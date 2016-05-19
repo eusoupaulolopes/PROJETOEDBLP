@@ -15,8 +15,7 @@ bool inserir(int argc, args argv){
 
 
 	// verifica se a função chamada é inserir
-	char* val = "-i";
-	if(strcmp(argv[1], val)){
+	if(strcmp(argv[1], "-i")){
 		std::cout << "não foi possivel inserir no arquivo" << std::endl;
 		std::cout << argv[1] << std::endl;
 		return false;	
@@ -31,7 +30,7 @@ bool inserir(int argc, args argv){
 		for (int i = 2; i < argc; i++){
 			validou = copiarArquivo(argv[i]); // TODO
 			if(validou){
-				// Aqui vai o teste de atualizar ou inserir no bancodedados.txt
+				// Aqui vai o teste de atualizar ou inserir no bancodedados.txt..
 				file << argv[i] << ";" << nomequetala << "\n";	
 			}else{
 				std::cout << (std::string) "Não foi encontrado arquivo: " + argv[i] << std::endl;
