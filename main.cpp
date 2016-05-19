@@ -23,7 +23,7 @@ int main(int argc, char** argv){
 
 	opcao opcoes[2]; 
 
-	opcoes[0] = validarArgumentos;
+	//opcoes[0] = validarArgumentos;
 	opcoes[1] = inserir;
 	
 

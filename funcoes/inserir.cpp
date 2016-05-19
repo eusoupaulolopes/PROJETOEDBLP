@@ -11,6 +11,7 @@ using namespace std;
 
 bool inserir(int argc, args argv){
 	setlocale(LC_ALL,"pt_BR"); 
+	bool validou = false;
 
 
 	// verifica se a função chamada é inserir
@@ -27,30 +28,41 @@ bool inserir(int argc, args argv){
 	std::time_t nomequetala = std::time(0);
     
 	if(file.is_open()){
+		for (int i = 2; i < argc; i++){
+			validou = copiarArquivo(argv[i]); // TODO
+			if(validou){
+				// Aqui vai o teste de atualizar ou inserir no bancodedados.txt
+				file << argv[i] << ";" << nomequetala << "\n";	
+			}else{
+				std::cout << (std::string) "Não foi encontrado arquivo: " + argv[i] << std::endl;
+			}
+		}
 
-		file << argv[2] << ";" << nomequetala << "\n";
 		file.close();
-		copiarArquivo(argv); // TODO
 		return true;
 	}else{
-		std::cout << "não foi possivel inserir no arquivo" << std::endl;
-
+		std::cout << "Foram encontrado falhas na inserção do arquivo" << std::endl;
 	}
 	return false;
-
 }
 
 /*
-@TODO melhorar a como pego o caminho do arquivo.
+@TODO melhorar a como pego o caminho do arquivo. fazendo atualizações
 */
 
-bool copiarArquivo(args argv){
+bool copiarArquivo(char* arquivo){
 	char caminho[50];
 	strcpy(caminho, "banco/");
-	strcat(caminho, argv[2]);
+	strcat(caminho, arquivo);
 	
-	ifstream origem (argv[2], fstream::binary);
-	ofstream destino (caminho, fstream::trunc|fstream::binary);
-	destino << origem.rdbuf ();
-	return true;
+	ifstream origem (arquivo, fstream::binary);
+	if(origem){
+		ofstream destino (caminho, fstream::trunc|fstream::binary);
+		destino << origem.rdbuf ();
+		return true;
+	}
+	
+	return false;
+	
+	
 }

@@ -14,7 +14,7 @@ bool inserir(int argc, args argv);
 Funcao copia o arquivo a inserir e joga na pasta de banco
 
 */
-bool copiarArquivo(args argv);
+bool copiarArquivo(char* arquivo);
 
 
 
