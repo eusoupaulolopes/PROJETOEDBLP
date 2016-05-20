@@ -3,11 +3,9 @@
 
 typedef char** args;
 
+
+bool atualiza(char * banco, char * arquivinho);
 bool inserir(int argc, args argv);
-
-
-
-
 
 /*
 @Aqui vai a documentação
