@@ -3,6 +3,7 @@
 #include <cstring>
 #include "suporte.h"
 #include "funcoes/inserir.h"
+#include "funcoes/estruturas.h"
 
 using namespace std;
 
@@ -21,10 +22,11 @@ bool validarArgumentos(int argc, args argv){
 
 int main(int argc, char** argv){
 
-	opcao opcoes[2]; 
+
+	opcao opcoes[1]; 
 
 	//opcoes[0] = validarArgumentos;
-	opcoes[1] = inserir;
+	opcoes[0] = inserir;
 	
 
 	/*opcao opcoesBusca[1];
@@ -34,7 +36,7 @@ int main(int argc, char** argv){
 	opcoesGerenciamento[0] = inserir;*/
 
 
-	if(!rodarOpcoes(opcoes,3,argc,argv)){
+	if(!rodarOpcoes(opcoes,1,argc,argv)){
 		cout << "Opção nao reconhecida!" << endl;
 	}
 	
