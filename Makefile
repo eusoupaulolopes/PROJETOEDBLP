@@ -1,7 +1,7 @@
 CC=g++
-CFLAGS=-c -Wall
+CFLAGS=-c -Wall -std=c++11
 LDFLAGS=
-SOURCES=main.cpp funcoes/inserir.cpp suporte.cpp funcoes/ListaComSentinelas.cpp
+SOURCES=main.cpp funcoes/inserir.cpp suporte.cpp funcoes/estruturas.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=buscaIMD
 

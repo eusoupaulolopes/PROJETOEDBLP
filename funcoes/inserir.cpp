@@ -1,11 +1,10 @@
 #include <fstream>
 #include <cstring>
+#include <ctime>
 #include <locale.h>
 #include <iostream>
 #include "inserir.h"
 #include "estruturas.h"
-
-#include <ctime>
 
 
 using namespace std;
@@ -14,7 +13,6 @@ bool inserir(int argc, args argv){
 	
 	setlocale(LC_ALL,"pt_BR"); 
 	bool validou = false;
-
 	
 	// verifica se a função chamada é inserir
 	if(strcmp(argv[1], "-i")){
@@ -23,25 +21,14 @@ bool inserir(int argc, args argv){
 		return false;	
 	} 
 	
-
-	char * banco = (char*)"bancodedados.txt";
+	char * banco = (char*) "bancodedados.txt";
 	fstream file (banco , ios::out | ios::app); // faz abrir sempre no fim do arquivo
-	
-	
-
 	std::time_t horaArqInserido = std::time(0);
     
 	if(file.is_open()){
-		
-
-
 		for (int i = 2; i < argc; i++){
 			validou = copiarArquivo(argv[i]); // TODO
-
-			
-
 			if(validou){
-
 				if(!atualiza(banco, argv[i])){					
 					// Aqui vai o teste de atualizar ou inserir no bancodedados.txt..
 					file << argv[i] << ";" << horaArqInserido << "\n";	
@@ -85,15 +72,12 @@ bool copiarArquivo(char* arquivo){
 
 
 
-bool atualiza(char * banco, char * arquivinho){
-	
+bool atualiza(char * banco, string arquivinho){	
 
 
 	setlocale(LC_ALL,"pt_BR"); 
 	bool verificaIndicesIguais = false;
-
-	Lista indices = LIS_Criar();
-	
+	Lista indices = LIS_Criar();	
 	
 	string prefixo = arquivinho;
 	string linha;
@@ -102,20 +86,28 @@ bool atualiza(char * banco, char * arquivinho){
 	fstream arquivo;
 	arquivo.open(banco,ios::in);
 	
-
+//bl 10 ap 403
 	//Construir a lista com cada nó sendo uma string do indice do arquivo referenciado
 	while(!arquivo.eof()){
 		getline(arquivo,linha);
 		//copia os indices de arquivos diferentes de arquivinho para a lista de indices
 		if(linha.substr(0, prefixo.size()) != arquivinho){
-			LIS_InserirFim(indices,linha);
+			//LIS_InserirFim(indices,linha);
 		}
 		else{//Se arquivinho for encontrado na base, manda pra lista arquivinho com hora atualizada.
+			
 			verificaIndicesIguais = true;
-			std::time_t horadeinsercao = std::time(0);
-			string hora = (const char*)horadeinsercao;
+			time_t horaArqInserido = time(0);
+			
+
+			cout << "passou" << endl;
+			
 			string pontoevirgula = ";";
-			string linhaatualizada = arquivinho+pontoevirgula+hora;
+			
+			// @TODO : trabalhar aqui
+
+			string linhaatualizada = arquivinho + pontoevirgula + asctime(horaArqInserido);  
+			
 			//o que tem da posiçao 0 até tamanho da linha, é substituido pelo conteudo de linhaatualizada
 			//linha.replace(0,linha.size(),linhaatualizada); 
 
@@ -123,78 +115,18 @@ bool atualiza(char * banco, char * arquivinho){
 				cout << "Arquivo " << arquivinho << "já estava na base de buscas.\nSeu registro foi atualizado." <<endl;
 			}
 
+			
+
 		}
-
-
+	
+	LIS_Imprimir(indices);
+	//LIS_Destruir(indices);
 	}
 	//Impressao de teste
-	LIS_Imprimir(indices);
+	
 
 	//Apaga o arquivo de log e insere os indices da lista encadeada que contem os indices atualizados em novo log.
-	if(verificaIndicesIguais){
-		arquivo.clear();
-		arquivo.close();
-
-		arquivo.open(banco,ios::out);
-
-	    for(No i = indices->cabeca; i != indices->cauda; i = i->proximo)
-	    {
-	        if(i != indices->cabeca)
-	        	arquivo << i->indiceArquivo << "\n";
-	    }
-	    arquivo << endl;
-
-	    return true;
-	}
-	else{
-		return false;
-	}
-
-
-
-    /*
-	int contador = 0;
-	bool valida = false;
-	std::string prefixo = arquivinho;
-	std::string linha;
-	fstream arquivo;
-	arquivo.open(banco);
-	//std::time_t mininomequetala = std::time(0);	
-	while(arquivo >> linha){
-		contador++;	
-		if (linha.substr(0, prefixo.size()) == arquivinho){
-			
-			valida = true;
-		}
-	}
-
-	if(valida){
-
-	}
-	devemos trabalhar aqui
-	if(valida){ 
-		arquivo.close();
-		arquivo.open(banco);
-		std::string *lista = new std::string[contador];
-		int i = 0;
-		while(!arquivo.eof()){
-			cout << "vendo" << linha << endl;
-			getline(arquivo, linha);
-			
-			if (linha.substr(0, prefixo.size()) != arquivinho){
-				cout << "inserindo linha" << endl;				
-				lista[i] = linha;
-
-			}
-			i++;
-		}
-		for (int i = 0; i < contador; i++){
-			cout << lista[i] << endl;
-		}
-		return true;
-	}
-	return false;
-	*/
+	return verificaIndicesIguais;
 }
 
 
