@@ -14,7 +14,6 @@ bool inserir(int argc, args argv){
 	
 	setlocale(LC_ALL,"pt_BR"); 
 	bool validou = false;
-
 	
 	// verifica se a função chamada é inserir
 	if(strcmp(argv[1], "-i")){
@@ -27,24 +26,26 @@ bool inserir(int argc, args argv){
 	char * banco = (char*)"bancodedados.txt";
 	fstream file (banco , ios::out | ios::app); // faz abrir sempre no fim do arquivo
 	
-	
-
-	std::time_t horaArqInserido = std::time(0);
-    
+	std::time_t horadeinsercao;
+	struct tm * timeinfo;
+	std::time(&horadeinsercao);
+	char buffer[80];
+	timeinfo = localtime(&horadeinsercao);
+	strftime(buffer,80,"%Y%m%d%H%M%S", timeinfo);
+	    
 	if(file.is_open()){
-
 		for (int i = 2; i < argc; i++){
 			validou = copiarArquivo(argv[i]); // TODO
 			if(validou){
 				if(!atualiza(banco, argv[i])){					
 					// Aqui vai o teste de atualizar ou inserir no bancodedados.txt..
-					file << argv[i] << ";" << horaArqInserido << "\n";	
+					cout << "Arquivo: " << argv[i] << " inserido na base de buscas." <<endl;
+					file << argv[i] << ";" << buffer << "\n";	
 				}
 			}else{
 				std::cout << (std::string) "Não foi encontrado arquivo: " + argv[i] << std::endl;
 			}
 		}
-
 		file.close();
 		return true;
 	}else{
@@ -53,13 +54,9 @@ bool inserir(int argc, args argv){
 	return false;
 }
 
-/*
-@TODO melhorar a como pego o caminho do arquivo. fazendo atualizações
-*/
 bool copiarArquivo(char* arquivo){
 	
 	int tamNome = strlen(arquivo);
-
 	char caminho[6+tamNome];
 	strcpy(caminho, "banco/");
 	strcat(caminho, arquivo);
@@ -67,17 +64,12 @@ bool copiarArquivo(char* arquivo){
 	ifstream origem (arquivo, fstream::binary);
 
 	if(origem){
-		
 		ofstream destino (caminho, fstream::trunc|fstream::binary);
 		destino << origem.rdbuf ();
 		return true;
 	}
-	
 	return false;
-	
 }
-
-
 
 bool atualiza(char * banco, char * arquivinho){
 	setlocale(LC_ALL,"pt_BR"); 
@@ -98,42 +90,40 @@ bool atualiza(char * banco, char * arquivinho){
 		if(linha.substr(0, prefixo.size()) != arquivinho){
 			LIS_InserirFim(indices,linha);
 		}
-		else{//Se arquivinho for encontrado na base, manda pra lista arquivinho com hora atualizada.
+		else{
 			verificaIndicesIguais = true;
-			std::time_t horadeinsercao = std::time(0);
 			
-			cout << "problema é aqui " << endl;
-			string hora = (const char*)horadeinsercao;
+			// humanizando o tempo
+			std::time_t horadeinsercao;
+			struct tm * timeinfo;
+			std::time(&horadeinsercao);
+			char buffer[80];
+			timeinfo = localtime(&horadeinsercao);
+			strftime(buffer,80,"%Y%m%d%H%M%S", timeinfo);
+			
 			string pontoevirgula = ";";
-
-			string linhaatualizada = arquivinho+pontoevirgula+hora;
+			string linhaatualizada = arquivinho+pontoevirgula+buffer;
+			
 			//o que tem da posiçao 0 até tamanho da linha, é substituido pelo conteudo de linhaatualizada
 			//linha.replace(0,linha.size(),linhaatualizada); 
-
 			if(LIS_InserirFim(indices,linhaatualizada)){
-				cout << "Arquivo " << arquivinho << "já estava na base de buscas.\nSeu registro foi atualizado." <<endl;
+				cout << "Arquivo " << arquivinho << " já estava na base de buscas.\n\tSeu registro foi atualizado." <<endl;
 			}
-
 		}
-
-
 	}
-	
-	//Impressao de teste
-	LIS_Imprimir(indices);
-
 
 	//Apaga o arquivo de log e insere os indices da lista encadeada que contem os indices atualizados em novo log.
 	if(verificaIndicesIguais){
-		arquivo.clear();
-
+		arquivo.close();
+		remove(banco);
+		fstream novobanco (banco , ios::out | ios::app);
 	    for(No i = indices->cabeca; i != indices->cauda; i = i->proximo)
 	    {
 	        if(i != indices->cabeca)
-	        	arquivo << i->conteudo << "\n";
+	        	novobanco << i->conteudo << "\n";
 	    }
-	    arquivo << endl;
-
+	    
+	    novobanco.close();
 	    return true;
 	}
 	else{

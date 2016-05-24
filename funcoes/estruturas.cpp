@@ -46,7 +46,7 @@ Lista LIS_Criar()
 
     lista->cabeca->proximo  = lista->cauda;
     lista->cabeca->anterior = NULL;
-
+    
     return lista;
 }
 
