@@ -3,13 +3,16 @@
 
 typedef char** args;
 
+
+bool atualiza(char * banco, char * arquivinho);
 bool inserir(int argc, args argv);
+
 /*
 @Aqui vai a documentação
 Funcao copia o arquivo a inserir e joga na pasta de banco
+
 */
 bool copiarArquivo(char* arquivo);
-bool atualiza(char * banco, std::string);
 
 
 

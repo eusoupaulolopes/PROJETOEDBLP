@@ -1,39 +1,42 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
-#include <cstring>
 #include "estruturas.h"
 
-using namespace std;
+//#define VALOR_QUALQUER "extremos"
 
-
-No CriarNo(string indice = "nulo");
+No CriarNo(string);
 bool DestruirNo(No);
 
+/**
+    Função que aloca memória para uma instância da estrutura Lista e inicializa os seus campos.
+ */
 Lista LIS_Criar()
 {
     //Deve haver problema nisso aqui, porque quando vai adcionar o conteudo no No, dá falha de segmentação.
-    
-    Lista lista = (Lista)malloc(sizeof(tpLista));
+    string VALOR_QUALQUER = "extremo";
 
+    Lista lista = (Lista)malloc(sizeof(tpLista));
     if( lista == NULL )
     {
         return NULL;
     }
+
     
     lista->tamanho = 0;
     
     //Cuidado! Buraco negro! Quando entra aqui encontra-se o erro! :/
-    lista->cabeca = CriarNo();
+    lista->cauda = CriarNo((string)VALOR_QUALQUER);
+
     
-    if( lista->cabeca == NULL )
+
+    if( lista->cauda == NULL )
     {
         return NULL;
     }
 
-    lista->cauda = CriarNo();    
-    
-    if( lista->cauda == NULL )
+    lista->cabeca = CriarNo(VALOR_QUALQUER);
+    if( lista->cabeca == NULL )
     {
         return NULL;
     }
@@ -47,9 +50,15 @@ Lista LIS_Criar()
     return lista;
 }
 
+/*
+ Função que insere um valor no fim da lista. Após a execução desta função, o elemento inserido será o último elemento da lista.
+ @param lista - lista em que será feita a inserção
+ @param v - valor a ser inserido na lista
+ @return true se inseriu com sucesso, false caso contrário
+ */
 bool LIS_InserirFim(Lista lista, string v)
 {
-	No no = CriarNo(v);
+    No no = CriarNo(v);
     if( no == NULL )
     {
         return false;
@@ -99,17 +108,21 @@ void LIS_Destruir(Lista lista)
  */
 No CriarNo(string indice)
 {
-    No no = new tpNo;
 
+
+
+    No no = new tpNo;
     if( no == NULL )
     {
         return NULL;
     }
     
     no->proximo = NULL;
-    no->anterior = NULL;    
+    no->anterior = NULL;
+
     no->conteudo = indice;
-   
+    
+    
     return no;
 }
 
