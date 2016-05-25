@@ -17,8 +17,7 @@ bool inserir(int argc, args argv){
 	
 	// verifica se a função chamada é inserir
 	if(strcmp(argv[1], "-i")){
-		std::cout << "não foi possivel inserir no arquivo" << std::endl;
-		std::cout << argv[1] << std::endl;
+		
 		return false;	
 	} 
 	
