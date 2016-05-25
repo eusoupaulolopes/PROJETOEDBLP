@@ -12,15 +12,16 @@ bool remover(int argc, args argv){
 
 	// verifica se a função chamada é remover
 	if(strcmp(argv[1], "-r")){
-		std::cout << "Não é a mamãe!" << std::endl;
-		std::cout << argv[1] << std::endl;
+
 		return false;	
 	} 
 
 
 	for(int i=2; i < argc; i++){
-		if(buscaLog(argv[i]))
-			cout << argv[i]	<< " foi encontrado" << endl;
+		if(remocao(argv[i]))
+			cout <<"Arquivo \"" << argv[i] << "\" removido da base de buscas." << endl;
+		else
+			cout <<"Arquivo \"" << argv[i] << "\" não estava na base de buscas." << endl;
 
 	}
 
@@ -28,12 +29,27 @@ bool remover(int argc, args argv){
 
 }
 
-bool buscaLog(char* nomedoarquivo){
+bool removeArquivo(char* arquivo){
+	
+	int tamNome = strlen(arquivo);
+	char caminho[6+tamNome];
+	strcpy(caminho, "banco/");
+	strcat(caminho, arquivo);	
+
+	//remove retorna 0 quando remove com sucesso
+	if(remove(caminho) == 0){
+
+		return true;
+	}
+	return false;
+}
+
+bool remocao(char* nomedoarquivo){
 	
 	Lista listaLog = LIS_Criar();
 	string linhaLog;
 	string prefixo = nomedoarquivo;
-	bool verificaExistenciaArquivo;
+	bool verificaExistenciaArquivo = false;
 
 
 	fstream arquivoLog;
@@ -41,38 +57,46 @@ bool buscaLog(char* nomedoarquivo){
 
 
 	if(arquivoLog.is_open()){
-
 		
 		//Construir a lista com cada nó sendo uma string do indice do arquivo referenciado
 		while(!arquivoLog.eof()){
 			getline(arquivoLog,linhaLog);
-			//copia os indices de arquivos diferentes de arquivinho para a lista de indices
+			//O que não for igual ao arquivo que se deseja remover
+			//copia os indices de arquivos do arquivo de Log para a listaLog
 			if(linhaLog.substr(0,prefixo.size()) != nomedoarquivo){
-				cout << "Coloca na lista!" << endl;
-			}
-			else{
-				cout << "nao coloca na lista, pois vai ser removido" << endl;
-			}
-
-
-
-/*
-			if(linhaLog.substr(0, prefixo.size()) != nomedoarquivo){
+				
 				LIS_InserirFim(listaLog,linhaLog);
 			}
-			else{
-				verificaExistenciaArquivo = true;
-				
-				cout << "Arquivo " << nomedoarquivo << " foi removido com sucesso!" <<endl;
-				break;
-			}*/
+			else{ //Senao, nao adciona na lista e remove
+				//bool removeu = removeArquivo(nomedoarquivo);
+				//cout << "valor de removeu: " << removeu << endl;
+				if(removeArquivo(nomedoarquivo)){
+					verificaExistenciaArquivo = true;
+				}
+			}
 		}
-		arquivoLog.close();
-		return true;
+
 	}
 
-	return false;
+	arquivoLog.close();
 
+	if(verificaExistenciaArquivo){
+
+		remove("bancodedados.txt");
+		fstream novobanco ("bancodedados.txt" , ios::out | ios::app);
+
+	    for(No i = listaLog->cabeca; i != listaLog->cauda; i = i->proximo)
+	    {
+	        if(i != listaLog->cabeca)
+	        	novobanco << i->conteudo;
+	    }
+	    
+	    novobanco.close();
+	    return true;
+	}
+	else{
+		return false;
+	}
 
 }
 

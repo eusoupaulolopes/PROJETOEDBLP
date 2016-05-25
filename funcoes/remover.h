@@ -4,7 +4,8 @@
 typedef char** args;
 
 bool remover(int argc, args argv);
-bool buscaLog(char* nomedoarquivo);
+bool remocao(char* nomedoarquivo);
+bool removeArquivo(char* arquivo);
 
 
 
