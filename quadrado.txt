@@ -1,0 +1,6 @@
+os quadrados tem 4 lados!
+E devem ser assim:
+_________
+|        |
+|        |
+|________|

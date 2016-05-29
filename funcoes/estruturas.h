@@ -38,6 +38,9 @@ Lista LIS_Criar();
 bool LIS_InserirFim(Lista lista, string v);
 void LIS_Imprimir(Lista lista);
 void LIS_Destruir(Lista lista);
+string LIS_RemoverInicio(Lista lista);
+string LIS_Remover(Lista lista, int indice);
+int LIS_Buscar(Lista lista, string chave);
 
 // 	FIM: Lista
 

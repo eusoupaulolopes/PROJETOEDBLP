@@ -35,6 +35,7 @@ bool inserir(int argc, args argv){
 	if(file.is_open()){
 		for (int i = 2; i < argc; i++){
 			validou = copiarArquivo(argv[i]); // TODO
+
 			if(validou){
 				if(!atualiza(banco, argv[i])){					
 					// Aqui vai o teste de atualizar ou inserir no bancodedados.txt..

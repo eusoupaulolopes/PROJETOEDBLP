@@ -13,7 +13,6 @@ bool DestruirNo(No);
  */
 Lista LIS_Criar()
 {
-    //Deve haver problema nisso aqui, porque quando vai adcionar o conteudo no No, dá falha de segmentação.
     string VALOR_QUALQUER = "extremo";
 
     Lista lista = (Lista)malloc(sizeof(tpLista));
@@ -25,9 +24,7 @@ Lista LIS_Criar()
     
     lista->tamanho = 0;
     
-    //Cuidado! Buraco negro! Quando entra aqui encontra-se o erro! :/
     lista->cauda = CriarNo((string)VALOR_QUALQUER);
-
     
 
     if( lista->cauda == NULL )
@@ -73,6 +70,76 @@ bool LIS_InserirFim(Lista lista, string v)
 
     lista->tamanho++;
     return true;
+}
+/*
+ Função que remove um valor no início da lista.
+ */
+string LIS_RemoverInicio(Lista lista)
+{
+    string menosum = "menosum";
+    if (lista->cabeca->proximo == lista->cauda){
+        return menosum;
+    }
+    else{
+        No primeiro = lista->cabeca->proximo;
+
+        lista->cabeca->proximo = primeiro->proximo;
+        primeiro->proximo->anterior = lista->cabeca;
+        
+        string valorremovido = primeiro->conteudo;
+
+        DestruirNo(primeiro);
+
+        lista->tamanho--;
+
+        return valorremovido;
+    }
+}
+
+/*
+ Função que remove um valor numa determinada posição da lista.
+ */
+string LIS_Remover(Lista lista, int indice)
+{    
+    string menosum = "menosum";
+    if (indice > lista->tamanho || indice <= 0){  
+        return menosum;
+    }
+    
+    if(lista->tamanho == 0){
+        return menosum;
+    }
+    if (indice == 1){
+        return LIS_RemoverInicio(lista);
+    }
+    
+    No no = lista->cabeca;
+
+    while (--indice){   
+        no = no->proximo;
+    }
+
+    string valorremovido = no->conteudo;
+
+    no->anterior->proximo = no->proximo;
+    no->proximo->anterior = no->anterior;
+    lista->tamanho--;
+
+    return valorremovido;
+}
+
+int LIS_Buscar(Lista lista, string chave)
+{
+    No no = lista->cabeca->proximo;
+    for (int i=0; i < lista->tamanho; i++){
+        if (no->conteudo.substr(0,chave.size()) == chave){
+            i++;
+            return i;
+        }
+        no = no->proximo;
+    }
+
+    return -1;
 }
 
 /*

@@ -5,8 +5,7 @@ typedef char** args;
 
 bool remover(int argc, args argv);
 bool remocao(char* nomedoarquivo);
-bool removeArquivo(char* arquivo);
-
+bool removerdaPasta(char* arquivo);
 
 
 #endif

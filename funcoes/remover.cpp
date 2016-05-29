@@ -29,7 +29,7 @@ bool remover(int argc, args argv){
 
 }
 
-bool removeArquivo(char* arquivo){
+bool removerdaPasta(char* arquivo){
 	
 	int tamNome = strlen(arquivo);
 	char caminho[6+tamNome];
@@ -57,8 +57,57 @@ bool remocao(char* nomedoarquivo){
 
 
 	if(arquivoLog.is_open()){
+		while(!arquivoLog.eof()){
+			
+			getline(arquivoLog,linhaLog);
+			
+			LIS_InserirFim(listaLog,linhaLog);
+			
+		}
 		
-		//Construir a lista com cada nó sendo uma string do indice do arquivo referenciado
+	}
+
+	/*cout << "Lista completa:" << endl;
+	LIS_Imprimir(listaLog);*/
+
+	arquivoLog.close();
+	int indice = LIS_Buscar(listaLog,nomedoarquivo);
+
+	if(indice > 0){
+		verificaExistenciaArquivo = true;
+		if(LIS_Remover(listaLog,indice)){
+			removerdaPasta(nomedoarquivo)
+		}
+	}
+
+
+	/*cout << "Lista com elementos removidos" << endl;
+	LIS_Imprimir(listaLog);*/
+
+
+	if(verificaExistenciaArquivo){	
+
+		remove("bancodedados.txt");
+
+		fstream novobanco ("bancodedados.txt" , ios::out | ios::app);
+
+	    for(No i = listaLog->cabeca; i != listaLog->cauda; i = i->proximo)
+	    {
+	        if(i != listaLog->cabeca)
+	        	novobanco << i->conteudo << endl;
+	    }
+	    
+	    novobanco.close();
+	    return true;
+	}
+	else{
+		return false;
+	}
+
+}
+
+
+/*//Construir a lista com cada nó sendo uma string do indice do arquivo referenciado
 		while(!arquivoLog.eof()){
 			getline(arquivoLog,linhaLog);
 			//O que não for igual ao arquivo que se deseja remover
@@ -75,31 +124,5 @@ bool remocao(char* nomedoarquivo){
 				}
 			}
 		}
-
-	}
-
-	arquivoLog.close();
-
-	if(verificaExistenciaArquivo){
-
-		remove("bancodedados.txt");
-		fstream novobanco ("bancodedados.txt" , ios::out | ios::app);
-
-	    for(No i = listaLog->cabeca; i != listaLog->cauda; i = i->proximo)
-	    {
-	        if(i != listaLog->cabeca)
-	        	novobanco << i->conteudo;
-	    }
-	    
-	    novobanco.close();
-	    return true;
-	}
-	else{
-		return false;
-	}
-
-}
-
-
-
+*/
 
