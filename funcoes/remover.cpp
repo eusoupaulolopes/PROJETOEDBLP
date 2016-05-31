@@ -6,7 +6,12 @@
 
 using namespace std;
 
-
+/*
+ Função que insere um remove da base de buscas um arquivo
+ @param argc - tamanho do vetor de argumentos
+ @param argv - vetor de argumentos do terminal
+ @return true se removeu com sucesso, false caso a opção escolhida não seja -r
+ */
 bool remover(int argc, args argv){
 	
 
@@ -28,7 +33,11 @@ bool remover(int argc, args argv){
 	return true;
 
 }
-
+/*
+ Função que remove o arquivo da pasta
+ @param arquivo - nome do arquivo a ser removido da pasta /banco
+ @return true se removeu com sucesso, false caso contrário
+ */
 bool removerdaPasta(char* arquivo){
 	
 	int tamNome = strlen(arquivo);
@@ -44,6 +53,11 @@ bool removerdaPasta(char* arquivo){
 	return false;
 }
 
+/*
+ Função que usa uma lista duplamente encadeada para remover o nome do arquivo do arquivo de log .txt da bade de busca
+ @param nomedoarquivo - nome do arquivo a ser removido do log da base de busca
+ @return true se removeu com sucesso, false caso contrário
+ */
 bool remocao(char* nomedoarquivo){
 	
 	Lista listaLog = LIS_Criar();
@@ -75,8 +89,8 @@ bool remocao(char* nomedoarquivo){
 
 	if(indice > 0){
 		verificaExistenciaArquivo = true;
-		if(LIS_Remover(listaLog,indice)){
-			removerdaPasta(nomedoarquivo)
+		if(LIS_Remover(listaLog,indice) != "menosum"){
+			removerdaPasta(nomedoarquivo);
 		}
 	}
 
@@ -93,8 +107,12 @@ bool remocao(char* nomedoarquivo){
 
 	    for(No i = listaLog->cabeca; i != listaLog->cauda; i = i->proximo)
 	    {
-	        if(i != listaLog->cabeca)
+	        if(i != listaLog->cabeca && i->proximo != listaLog->cauda){
 	        	novobanco << i->conteudo << endl;
+	        }
+	        else if(i != listaLog->cabeca){
+	        	novobanco << i->conteudo;
+	        }
 	    }
 	    
 	    novobanco.close();

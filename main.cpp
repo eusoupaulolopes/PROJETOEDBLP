@@ -5,6 +5,8 @@
 #include "funcoes/inserir.h"
 #include "funcoes/remover.h"
 #include "funcoes/estruturas.h"
+#include "funcoes/listar.h"
+
 
 using namespace std;
 
@@ -24,11 +26,13 @@ bool validarArgumentos(int argc, args argv){
 int main(int argc, char** argv){
 
 
-	opcao opcoes[2]; 
+	opcao opcoes[3]; 
 
 	//opcoes[0] = validarArgumentos;
 	opcoes[0] = inserir;
 	opcoes[1] = remover;
+	opcoes[2] = listarInsercao;
+
 	
 
 	/*opcao opcoesBusca[1];
@@ -38,7 +42,7 @@ int main(int argc, char** argv){
 	opcoesGerenciamento[0] = inserir;*/
 
 
-	if(!rodarOpcoes(opcoes,2,argc,argv)){
+	if(!rodarOpcoes(opcoes,3,argc,argv)){
 		cout << "Opção nao reconhecida!" << endl;
 	}
 	

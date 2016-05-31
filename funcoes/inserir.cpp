@@ -4,7 +4,6 @@
 #include <iostream>
 #include "inserir.h"
 #include "estruturas.h"
-
 #include <ctime>
 
 
@@ -40,7 +39,14 @@ bool inserir(int argc, args argv){
 				if(!atualiza(banco, argv[i])){					
 					// Aqui vai o teste de atualizar ou inserir no bancodedados.txt..
 					cout << "Arquivo: " << argv[i] << " inserido na base de buscas." <<endl;
-					file << argv[i] << ";" << buffer << "\n";	
+					
+					if (i != argc-1){
+						file << argv[i] << ";" << buffer << "\n";
+					}
+					else{
+						file << argv[i] << ";" << buffer;	
+					}
+
 				}
 			}else{
 				std::cout << (std::string) "Não foi encontrado arquivo: " + argv[i] << std::endl;

@@ -22,7 +22,8 @@ struct tpNo
 
 typedef tpNo * No;
 
-// Esta é a estrutura para uma lista com sentinelas. Não a modifique!
+
+// Esta é a estrutura para uma lista com sentinelas.
 struct tpLista
 {
     No cabeca;
