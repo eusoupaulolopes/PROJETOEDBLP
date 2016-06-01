@@ -6,6 +6,7 @@
 //#define VALOR_QUALQUER "extremos"
 
 No CriarNo(string);
+No CriarNo(string,string,string);
 bool DestruirNo(No);
 
 /**
@@ -71,6 +72,26 @@ bool LIS_InserirFim(Lista lista, string v)
     lista->tamanho++;
     return true;
 }
+
+bool LIS_InserirFim(Lista lista, string conteudo, string nome, string dataHora)
+{
+    No no = CriarNo(conteudo,nome,dataHora);
+    if( no == NULL )
+    {
+        return false;
+    }
+    
+    No ultimo = lista->cauda->anterior;
+
+    lista->cauda->anterior = no;
+    no->proximo = lista->cauda;
+    no->anterior = ultimo;    
+    ultimo->proximo = no;
+
+    lista->tamanho++;
+    return true;
+}
+
 /*
  Função que remove um valor no início da lista.
  */
@@ -147,10 +168,10 @@ int LIS_Buscar(Lista lista, string chave)
  */
 void LIS_Imprimir(Lista lista)
 {
-    std::cout << "Tamanho " << lista->tamanho << std::endl;
+    //std::cout << "Tamanho " << lista->tamanho << std::endl;
     for(No i = lista->cabeca->proximo; i != lista->cauda; i = i->proximo)
     {
-        std::cout << i->conteudo << "\n";
+        std::cout << "\t-  \""<<i->nome <<"\"\n";
     }
     std::cout << std::endl;
 }
@@ -188,6 +209,24 @@ No CriarNo(string indice)
     no->anterior = NULL;
 
     no->conteudo = indice;
+    
+    
+    return no;
+}
+
+No CriarNo(string conteudo,string nome,string dataHora){
+    No no = new tpNo;
+    if( no == NULL )
+    {
+        return NULL;
+    }
+    
+    no->proximo = NULL;
+    no->anterior = NULL;
+
+    no->conteudo = conteudo;
+    no->nome = nome;
+    no->dataHora = dataHora;
     
     
     return no;

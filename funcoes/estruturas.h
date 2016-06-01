@@ -15,7 +15,9 @@ using namespace std;
 struct tpNo
 {
     string conteudo; //adaptação feita para atender o propósito do projeto
-    int contadorAcessos;
+    string nome;
+    string dataHora;
+    int qtdePalavras;
     struct tpNo* proximo;
     struct tpNo* anterior;
 };
@@ -37,6 +39,7 @@ typedef tpLista * Lista;
 Lista LIS_Criar();
 
 bool LIS_InserirFim(Lista lista, string v);
+bool LIS_InserirFim(Lista lista, string conteudo, string nome, string dataHora);
 void LIS_Imprimir(Lista lista);
 void LIS_Destruir(Lista lista);
 string LIS_RemoverInicio(Lista lista);

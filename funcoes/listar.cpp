@@ -5,7 +5,7 @@
 #include "listar.h"
 #include "estruturas.h"
 
-char* quebraString(string str);
+string quebraString(string str,Lista listaPorInsercao);
 
 bool listarInsercao(int argc, args argv){
 
@@ -13,7 +13,7 @@ bool listarInsercao(int argc, args argv){
 
 
 	// verifica se a função chamada é listar
-	if(strcmp(argv[1], "-li") !=0){
+	if(strcmp(argv[1], "-li")){
 
 
 		return false;	
@@ -23,36 +23,53 @@ bool listarInsercao(int argc, args argv){
 
 	Lista listaPorInsercao = LIS_Criar();
 	string linha;
-	char* horaInsercao = new char[14];	//14 é o tamanho da string hora: AAAAMMDDHHMMSS
+	string horaInsercao;
+	//char* horaInsercao = new char[14];	//14 é o tamanho da string hora: AAAAMMDDHHMMSS
 	fstream basedebuscas;
 
 	basedebuscas.open("bancodedados.txt",ios::in);
 
-	cout << "Hello\n" << endl;
+	
 	if(basedebuscas.is_open()){
-
+	
 		while(!basedebuscas.eof()){
 			getline(basedebuscas,linha);
 
-			horaInsercao = quebraString(linha);
+			horaInsercao = quebraString(linha,listaPorInsercao);
+
 
 			//int hora = atoi(horaInsercao) atoi converte string para int
 
-			LIS_InserirFim(listaPorInsercao,horaInsercao);
+			
 			
 		}
 	}
-
+	cout << "Arquivos contidos na base de buscas:" << endl;
 	LIS_Imprimir(listaPorInsercao);
 
 	return true;
 
 }
 
-char* quebraString(string str){
+string quebraString(string str,Lista listaPorInsercao){
 
 	char* linha = new char[str.length()];
+
+	strcpy(linha,str.c_str());
 	
+	char* auxNome;
+	char* auxDataHora;
+
+	auxNome = strtok(linha,";");
+	auxDataHora = strtok(NULL,";");
+
+	string nome(auxNome);
+	string dataHora(auxDataHora);
+
+	LIS_InserirFim(listaPorInsercao,str,nome,dataHora);
+
+
+	/*
 	//const char * linha = str.c_str(); //transforma str em const char*
 
 	
@@ -61,8 +78,10 @@ char* quebraString(string str){
 	//strtok quebra string através dos delimitadores
 	nome = strtok(linha,";");
 	//tem que colocar NULL para continuar do fim do primeiro token
-	hora = strtok(NULL,";");
+	//hora = strtok(NULL,";");
 
-	return hora;
+	string s(c);*/
+
+	return nome;
 }
 
