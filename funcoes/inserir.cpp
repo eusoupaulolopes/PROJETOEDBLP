@@ -46,7 +46,8 @@ bool inserir(int argc, args argv){
 					if (i != argc-1){
 						file << argv[i] << ";" << buffer << ";" << palavras << "\n";
 					}else{
-						file << argv[i] << ";" << buffer << ";" << palavras;	
+						file << argv[i] << ";" << buffer << ";" << palavras << "\r";
+						
 					}
 					
 

@@ -14,25 +14,22 @@ bool Ler_Base(int argc, args argv){
 	if(strcmp(argv[1], "-b")){
 	
 		return false;	
-	} 
-
-	
+	}	
 	setlocale(LC_ALL,"pt_BR"); 
 	char * banco = (char *) "bancodedados";
 	ifstream file;
 	file.open(banco);
+	//char* termo = std::strtok((char *)linha.c_str() ," .,;!?()[]");
+
 
 	if (file.is_open()){
-
 		std::string linha;
-
 		while(!file.eof()){
 			getline(file, linha);
 			std::string arquivo = "banco/";
 			if(linha != "\0"){
 				for (int j = 0; j < linha.size(); j++){
-					if(linha[j] == 59){ // o primeiro ; da linha	
-						gerarTabela(arquivo);
+					if(linha[j] == 59){ // o primeiro ; da linha		
 					}
 					arquivo+=linha[j];
 				}

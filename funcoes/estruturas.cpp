@@ -138,7 +138,7 @@ string LIS_Remover(Lista lista, int indice)
         return LIS_RemoverInicio(lista);
     }
     
-    No no = lista->cabeca;
+    No no = lista->cabeca->proximo;
 
     while (--indice){   
         no = no->proximo;
