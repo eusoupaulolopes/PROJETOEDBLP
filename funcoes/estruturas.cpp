@@ -1,7 +1,11 @@
+#include "buscar.h" // coisas de tad
+#include "estruturas.h"
 #include <stdlib.h>
 #include <iostream>
+#include <cstring>
 #include <string>
-#include "estruturas.h"
+#include <locale.h>
+#include <fstream>
 #include "listar.h"
 
 //#define VALOR_QUALQUER "extremos"
@@ -320,7 +324,156 @@ bool DestruirNo(No no)
 }
 
 
-/*
-    Função que ordena a lista. (Obs.: Implemente os algoritmos: selection sort, insertion sort e bubble sort.)
- */
+
+Tabela TAB_CriarTabela(int tamanho){
+    
+    if (tamanho <= 0 ) 
+        return NULL;
+
+    Tabela tabela = new tpTabela;
+    tabela->tamanho = tamanho;
+    tabela->qtdItens = 0;
+    tabela->valores = new Valor[tamanho];
+    tabela->chaves = new Chave[tamanho];
+
+    for(int i = 0; i < tabela->tamanho; i++){
+        tabela->valores[i] = NULL;
+        tabela->chaves[i] = NULL;
+    }
+
+    return tabela;
+}
+void Expandir(Tabela tabela){
+    Tabela ntabela = TAB_CriarTabela((1+(tabela->tamanho*2)));    
+    
+    for (int i = 0; i < tabela->tamanho; i++){
+        TAB_Inserir(ntabela, tabela->chaves[i], tabela->valores[i]);    
+    }
+    
+    tabela->tamanho = ntabela->tamanho;
+    tabela->valores = ntabela->valores;
+    tabela->chaves = ntabela->chaves;    
+    
+}
+
+void Reduzir(Tabela tabela){
+    
+    Tabela novaTabela = TAB_CriarTabela(1+(tabela->tamanho/2));
+
+    for (int i = 0; i < tabela->tamanho; i++){        
+        TAB_Inserir(novaTabela, tabela->chaves[i], tabela->valores[i]);   
+    } 
+    
+    tabela->tamanho = novaTabela->tamanho;
+    tabela->valores = novaTabela->valores;
+    tabela->chaves = novaTabela->chaves;    
+    
+}
+bool TAB_Inserir(Tabela tabela, Chave chave, Valor valor)
+{
+    
+    if (tabela == NULL || chave == NULL || valor == NULL || chave == CHAVE_REMOVIDA)
+        return false;
+
+    int aux = Hash(PreHash(chave), tabela->tamanho);
+    int indice;
+    for (int i = 0; i < tabela->tamanho; i++){
+        indice = (aux + i) % tabela->tamanho;
+        if(tabela->chaves[indice] == NULL || tabela->chaves[indice] == CHAVE_REMOVIDA || (strcmp(tabela->chaves[indice]->chave, chave->chave) == 0)){
+            tabela->chaves[indice] = chave;
+            if(tabela->valores[indice] == NULL || tabela->valores[indice] == ITEM_REMOVIDO)
+                tabela->qtdItens++;            
+            if(tabela->valores[indice] == NULL)
+                tabela->valores[indice] = valor;                                // AQUI DEVE INCLUIR
+            else                                                                // AQUI        
+                tabela->valores[indice]->conteudo += " " + valor->conteudo;     //             
+            if (tabela->qtdItens*2 >= tabela->tamanho)
+                Expandir(tabela);
+            return true;
+        }
+    }
+    return false;
+}
+
+void TAB_imprimir(Tabela tabela)
+{
+    for (int i = 0; i < tabela->tamanho; i++){
+        std::cout << "T[" << i << "] = ";
+        Valor valor = tabela->valores[i];
+        Chave chave = tabela->chaves[i];
+        if ( valor == NULL){
+            std::cout << "NULO\n"; 
+        }else if (valor == ITEM_REMOVIDO){
+            std::cout << "REMOVIDO\n"; 
+        }else{
+            std::cout << chave->chave << " : " << valor->conteudo << std::endl;
+        }
+    }
+}
+
+void gerarArquivoTabela(char* auxTabela, Tabela tabela)
+{
+    std::string texto;
+    fstream file (auxTabela , ios::out | ios::app);
+    if(file.is_open()){
+        for (int i = 0; i < tabela->tamanho; i++){
+            file << "T[" << std::to_string(i).c_str() << "] = ";
+            Valor valor = tabela->valores[i];
+            Chave chave = tabela->chaves[i];
+            if ( valor == NULL){
+                file << "NULO\n"; 
+            }else if (valor == ITEM_REMOVIDO){
+                file << "REMOVIDO\n"; 
+            }else{
+                std::string aux(chave->chave);
+                file << aux << " : " << valor->conteudo << "\n";
+            }
+        }
+    } 
+    
+    file.close();
+
+}
+
+short Hash(long valor, int n)
+{
+    int indice = (valor & 0x7FFFFFFF) % n;
+    return indice;
+}
+
+long PreHash(Chave chave)
+{
+    char * str = chave->chave;
+    
+    long hash = 0;
+    
+    int c;
+    
+    while ( (c = *str++) )
+    {
+       
+        hash += c;
+    }
+    
+    return hash;
+}
+
+Chave TAB_CriarChave(const char * c)
+{
+    Chave chave = new tpChave;
+    chave->chave = new char[strlen(c)+1];
+
+    strcpy(chave->chave, c);
+
+    return chave;
+}
+
+Valor TAB_CriarValor(const char* c)
+{
+    Valor valor = new tpValor;
+    
+    valor->conteudo = c;
+    
+    return valor;
+}
 
