@@ -77,9 +77,6 @@ bool remocao(char* nomedoarquivo){
 		}
 	}
 
-	/*cout << "Lista completa:" << endl;
-	LIS_Imprimir(listaLog);*/
-
 	arquivoLog.close();
 	int indice = LIS_Buscar(listaLog,nomedoarquivo);
 

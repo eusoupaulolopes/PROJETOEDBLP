@@ -5,7 +5,11 @@
 #include "listar.h"
 #include "estruturas.h"
 
-string quebraString(string str,Lista listaPorInsercao);
+
+using namespace std;
+
+void quebraString(string str,Lista listaPorInsercao);
+
 
 bool listarInsercao(int argc, args argv){
 
@@ -14,8 +18,6 @@ bool listarInsercao(int argc, args argv){
 
 	// verifica se a função chamada é listar
 	if(strcmp(argv[1], "-li")){
-
-
 		return false;	
 	} 
 
@@ -34,24 +36,25 @@ bool listarInsercao(int argc, args argv){
 	
 		while(!basedebuscas.eof()){
 			getline(basedebuscas,linha);
+			if(linha != "\0")
+				quebraString(linha,listaPorInsercao);
 
-			horaInsercao = quebraString(linha,listaPorInsercao);
-
-
-			//int hora = atoi(horaInsercao) atoi converte string para int
-
-			
 			
 		}
+	}else{
+		cout << "\tNão foi possivel encontrar a base de buscas, ou estava vazia!" << endl;
 	}
-	cout << "Arquivos contidos na base de buscas:" << endl;
+
+	cout << "Arquivos contidos na base de buscas:" << endl;	
 	LIS_Imprimir(listaPorInsercao);
+
+
 
 	return true;
 
 }
 
-string quebraString(string str, Lista listaPorInsercao){
+void quebraString(string str, Lista listaPorInsercao){
 
 	char* linha = new char[str.length()];
 
@@ -66,11 +69,7 @@ string quebraString(string str, Lista listaPorInsercao){
 	string nome(auxNome);
 	string dataHora(auxDataHora);
 
-	LIS_InserirFim(listaPorInsercao,str,nome,dataHora);
-
-
-
-
-	return nome;
+	LIS_InserirFim2(listaPorInsercao,str,nome,dataHora);
+	
 }
 

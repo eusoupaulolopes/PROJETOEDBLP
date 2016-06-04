@@ -6,7 +6,7 @@
 //#define VALOR_QUALQUER "extremos"
 
 No CriarNo(string);
-No CriarNo(string,string,string);
+No CriarNo2(string,string,string);
 bool DestruirNo(No);
 
 /**
@@ -73,9 +73,10 @@ bool LIS_InserirFim(Lista lista, string conteudo)
     return true;
 }
 
-bool LIS_InserirFim(Lista lista, string conteudo, string nome, string dataHora)
+bool LIS_InserirFim2(Lista lista, string conteudo, string nome, string dataHora)
 {
-    No no = CriarNo(conteudo,nome,dataHora);
+    No no = CriarNo2(conteudo,nome,dataHora);
+
     if( no == NULL )
     {
         return false;
@@ -87,7 +88,6 @@ bool LIS_InserirFim(Lista lista, string conteudo, string nome, string dataHora)
     no->proximo = lista->cauda;
     no->anterior = ultimo;    
     ultimo->proximo = no;
-
     lista->tamanho++;
     return true;
 }
@@ -171,7 +171,7 @@ void LIS_Imprimir(Lista lista)
     //std::cout << "Tamanho " << lista->tamanho << std::endl;
     for(No i = lista->cabeca->proximo; i != lista->cauda; i = i->proximo)
     {
-        std::cout << "\t-  \""<<i->nome <<"\"\n";
+        std::cout << "\t-  \""<< i->nome <<"\"\n";
     }
     std::cout << std::endl;
 }
@@ -207,6 +207,8 @@ No CriarNo(string indice)
     
     no->proximo = NULL;
     no->anterior = NULL;
+    no->nome = "";
+    no->dataHora = "";
 
     no->conteudo = indice;
     
@@ -214,7 +216,7 @@ No CriarNo(string indice)
     return no;
 }
 
-No CriarNo(string conteudo,string nome,string dataHora){
+No CriarNo2(string conteudo,string nome,string dataHora){
     No no = new tpNo;
     if( no == NULL )
     {

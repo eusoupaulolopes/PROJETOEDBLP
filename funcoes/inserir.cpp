@@ -34,12 +34,10 @@ bool inserir(int argc, args argv){
 	if(file.is_open()){
 		for (int i = 2; i < argc; i++){
 			validou = copiarArquivo(argv[i]); // TODO
-
 			if(validou){
 				if(!atualiza(banco, argv[i])){					
 					// Aqui vai o teste de atualizar ou inserir no bancodedados.txt..
-					cout << "Arquivo: " << argv[i] << " inserido na base de buscas." <<endl;
-					
+					cout << "Arquivo: " << argv[i] << " inserido na base de buscas." <<endl;					
 					if (i != argc-1){
 						file << argv[i] << ";" << buffer << "\n";
 					}else{
@@ -85,8 +83,7 @@ bool atualiza(char * banco, char * arquivinho){
 
 
 	fstream arquivo;
-	arquivo.open(banco,ios::in);
-	
+	arquivo.open(banco,ios::in);	
 
 	//Construir a lista com cada nó sendo uma string do indice do arquivo referenciado
 	while(!arquivo.eof()){
@@ -124,8 +121,12 @@ bool atualiza(char * banco, char * arquivinho){
 		fstream novobanco (banco , ios::out | ios::app);
 	    for(No i = indices->cabeca; i != indices->cauda; i = i->proximo)
 	    {
-	        if(i != indices->cabeca)
-	        	novobanco << i->conteudo << "\n";
+	        if(i != indices->cabeca){
+	        	if(i->proximo == indices->cauda)
+	        		novobanco << i->conteudo;
+	        	else
+	        		novobanco << i->conteudo << '\n';
+	        }
 	    }
 	    
 	    novobanco.close();
