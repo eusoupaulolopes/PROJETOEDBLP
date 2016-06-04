@@ -43,7 +43,7 @@ bool removerdaPasta(char* arquivo){
 	int tamNome = strlen(arquivo);
 	char caminho[6+tamNome];
 	strcpy(caminho, "banco/");
-	strcat(caminho, arquivo);
+	strcat(caminho, arquivo);	
 
 	//remove retorna 0 quando remove com sucesso
 	if(remove(caminho) == 0){
@@ -78,19 +78,19 @@ bool remocao(char* nomedoarquivo){
 	}
 
 	arquivoLog.close();
-	int indice = LIS_Buscar(listaLog,nomedoarquivo);
-	
-	if(indice > 0){
-		verificaExistenciaArquivo = true;
-		if(LIS_Remover(listaLog,indice) != "menosum"){
-			removerdaPasta(nomedoarquivo);
-		}
-	}
 
 
-	/*cout << "Lista com elementos removidos" << endl;
+	/*cout << "Lista com todos elementos" << endl;
 	LIS_Imprimir(listaLog);*/
 
+	int indice = LIS_Buscar(listaLog,nomedoarquivo);
+
+	if(indice > 0){
+		verificaExistenciaArquivo = true;
+		LIS_Remover(listaLog,indice);
+		removerdaPasta(nomedoarquivo);
+		
+	}
 
 	if(verificaExistenciaArquivo){	
 

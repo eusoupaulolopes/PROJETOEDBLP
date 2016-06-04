@@ -5,11 +5,16 @@
 
 #include <iostream>
 
-
+enum tipoListar {
+	alfabeticamente,
+	quantidadePalavras,
+};
 
 typedef char** args;
 
+void quebraLinha(string linhaStr, Lista lista);
 bool listarInsercao(int argc, args argv);
+bool listarAlfabeticamente(int argc, args argv);
 
 //char* quebraString(string str);
 

@@ -2,14 +2,30 @@
 #include <cstring>
 #include <locale.h>
 #include <iostream>
-#include "listar.h"
 #include "estruturas.h"
+#include "listar.h"
 
 
 using namespace std;
 
-void quebraString(string str,Lista listaPorInsercao);
+void quebraLinha(string linhaStr, Lista lista){
 
+	char* linha = new char[linhaStr.length()];
+
+	strcpy(linha,linhaStr.c_str());
+	
+	char* auxNome;
+	char* auxDataHora;
+
+	auxNome = strtok(linha,";");
+	auxDataHora = strtok(NULL,";");
+
+	string nome(auxNome);
+	string dataHora(auxDataHora);
+
+	LIS_InserirFim(lista,linhaStr,nome,dataHora);
+	
+}
 
 bool listarInsercao(int argc, args argv){
 
@@ -25,10 +41,10 @@ bool listarInsercao(int argc, args argv){
 
 	Lista listaPorInsercao = LIS_Criar();
 	string linha;
-	string horaInsercao;
+	//string horaInsercao;
 	//char* horaInsercao = new char[14];	//14 é o tamanho da string hora: AAAAMMDDHHMMSS
+	
 	fstream basedebuscas;
-
 	basedebuscas.open("bancodedados",ios::in);
 
 	
@@ -37,7 +53,7 @@ bool listarInsercao(int argc, args argv){
 		while(!basedebuscas.eof()){
 			getline(basedebuscas,linha);
 			if(linha != "\0")
-				quebraString(linha,listaPorInsercao);
+				quebraLinha(linha,listaPorInsercao);
 
 			
 		}
@@ -54,22 +70,55 @@ bool listarInsercao(int argc, args argv){
 
 }
 
-void quebraString(string str, Lista listaPorInsercao){
 
-	char* linha = new char[str.length()];
 
-	strcpy(linha,str.c_str());
+/*
+ Função que lista os arquivos da base de busca em ordem alfabética
+ @param argc - tamanho do vetor de argumentos
+ @param argv - vetor de argumentos do terminal
+ @return true se listou com sucesso, false caso a opção escolhida não seja -la
+*/
+bool listarAlfabeticamente(int argc, args argv){
+	setlocale(LC_ALL,"pt_BR"); 
+
+
+	// verifica se a função chamada é listar
+	if(strcmp(argv[1], "-la")){
+		return false;	
+	} 
+
+
+	Lista listaAlfabetica = LIS_Criar();
+	string linha;
+
+	fstream basedebuscas;
+	basedebuscas.open("bancodedados",ios::in);
+
 	
-	char* auxNome;
-	char* auxDataHora;
-
-	auxNome = strtok(linha,";");
-	auxDataHora = strtok(NULL,";");
-
-	string nome(auxNome);
-	string dataHora(auxDataHora);
-
-	LIS_InserirFim2(listaPorInsercao,str,nome,dataHora);
+	if(basedebuscas.is_open()){
 	
+		while(!basedebuscas.eof()){
+			
+			getline(basedebuscas,linha);
+
+			if(linha != "\0")
+				quebraLinha(linha,listaAlfabetica);			
+		}
+
+	}else{
+		cout << "\tNão foi possivel encontrar a base de buscas, ou estava vazia!" << endl;
+	}
+
+	LIS_Ordenar(listaAlfabetica,alfabeticamente);
+
+	cout << "Arquivos contidos na base de buscas:" << endl;	
+	
+	LIS_Imprimir(listaAlfabetica);
+
+
+
+	return true;
+
 }
+
 

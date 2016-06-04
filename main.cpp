@@ -6,7 +6,6 @@
 #include "funcoes/remover.h"
 #include "funcoes/estruturas.h"
 #include "funcoes/listar.h"
-#include "funcoes/buscar.h"
 
 
 using namespace std;
@@ -33,9 +32,7 @@ int main(int argc, char** argv){
 	opcoes[0] = inserir;
 	opcoes[1] = remover;
 	opcoes[2] = listarInsercao;
-	opcoes[3] = Ler_Base;
-
-	
+	opcoes[3] = listarAlfabeticamente;
 
 	/*opcao opcoesBusca[1];
 	opcoesBusca[0] = inserir;

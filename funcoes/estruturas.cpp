@@ -1,16 +1,13 @@
-#include "buscar.h" // coisas de tad
-#include "estruturas.h"
 #include <stdlib.h>
 #include <iostream>
-#include <cstring>
 #include <string>
-#include <locale.h>
-#include <fstream>
+#include "estruturas.h"
+#include "listar.h"
 
 //#define VALOR_QUALQUER "extremos"
 
 No CriarNo(string);
-No CriarNo2(string,string,string);
+No CriarNo(string,string,string);
 bool DestruirNo(No);
 
 /**
@@ -77,9 +74,9 @@ bool LIS_InserirFim(Lista lista, string conteudo)
     return true;
 }
 
-bool LIS_InserirFim2(Lista lista, string conteudo, string nome, string dataHora)
+bool LIS_InserirFim(Lista lista, string conteudo, string nome, string dataHora)
 {
-    No no = CriarNo2(conteudo,nome,dataHora);
+    No no = CriarNo(conteudo,nome,dataHora);
 
     if( no == NULL )
     {
@@ -158,8 +155,7 @@ int LIS_Buscar(Lista lista, string chave)
     No no = lista->cabeca->proximo;
     for (int i=0; i < lista->tamanho; i++){
         if (no->conteudo.substr(0,chave.size()) == chave){
-            i++;
-            return i;
+            return i+1;
         }
         no = no->proximo;
     }
@@ -167,9 +163,75 @@ int LIS_Buscar(Lista lista, string chave)
     return -1;
 }
 
+//Selection Sort
+void LIS_Trocar(No menor, No fixo){
+    
+    No tmp1 = menor->proximo;
+    No tmp2 = fixo->anterior;
+    No tmp3 = fixo->proximo;
+    No tmp4 = menor->anterior;
+
+    if (fixo->proximo == menor) {//Nós vizinhos
+        fixo->anterior->proximo = menor;
+        menor->proximo->anterior = fixo;
+
+        fixo->proximo = menor->proximo;
+        menor->proximo = fixo;
+
+        menor->anterior = fixo->anterior;
+        fixo->anterior = menor;
+    }
+    else {//Nós com algum elemento entre eles
+        fixo->anterior->proximo = menor;
+        menor->proximo->anterior = fixo;
+
+        fixo->proximo = tmp1;
+        menor->proximo = tmp3;
+
+        menor->anterior = tmp2;
+        fixo->anterior = tmp4;
+    }
+
+}
+
+void LIS_Ordenar(Lista lista, int tipoListar)
+{
+    No menor;
+
+
+    //Seleção do menor
+    for(No fixo = lista->cabeca->proximo; fixo != lista->cauda->anterior; fixo=fixo->proximo){
+        menor = fixo;
+
+        //cout << "to por aqui!" << menor->nome << endl;
+
+
+        for(No iter=fixo->proximo; iter != lista->cauda; iter=iter->proximo){
+            if(tipoListar == alfabeticamente){
+                if(iter->nome < menor->nome){
+                    menor = iter;
+                }
+            }
+            if(tipoListar == quantidadePalavras){
+                if(iter->qtdePalavras < menor->qtdePalavras){
+                    menor = iter;
+                }
+            }
+
+
+        }
+
+        //Trocar se menor é diferente do no pré-fixado
+        if(menor!=fixo){
+            LIS_Trocar(menor,fixo);
+            fixo=menor;
+        }
+    }
+}
+
 /*
     Função que imprime todos os elementos de uma lista.
- */
+*/
 void LIS_Imprimir(Lista lista)
 {
     //std::cout << "Tamanho " << lista->tamanho << std::endl;
@@ -179,6 +241,16 @@ void LIS_Imprimir(Lista lista)
     }
     std::cout << std::endl;
 }
+/* PARA TESTAR inserir.cpp e remover.cpp
+void LIS_Imprimir(Lista lista)
+{
+    //std::cout << "Tamanho " << lista->tamanho << std::endl;
+    for(No i = lista->cabeca->proximo; i != lista->cauda; i = i->proximo)
+    {
+        std::cout << "\t-  \""<< i->conteudo <<"\"\n";
+    }
+    std::cout << std::endl;
+}*/
 
 /**
  Função que libera a memória de uma instância da estrutura Lista, liberando a memória de todos os nós encadeados na lista, incluindo os nós cabeça e cauda.
@@ -220,7 +292,7 @@ No CriarNo(string indice)
     return no;
 }
 
-No CriarNo2(string conteudo,string nome,string dataHora){
+No CriarNo(string conteudo,string nome,string dataHora){
     No no = new tpNo;
     if( no == NULL )
     {
@@ -248,156 +320,7 @@ bool DestruirNo(No no)
 }
 
 
+/*
+    Função que ordena a lista. (Obs.: Implemente os algoritmos: selection sort, insertion sort e bubble sort.)
+ */
 
-Tabela TAB_CriarTabela(int tamanho){
-    
-    if (tamanho <= 0 ) 
-        return NULL;
-
-    Tabela tabela = new tpTabela;
-    tabela->tamanho = tamanho;
-    tabela->qtdItens = 0;
-    tabela->valores = new Valor[tamanho];
-    tabela->chaves = new Chave[tamanho];
-
-    for(int i = 0; i < tabela->tamanho; i++){
-        tabela->valores[i] = NULL;
-        tabela->chaves[i] = NULL;
-    }
-
-    return tabela;
-}
-void Expandir(Tabela tabela){
-    Tabela ntabela = TAB_CriarTabela((1+(tabela->tamanho*2)));    
-    
-    for (int i = 0; i < tabela->tamanho; i++){
-        TAB_Inserir(ntabela, tabela->chaves[i], tabela->valores[i]);    
-    }
-    
-    tabela->tamanho = ntabela->tamanho;
-    tabela->valores = ntabela->valores;
-    tabela->chaves = ntabela->chaves;    
-    
-}
-
-void Reduzir(Tabela tabela){
-    
-    Tabela novaTabela = TAB_CriarTabela(1+(tabela->tamanho/2));
-
-    for (int i = 0; i < tabela->tamanho; i++){        
-        TAB_Inserir(novaTabela, tabela->chaves[i], tabela->valores[i]);   
-    } 
-    
-    tabela->tamanho = novaTabela->tamanho;
-    tabela->valores = novaTabela->valores;
-    tabela->chaves = novaTabela->chaves;    
-    
-}
-bool TAB_Inserir(Tabela tabela, Chave chave, Valor valor)
-{
-    
-    if (tabela == NULL || chave == NULL || valor == NULL || chave == CHAVE_REMOVIDA)
-        return false;
-
-    int aux = Hash(PreHash(chave), tabela->tamanho);
-    int indice;
-    for (int i = 0; i < tabela->tamanho; i++){
-        indice = (aux + i) % tabela->tamanho;
-        if(tabela->chaves[indice] == NULL || tabela->chaves[indice] == CHAVE_REMOVIDA || (strcmp(tabela->chaves[indice]->chave, chave->chave) == 0)){
-            tabela->chaves[indice] = chave;
-            if(tabela->valores[indice] == NULL || tabela->valores[indice] == ITEM_REMOVIDO)
-                tabela->qtdItens++;            
-            if(tabela->valores[indice] == NULL)
-                tabela->valores[indice] = valor;                                // AQUI DEVE INCLUIR
-            else                                                                // AQUI        
-                tabela->valores[indice]->conteudo += " " + valor->conteudo;     //             
-            if (tabela->qtdItens*2 >= tabela->tamanho)
-                Expandir(tabela);
-            return true;
-        }
-    }
-    return false;
-}
-
-void TAB_imprimir(Tabela tabela)
-{
-    for (int i = 0; i < tabela->tamanho; i++){
-        std::cout << "T[" << i << "] = ";
-        Valor valor = tabela->valores[i];
-        Chave chave = tabela->chaves[i];
-        if ( valor == NULL){
-            std::cout << "NULO\n"; 
-        }else if (valor == ITEM_REMOVIDO){
-            std::cout << "REMOVIDO\n"; 
-        }else{
-            std::cout << chave->chave << " : " << valor->conteudo << std::endl;
-        }
-    }
-}
-
-void gerarArquivoTabela(char* auxTabela, Tabela tabela)
-{
-    std::string texto;
-    fstream file (auxTabela , ios::out | ios::app);
-    if(file.is_open()){
-        for (int i = 0; i < tabela->tamanho; i++){
-            file << "T[" << std::to_string(i).c_str() << "] = ";
-            Valor valor = tabela->valores[i];
-            Chave chave = tabela->chaves[i];
-            if ( valor == NULL){
-                file << "NULO\n"; 
-            }else if (valor == ITEM_REMOVIDO){
-                file << "REMOVIDO\n"; 
-            }else{
-                std::string aux(chave->chave);
-                file << aux << " : " << valor->conteudo << "\n";
-            }
-        }
-    } 
-    
-    file.close();
-
-}
-
-short Hash(long valor, int n)
-{
-    int indice = (valor & 0x7FFFFFFF) % n;
-    return indice;
-}
-
-long PreHash(Chave chave)
-{
-    char * str = chave->chave;
-    
-    long hash = 0;
-    
-    int c;
-    
-    while ( (c = *str++) )
-    {
-        // Uma função hash bem melhor seria: hash = c + (hash << 6) + (hash << 16) - hash;
-        // Estamos usando a mais simples abaixo para aumentar o número de colisões a fim de testar os métodos de tratamento de colisão
-        hash += c;
-    }
-    
-    return hash;
-}
-
-Chave TAB_CriarChave(const char * c)
-{
-    Chave chave = new tpChave;
-    chave->chave = new char[strlen(c)+1];
-
-    strcpy(chave->chave, c);
-
-    return chave;
-}
-
-Valor TAB_CriarValor(const char* c)
-{
-    Valor valor = new tpValor;
-    
-    valor->conteudo = c;
-    
-    return valor;
-}
