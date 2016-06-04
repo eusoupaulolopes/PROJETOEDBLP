@@ -4,8 +4,8 @@
 #include <iostream>
 #include "inserir.h"
 #include "estruturas.h"
+#include "buscar.h"
 #include <ctime>
-
 
 using namespace std;
 
@@ -18,10 +18,9 @@ bool inserir(int argc, args argv){
 	if(strcmp(argv[1], "-i")){
 		
 		return false;	
-	} 
-	
+	}
 
-	char * banco = (char*)"bancodedados.txt";
+	char * banco = (char*)"bancodedados";
 	fstream file (banco , ios::out | ios::app); // faz abrir sempre no fim do arquivo
 	
 	std::time_t horadeinsercao;
@@ -29,20 +28,27 @@ bool inserir(int argc, args argv){
 	std::time(&horadeinsercao);
 	char buffer[80];
 	timeinfo = localtime(&horadeinsercao);
-	strftime(buffer,80,"%Y%m%d%H%M%S", timeinfo);
-	    
+	strftime(buffer,80,"%Y%m%d%H%M%S", timeinfo);	    
 	if(file.is_open()){
 		for (int i = 2; i < argc; i++){
 			validou = copiarArquivo(argv[i]); // TODO
+			
 			if(validou){
+				int tamNome = strlen(argv[i]);
+				char caminho[6+tamNome];
+				strcpy(caminho, "banco/");
+				strcat(caminho, argv[i]);
+				int palavras = gerarTabela(caminho); // Conta as palavras e gera tabela de dispersao
+				
 				if(!atualiza(banco, argv[i])){					
-					// Aqui vai o teste de atualizar ou inserir no bancodedados.txt..
+					// Aqui vai o teste de atualizar ou inserir no bancodedados..
 					cout << "Arquivo: " << argv[i] << " inserido na base de buscas." <<endl;					
 					if (i != argc-1){
-						file << argv[i] << ";" << buffer << "\n";
+						file << argv[i] << ";" << buffer << ";" << palavras << "\n";
 					}else{
-						file << argv[i] << ";" << buffer;	
+						file << argv[i] << ";" << buffer << ";" << palavras;	
 					}
+					
 
 				}
 			}else{
@@ -63,6 +69,8 @@ bool copiarArquivo(char* arquivo){
 	char caminho[6+tamNome];
 	strcpy(caminho, "banco/");
 	strcat(caminho, arquivo);
+
+	gerarTabela(caminho);
 	
 	ifstream origem (arquivo, fstream::binary);
 

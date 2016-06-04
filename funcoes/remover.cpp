@@ -43,7 +43,7 @@ bool removerdaPasta(char* arquivo){
 	int tamNome = strlen(arquivo);
 	char caminho[6+tamNome];
 	strcpy(caminho, "banco/");
-	strcat(caminho, arquivo);	
+	strcat(caminho, arquivo);
 
 	//remove retorna 0 quando remove com sucesso
 	if(remove(caminho) == 0){
@@ -66,7 +66,7 @@ bool remocao(char* nomedoarquivo){
 	bool verificaExistenciaArquivo = false;
 
 	fstream arquivoLog;
-	arquivoLog.open("bancodedados.txt",ios::in);
+	arquivoLog.open("bancodedados",ios::in);
 
 	if(arquivoLog.is_open()){
 		while(!arquivoLog.eof()){
@@ -79,7 +79,7 @@ bool remocao(char* nomedoarquivo){
 
 	arquivoLog.close();
 	int indice = LIS_Buscar(listaLog,nomedoarquivo);
-
+	
 	if(indice > 0){
 		verificaExistenciaArquivo = true;
 		if(LIS_Remover(listaLog,indice) != "menosum"){
@@ -94,9 +94,9 @@ bool remocao(char* nomedoarquivo){
 
 	if(verificaExistenciaArquivo){	
 
-		remove("bancodedados.txt");
+		remove("bancodedados");
 
-		fstream novobanco ("bancodedados.txt" , ios::out | ios::app);
+		fstream novobanco ("bancodedados" , ios::out | ios::app);
 
 	    for(No i = listaLog->cabeca; i != listaLog->cauda; i = i->proximo)
 	    {

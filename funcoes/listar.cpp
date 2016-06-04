@@ -29,7 +29,7 @@ bool listarInsercao(int argc, args argv){
 	//char* horaInsercao = new char[14];	//14 é o tamanho da string hora: AAAAMMDDHHMMSS
 	fstream basedebuscas;
 
-	basedebuscas.open("bancodedados.txt",ios::in);
+	basedebuscas.open("bancodedados",ios::in);
 
 	
 	if(basedebuscas.is_open()){

@@ -1,2 +1,0 @@
-arquivo.txt;20160604120652
-quadrado.txt;20160604120718
