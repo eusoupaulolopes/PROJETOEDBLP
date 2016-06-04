@@ -6,12 +6,14 @@
 #include <string>
 #include <locale.h>
 #include <fstream>
+#include <sstream> //atoi
 #include "listar.h"
 
 //#define VALOR_QUALQUER "extremos"
 
 No CriarNo(string);
 No CriarNo(string,string,string);
+No CriarNo(string,string,string,string);
 bool DestruirNo(No);
 
 /**
@@ -81,6 +83,25 @@ bool LIS_InserirFim(Lista lista, string conteudo)
 bool LIS_InserirFim(Lista lista, string conteudo, string nome, string dataHora)
 {
     No no = CriarNo(conteudo,nome,dataHora);
+
+    if( no == NULL )
+    {
+        return false;
+    }
+    
+    No ultimo = lista->cauda->anterior;
+
+    lista->cauda->anterior = no;
+    no->proximo = lista->cauda;
+    no->anterior = ultimo;    
+    ultimo->proximo = no;
+    lista->tamanho++;
+    return true;
+}
+
+bool LIS_InserirFim(Lista lista, string conteudo, string nome, string dataHora, string qtdePalavras)
+{
+    No no = CriarNo(conteudo,nome,dataHora,qtdePalavras);
 
     if( no == NULL )
     {
@@ -310,6 +331,24 @@ No CriarNo(string conteudo,string nome,string dataHora){
     no->nome = nome;
     no->dataHora = dataHora;
     
+    
+    return no;
+}
+
+No CriarNo(string conteudo,string nome,string dataHora,string palavras){
+    No no = new tpNo;
+    if( no == NULL )
+    {
+        return NULL;
+    }
+    
+    no->proximo = NULL;
+    no->anterior = NULL;
+
+    no->conteudo = conteudo;
+    no->nome = nome;
+    no->dataHora = dataHora;
+    no->qtdePalavras = palavras;
     
     return no;
 }
