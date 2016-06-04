@@ -65,20 +65,16 @@ bool remocao(char* nomedoarquivo){
 	string prefixo = nomedoarquivo;
 	bool verificaExistenciaArquivo = false;
 
-
 	fstream arquivoLog;
 	arquivoLog.open("bancodedados.txt",ios::in);
-
 
 	if(arquivoLog.is_open()){
 		while(!arquivoLog.eof()){
 			
-			getline(arquivoLog,linhaLog);
-			
-			LIS_InserirFim(listaLog,linhaLog);
+			getline(arquivoLog,linhaLog);			
+			LIS_InserirFim(listaLog, linhaLog);
 			
 		}
-		
 	}
 
 	/*cout << "Lista completa:" << endl;

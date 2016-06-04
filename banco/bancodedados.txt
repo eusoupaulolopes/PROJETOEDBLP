@@ -5,9 +5,6 @@
 
 
 
-arquivo.txt;20160524214702
-bancodedados.txt;20160524214558
-input.txt;20160524214558
 
 
 

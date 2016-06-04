@@ -54,9 +54,9 @@ Lista LIS_Criar()
  @param v - valor a ser inserido na lista
  @return true se inseriu com sucesso, false caso contrário
  */
-bool LIS_InserirFim(Lista lista, string v)
+bool LIS_InserirFim(Lista lista, string conteudo)
 {
-    No no = CriarNo(v);
+    No no = CriarNo(conteudo);
     if( no == NULL )
     {
         return false;

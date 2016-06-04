@@ -51,7 +51,7 @@ bool listarInsercao(int argc, args argv){
 
 }
 
-string quebraString(string str,Lista listaPorInsercao){
+string quebraString(string str, Lista listaPorInsercao){
 
 	char* linha = new char[str.length()];
 
@@ -69,18 +69,7 @@ string quebraString(string str,Lista listaPorInsercao){
 	LIS_InserirFim(listaPorInsercao,str,nome,dataHora);
 
 
-	/*
-	//const char * linha = str.c_str(); //transforma str em const char*
 
-	
-	char* nome;
-	char* hora;
-	//strtok quebra string através dos delimitadores
-	nome = strtok(linha,";");
-	//tem que colocar NULL para continuar do fim do primeiro token
-	//hora = strtok(NULL,";");
-
-	string s(c);*/
 
 	return nome;
 }
