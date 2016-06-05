@@ -28,7 +28,7 @@ bool Ler_Base(int argc, args argv){
 			getline(file, linha);
 			std::string arquivo = "banco/";
 			if(linha != "\0"){
-				for (int j = 0; j < linha.size(); j++){
+				for (int j = 0; j < (int)linha.size(); j++){
 					if(linha[j] == 59){ // o primeiro ; da linha		
 					}
 					arquivo+=linha[j];

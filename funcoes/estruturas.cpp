@@ -224,6 +224,7 @@ void LIS_Ordenar(Lista lista, int tipoListar)
     No menor;
 
 
+
     //Seleção do menor
     for(No fixo = lista->cabeca->proximo; fixo != lista->cauda->anterior; fixo=fixo->proximo){
         menor = fixo;
@@ -232,11 +233,13 @@ void LIS_Ordenar(Lista lista, int tipoListar)
 
 
         for(No iter=fixo->proximo; iter != lista->cauda; iter=iter->proximo){
-            if(tipoListar == alfabeticamente){
+            
+           if(tipoListar == alfabeticamente){
                 if(iter->nome < menor->nome){
                     menor = iter;
                 }
             }
+
             if(tipoListar == quantidadePalavras){
                 if(iter->qtdePalavras < menor->qtdePalavras){
                     menor = iter;

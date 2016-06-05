@@ -132,8 +132,7 @@ bool listarAlfabeticamente(int argc, args argv){
  @return true se listou com sucesso, false caso a opção escolhida não seja -lt
 */
 bool listarQtdePalavras(int argc, args argv){
-/*	setlocale(LC_ALL,"pt_BR"); 
-
+	setlocale(LC_ALL,"pt_BR"); 
 
 	// verifica se a função chamada é listar
 	if(strcmp(argv[1], "-lt")){
@@ -155,20 +154,21 @@ bool listarQtdePalavras(int argc, args argv){
 			getline(basedebuscas,linha);
 
 			if(linha != "\0")
-				quebraLinha(linha,listaQtdePalavras);			
+				quebraLinha(linha,listaQtdePalavras);
 		}
 
 	}else{
 		cout << "\tNão foi possivel encontrar a base de buscas, ou estava vazia!" << endl;
 	}
 
+	LIS_Imprimir(listaQtdePalavras);
+
+
 	LIS_Ordenar(listaQtdePalavras,quantidadePalavras);
 
 	cout << "Arquivos contidos na base de buscas:" << endl;	
 	
 	LIS_Imprimir(listaQtdePalavras);
-
-*/
 
 	return true;
 
