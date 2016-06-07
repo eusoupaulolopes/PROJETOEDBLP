@@ -71,7 +71,9 @@ bool buscaBAND(int argc, args argv){
 				for (int j = 0; j < (int)linha.size(); j++){
 					if(linha[j] == 59){ // o primeiro ; da linha		
 						arquivo = arquivo.erase(arquivo.length()-4,4) +".dat";
-						buscar(argc, argv, arquivo);						
+						cout << ">>> Abrindo: " << arquivo << endl;
+						buscar(argc, argv, arquivo);
+						break;						
 					}
 					arquivo+=linha[j];
 				}
@@ -96,15 +98,20 @@ bool buscar(int argc, args argv, std::string arquivo){
 	if (file.is_open()){
 		getline(file, linha);
 		int tamanho = atoi(linha.c_str());	
+
 		for (int i = 2; i < argc; i++){
-			cout << "Procurando por: [" << argv[i] << "] em " << arquivo << endl;
+			cout << " > Procurando por: [" << argv[i] << "]" << endl;
  			Chave chave = TAB_CriarChave(argv[i]);
-			int linhaIdeal = Hash(PreHash(chave), tamanho)+1;
-			while((linhaIdeal)--){
-				getline(file, linha);
+			int linhaIdeal = Hash(PreHash(chave), tamanho);
+			
+
+			for( int j = 1 ; j < linhaIdeal; j++){
+				getline(file, linha); // alcança a linha gerada pelo hash
 			}
-			std::size_t foundedWord = linha.find(argv[i]);                
+		
+			std::size_t foundedWord = linha.find(argv[i]+' ');                
 			std::size_t foundedNull = linha.find(nulo);                
+		
 			while(foundedWord==string::npos){
 				if(foundedNull==string::npos){
 					cout << "\t - Não contem a palavra\n" << endl;
@@ -113,13 +120,13 @@ bool buscar(int argc, args argv, std::string arquivo){
 				getline(file, linha);
 				foundedWord = linha.find(argv[i]);                
 				foundedNull = linha.find(nulo);
-				tamanho++;
+				
 			}
+
 			if(foundedWord!=string::npos){
 				cout << "\t - Contem a palavra segundo a tabela: [" << linha << "]" << endl;
 			}
 		}
-	
 		file.close();
 	}
 
