@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <string>
 #include <fstream>
 #include "estruturas.h"
 #include "remover.h"
@@ -45,8 +46,13 @@ bool removerdaPasta(char* arquivo){
 	strcpy(caminho, "banco/");
 	strcat(caminho, arquivo);	
 
+
+	string arquivodat(caminho);
+
+	arquivodat = arquivodat.erase(arquivodat.length()-4,4) +".dat";
+
 	//remove retorna 0 quando remove com sucesso
-	if(remove(caminho) == 0){
+	if(remove(caminho) == 0 && remove(arquivodat.c_str() ) ){
 
 		return true;
 	}

@@ -102,14 +102,16 @@ bool buscar(int argc, args argv, std::string arquivo){
 		for (int i = 2; i < argc; i++){
 			cout << " > Procurando por: [" << argv[i] << "]" << endl;
  			Chave chave = TAB_CriarChave(argv[i]);
-			int linhaIdeal = Hash(PreHash(chave), tamanho);
+			int linhaIdeal = Hash(PreHash(chave), tamanho)+1;
 			
-
-			for( int j = 1 ; j < linhaIdeal; j++){
-				getline(file, linha); // alcança a linha gerada pelo hash
-			}
+			while(linhaIdeal--){
+				getline(file,linha);
+			}	
+//			for( int j = 1 ; j < linhaIdeal; j++){
+//				getline(file, linha); // alcança a linha gerada pelo hash
+//			}
 		
-			std::size_t foundedWord = linha.find(argv[i]+' ');                
+			std::size_t foundedWord = linha.find(argv[i]);                
 			std::size_t foundedNull = linha.find(nulo);                
 		
 			while(foundedWord==string::npos){

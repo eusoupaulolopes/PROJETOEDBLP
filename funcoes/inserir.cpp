@@ -46,7 +46,12 @@ bool inserir(int argc, args argv){
 					if (i != argc-1){
 						file << argv[i] << ";" << buffer << ";" << palavras << "\n";
 					}else{
-						file << argv[i] << ";" << buffer << ";" << palavras << "\r";
+						
+						file << argv[i] << ";" << buffer << ";" << palavras;
+
+						if(argc == 3){
+							file << "\n";
+						}
 						
 					}
 					
@@ -84,6 +89,7 @@ bool copiarArquivo(char* arquivo){
 }
 
 bool atualiza(char * banco, char * arquivinho){
+
 	setlocale(LC_ALL,"pt_BR"); 
 	bool verificaIndicesIguais = false;
 	Lista indices = LIS_Criar();
@@ -100,6 +106,7 @@ bool atualiza(char * banco, char * arquivinho){
 		//copia os indices de arquivos diferentes de arquivinho para a lista de indices
 		if(linha.substr(0, prefixo.size()) != arquivinho){
 			LIS_InserirFim(indices,linha);
+			
 		}
 		else{
 			verificaIndicesIguais = true;
@@ -111,9 +118,16 @@ bool atualiza(char * banco, char * arquivinho){
 			char buffer[80];
 			timeinfo = localtime(&horadeinsercao);
 			strftime(buffer,80,"%Y%m%d%H%M%S", timeinfo);
+
+			int tamNome = strlen(arquivinho);
+			char caminho[6+tamNome];
+			strcpy(caminho, "banco/");
+			strcat(caminho, arquivinho);
 			
+			int palavras = gerarTabela(caminho); // Conta as palavras e gera tabela de dispersao
+
 			string pontoevirgula = ";";
-			string linhaatualizada = arquivinho+pontoevirgula+buffer;
+			string linhaatualizada = arquivinho+pontoevirgula+buffer+pontoevirgula+std::to_string(palavras).c_str();
 			
 			//o que tem da posiçao 0 até tamanho da linha, é substituido pelo conteudo de linhaatualizada
 			//linha.replace(0,linha.size(),linhaatualizada); 
@@ -128,13 +142,19 @@ bool atualiza(char * banco, char * arquivinho){
 		arquivo.close();
 		remove(banco);
 		fstream novobanco (banco , ios::out | ios::app);
+
+
 	    for(No i = indices->cabeca; i != indices->cauda; i = i->proximo)
 	    {
 	        if(i != indices->cabeca){
-	        	if(i->proximo == indices->cauda)
+	        	cout << i->conteudo << endl;
+	        	if(i->proximo == indices->cauda){
 	        		novobanco << i->conteudo;
-	        	else
+	        	}
+	        		
+	        	else{
 	        		novobanco << i->conteudo << '\n';
+	        	}
 	        }
 	    }
 	    
