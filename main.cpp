@@ -27,14 +27,15 @@ bool validarArgumentos(int argc, args argv){
 int main(int argc, char** argv){
 
 
-	opcao opcoes[5]; 
+	opcao opcoes[6]; 
 
 	//opcoes[0] = validarArgumentos;
 	opcoes[0] = inserir;
 	opcoes[1] = remover;
 	opcoes[2] = listarInsercao;
 	opcoes[3] = listarAlfabeticamente;
-	opcoes[4] = Ler_Base;
+	opcoes[4] = listarQtdePalavras;
+	opcoes[5] = Ler_Base;
 
 
 	/*opcao opcoesBusca[1];
@@ -44,7 +45,7 @@ int main(int argc, char** argv){
 	opcoesGerenciamento[0] = inserir;*/
 
 
-	if(!rodarOpcoes(opcoes,5,argc,argv)){
+	if(!rodarOpcoes(opcoes,6,argc,argv)){
 		cout << "Opção nao reconhecida!" << endl;
 	}
 	

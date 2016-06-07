@@ -151,19 +151,20 @@ bool listarQtdePalavras(int argc, args argv){
 		while(!basedebuscas.eof()){			
 			getline(basedebuscas,linha);
 			if(linha != "\0")
-				quebraLinha(linha,listaQtdePalavras);			
+				quebraLinha(linha,listaQtdePalavras);
 		}
 	}else{
 		cout << "\tNão foi possivel encontrar a base de buscas, ou estava vazia!" << endl;
 	}
+
+	LIS_Imprimir(listaQtdePalavras);
+
 
 	LIS_Ordenar(listaQtdePalavras,quantidadePalavras);
 
 	cout << "Arquivos contidos na base de buscas:" << endl;	
 	
 	LIS_Imprimir(listaQtdePalavras);
-
-
 
 	return true;
 
