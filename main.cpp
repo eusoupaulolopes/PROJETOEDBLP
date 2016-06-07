@@ -35,7 +35,7 @@ int main(int argc, char** argv){
 	opcoes[2] = listarInsercao;
 	opcoes[3] = listarAlfabeticamente;
 	opcoes[4] = listarQtdePalavras;
-	opcoes[5] = Ler_Base;
+	opcoes[5] = Ler_Buscas;
 
 
 	/*opcao opcoesBusca[1];

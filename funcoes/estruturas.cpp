@@ -428,8 +428,11 @@ bool TAB_Inserir(Tabela tabela, Chave chave, Valor valor)
                 tabela->qtdItens++;            
             if(tabela->valores[indice] == NULL)
                 tabela->valores[indice] = valor;                                // AQUI DEVE INCLUIR
-            else                                                                // AQUI        
-                tabela->valores[indice]->conteudo += " " + valor->conteudo;     //             
+            else {
+                std::size_t founded = tabela->valores[indice]->conteudo.find(valor->conteudo);                
+                    if(founded == string::npos)
+                        tabela->valores[indice]->conteudo += " " + valor->conteudo;     //             
+                }                                                               // AQUI                        
             if (tabela->qtdItens*2 >= tabela->tamanho)
                 Expandir(tabela);
             return true;
@@ -459,8 +462,9 @@ void gerarArquivoTabela(char* auxTabela, Tabela tabela)
     std::string texto;
     fstream file (auxTabela , ios::out | ios::app);
     if(file.is_open()){
+        file << tabela->tamanho <<"\n";
         for (int i = 0; i < tabela->tamanho; i++){
-            file << "T[" << std::to_string(i).c_str() << "] = ";
+            file << std::to_string(i).c_str() << " ";
             Valor valor = tabela->valores[i];
             Chave chave = tabela->chaves[i];
             if ( valor == NULL){

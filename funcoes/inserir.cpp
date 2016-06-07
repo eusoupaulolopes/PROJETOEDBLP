@@ -59,11 +59,7 @@ bool inserir(int argc, args argv){
 		file.close();
 		return true;
 	}else{
-		std::cout << "Foram encontrado falhas na inserção do arquivo" << std::endl;
-
-
-
-		
+		std::cout << "Foram encontrado falhas na inserção do arquivo" << std::endl;		
 	}
 	return false;
 }
