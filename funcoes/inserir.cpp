@@ -60,6 +60,10 @@ bool inserir(int argc, args argv){
 		return true;
 	}else{
 		std::cout << "Foram encontrado falhas na inserção do arquivo" << std::endl;
+
+
+
+		
 	}
 	return false;
 }

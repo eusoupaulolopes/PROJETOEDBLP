@@ -14,6 +14,7 @@
 No CriarNo(string);
 No CriarNo(string,string,string);
 No CriarNo(string,string,string,string);
+
 bool DestruirNo(No);
 
 /**

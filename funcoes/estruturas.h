@@ -46,7 +46,6 @@ void LIS_Destruir(Lista lista);
 string LIS_RemoverInicio(Lista lista);
 string LIS_Remover(Lista lista, int indice);
 int LIS_Buscar(Lista lista, string chave);
-
 bool LIS_InserirFim(Lista lista, string conteudo);
 bool LIS_InserirFim(Lista lista, string conteudo, string nome, string dataHora);
 bool LIS_InserirFim(Lista lista, string conteudo, string nome, string dataHora, string qtdePalavras);
