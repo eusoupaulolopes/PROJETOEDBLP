@@ -367,6 +367,7 @@ bool DestruirNo(No no)
 }
 
 
+// Funções para TADS
 
 Tabela TAB_CriarTabela(int tamanho){
     

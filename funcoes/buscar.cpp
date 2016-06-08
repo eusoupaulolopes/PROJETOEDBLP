@@ -5,8 +5,19 @@
 #include <string>
 #include <locale.h>
 #include <fstream>
+#include <limits>
 
 using namespace std;
+
+
+fstream& GoToLine(std::fstream& file, int num);
+
+/*
+ Função que valida a entrada no terminal e escolhe a busca apropriada 
+ @param argc - tamanho do vetor de argumentos
+ @param argv - vetor de argumentos do terminal
+ @return busca apropriada, false caso a opção escolhida não seja -bAND ou -bOR
+ */
 
 bool Ler_Buscas(int argc, args argv){
 
@@ -62,25 +73,28 @@ bool buscaBAND(int argc, args argv){
 	char * banco = (char *) "bancodedados";
 	ifstream file;
 	file.open(banco);
-	if (file.is_open()){
-		std::string linha;
-		while(!file.eof()){
-			getline(file, linha);
-			std::string arquivo = "banco/";
-			if(linha != "\0"){
-				for (int j = 0; j < (int)linha.size(); j++){
-					if(linha[j] == 59){ // o primeiro ; da linha		
-						arquivo = arquivo.erase(arquivo.length()-4,4) +".dat";
-						cout << ">>> Abrindo: " << arquivo << endl;
-						buscar(argc, argv, arquivo);
-						break;						
-					}
-					arquivo+=linha[j];
-				}
-			}
-		}	
-	file.close();
+	if (!file.is_open()){
+		cout << "Não foi possivel abrir " << banco << endl;
+		return false;
 	}
+
+	std::string linha;
+	while(!file.eof()){
+		getline(file, linha);
+		std::string arquivo = "banco/";
+		if(linha != "\0"){
+			for (int j = 0; j < (int)linha.size(); j++){
+				if(linha[j] == ';'){ // o primeiro ; da linha		
+					arquivo = arquivo.erase(arquivo.length()-4,4) +".dat";
+					cout << ">>> Abrindo: " << arquivo << endl;
+					buscar(argc, argv, arquivo);
+					break;						
+				}
+				arquivo+=linha[j];
+			}
+		}
+	}	
+	file.close();
 	return true;
 }
 
@@ -89,10 +103,18 @@ bool buscaBOR(int argc, args argv){
 	
 	return true;
 }
-
+/*
+ Função que não sei como se chama, quando descobrir coloco um nome melhor
+ @param argc - tamanho do vetor de argumentos
+ @param argv - vetor de argumentos do terminal
+ @return true caso tenha aberto corretamento o arquivo e designado a busca, false caso o arquivo nao exista na base
+ */
 
 bool buscar(int argc, args argv, std::string arquivo){
-	ifstream file (arquivo, fstream::binary);
+	fstream file (arquivo);
+	file.seekg(0);
+	
+
 
 	if (!file.is_open()){
 		cout << "Erro na abertura do arquivo" << endl;
@@ -108,14 +130,14 @@ bool buscar(int argc, args argv, std::string arquivo){
 		cout << " > Procurando por: [" << argv[i] << "]" << endl;
  		Chave chave = TAB_CriarChave(argv[i]);
 		int linhaIdeal = Hash(PreHash(chave), tamanho)+2;
-		cout << linhaIdeal << endl;
-		while(--linhaIdeal){
-			getline(file,linha); // para chegar na linha correta da TAD
-		}
+		
+		GoToLine(file, linhaIdeal);	
+		getline(file,linha);
 		
 		std::size_t foundedWord = linha.find(argv[i]);                
 		std::size_t foundedNull = linha.find(nulo);                
-	
+		
+		//Se não achar a chave e != de nulo prossiga
 		while(foundedWord==string::npos){
 			if(foundedNull!=string::npos){
 				cout << "\t - Não contem a palavra\n" << endl;
@@ -126,11 +148,13 @@ bool buscar(int argc, args argv, std::string arquivo){
 			foundedNull = linha.find(nulo);
 			
 		}
-
+		// Se achou a palavra
 		if(foundedWord!=string::npos){
+			// Descarto tudo antes do ':' 
 			strtok((char*)linha.c_str(),":");		
-			char* auxLinhas = strtok(NULL,":");				
-			listaLinhas(arquivo, auxLinhas); 
+			char* auxLinhas = strtok(NULL,":");
+			// Atribuo a linhas a uma string e envio a listagem				
+			listaLinhas(arquivo, auxLinhas);
 		}
 		file.seekg(0);
 	}
@@ -140,11 +164,33 @@ bool buscar(int argc, args argv, std::string arquivo){
 }
 
 
-// quebra o conteudo da TAD em linhas visualizaveis
+
+/*
+ Função que recebe um arquivo contido na base de buscas, e a linha desejada nesse arquivo
+ FONTE: //http://stackoverflow.com/questions/5207550/in-c-is-there-a-way-to-go-to-a-specific-line-in-a-text-file/5207600#5207600
+ @param file - arquivo a percorrer
+ @param num - linha desejada no arquivo
+ @return file com o ponteiro armadao na linha desejada
+ */
+std::fstream& GoToLine(std::fstream& file, int num){
+	file.seekg(std::ios::beg);
+    for(int i=0; i < num - 1; ++i){
+        file.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+    }
+    return file;
+}
+
+
+/*
+ Função que recebe um caminho para arquivo contido na base de buscas e as linhas a navegar nesses arquivos
+ @param arquivo - localização do arquivo na base
+ @param linhas - todas as linhas a buscar no arquivo
+ @return true se o arquivo foi aberto e as linhas tratadas; false caso o arquivo nao exista
+ */
 bool listaLinhas(string arquivo, char * linhas){
 	string arquivoAux = arquivo.erase(arquivo.length()-4,4) +".txt";
 	char* nlinha = std::strtok(linhas ,"-");
-	ifstream arquivoTXT (arquivoAux.c_str(), fstream::binary);
+	fstream arquivoTXT(arquivoAux);
 
 	// Verifica se o arquivo foi aberto corretamente
 	if(!arquivoTXT.is_open()){
@@ -152,17 +198,10 @@ bool listaLinhas(string arquivo, char * linhas){
 	}
 
 	while(nlinha != NULL){	
-
 		string linhaAux;
-		int cont = 0;
-
-		// Para não voltar ao inicio do arquivo e percorrer novamente uso um contador que persiste a posição que encontrou o ultimo termo
-		while(atoi(nlinha) != cont){
-			getline(arquivoTXT, linhaAux);						
-			cont++;
-		}
-
-		cout << "\t>>> Encontrado na linha " << nlinha << " :: " << linhaAux << endl;
+		GoToLine(arquivoTXT, atoi(nlinha));
+		getline(arquivoTXT,linhaAux);
+		cout << "\t>>> Encontrado na linha " << nlinha << " -> " << linhaAux << endl;
 		nlinha = strtok(NULL,"-");			
 	}
 
