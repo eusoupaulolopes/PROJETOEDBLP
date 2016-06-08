@@ -1,19 +1,19 @@
 #ifndef _FUNCAO_INSERIR_
 #define _FUNCAO_INSERIR_
 
+#include <fstream>
+#include <iostream>
 typedef char** args;
 
+using namespace std;
 
-bool atualiza(char * banco, char * arquivinho);
-bool inserir(int argc, args argv);
 
-/*
-@Aqui vai a documentação
-Funcao copia o arquivo a inserir e joga na pasta de banco
 
-*/
-bool copiarArquivo(char* arquivo);
-
+bool atualiza(char* base, char* nomeArquivo);
+char* horaDataInsercao();
+bool copiarArquivoParaPasta(char* arquivo);
+bool fazAtualizacao(char * base, char * nomeArquivo);
+bool apenasInsere(char * base, char * nomeArquivo, int argc, int posicao);
 
 
 #endif
