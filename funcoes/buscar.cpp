@@ -93,58 +93,82 @@ bool buscaBOR(int argc, args argv){
 
 bool buscar(int argc, args argv, std::string arquivo){
 	ifstream file (arquivo, fstream::binary);
-	std::string linha;
-	std::string nulo = "NULO";
-	if (file.is_open()){
-		getline(file, linha);
-		int tamanho = atoi(linha.c_str());	
 
-		for (int i = 2; i < argc; i++){
-			cout << " > Procurando por: [" << argv[i] << "]" << endl;
- 			Chave chave = TAB_CriarChave(argv[i]);
-			int linhaIdeal = Hash(PreHash(chave), tamanho)+1;
-			
-			while(linhaIdeal--){
-				getline(file,linha);
-			}	
-//			for( int j = 1 ; j < linhaIdeal; j++){
-//				getline(file, linha); // alcança a linha gerada pelo hash
-//			}
-		
-			std::size_t foundedWord = linha.find(argv[i]);                
-			std::size_t foundedNull = linha.find(nulo);                
-		
-			while(foundedWord==string::npos){
-				if(foundedNull==string::npos){
-					cout << "\t - Não contem a palavra\n" << endl;
-					break;
-				}
-				getline(file, linha);
-				foundedWord = linha.find(argv[i]);                
-				foundedNull = linha.find(nulo);
-				
-			}
-
-			if(foundedWord!=string::npos){
-				cout << "\t - Contem a palavra segundo a tabela: [" << linha << "]" << endl;
-			}
-		}
-		file.close();
+	if (!file.is_open()){
+		cout << "Erro na abertura do arquivo" << endl;
+		return false;
 	}
 
+	std::string linha;
+	std::string nulo = "NULO";
+	getline(file, linha);
+	int tamanho = atoi(linha.c_str());
 
-/*
-	while(!file.eof()){
-			
-			std::string arquivo = "banco/";
-			if(linha != "\0"){
-				for (int j = 0; j < (int)linha.size(); j++){
-					if(linha[j] == 59){ // o primeiro ; da linha		
-					}
-					arquivo+=linha[j];
-				}
-			}
+	for (int i = 2; i < argc; i++){
+		cout << " > Procurando por: [" << argv[i] << "]" << endl;
+ 		Chave chave = TAB_CriarChave(argv[i]);
+		int linhaIdeal = Hash(PreHash(chave), tamanho)+2;
+		cout << linhaIdeal << endl;
+		while(--linhaIdeal){
+			getline(file,linha); // para chegar na linha correta da TAD
 		}
-*/
+		
+		std::size_t foundedWord = linha.find(argv[i]);                
+		std::size_t foundedNull = linha.find(nulo);                
+	
+		while(foundedWord==string::npos){
+			if(foundedNull!=string::npos){
+				cout << "\t - Não contem a palavra\n" << endl;
+				break;
+			}
+			getline(file, linha);
+			foundedWord = linha.find(argv[i]);                
+			foundedNull = linha.find(nulo);
+			
+		}
+
+		if(foundedWord!=string::npos){
+			strtok((char*)linha.c_str(),":");		
+			char* auxLinhas = strtok(NULL,":");				
+			listaLinhas(arquivo, auxLinhas); 
+		}
+		file.seekg(0);
+	}
+	file.close();
+	
 	return true;
+}
+
+
+// quebra o conteudo da TAD em linhas visualizaveis
+bool listaLinhas(string arquivo, char * linhas){
+	string arquivoAux = arquivo.erase(arquivo.length()-4,4) +".txt";
+	char* nlinha = std::strtok(linhas ,"-");
+	ifstream arquivoTXT (arquivoAux.c_str(), fstream::binary);
+
+	// Verifica se o arquivo foi aberto corretamente
+	if(!arquivoTXT.is_open()){
+		return false;
+	}
+
+	while(nlinha != NULL){	
+
+		string linhaAux;
+		int cont = 0;
+
+		// Para não voltar ao inicio do arquivo e percorrer novamente uso um contador que persiste a posição que encontrou o ultimo termo
+		while(atoi(nlinha) != cont){
+			getline(arquivoTXT, linhaAux);						
+			cont++;
+		}
+
+		cout << "\t>>> Encontrado na linha " << nlinha << " :: " << linhaAux << endl;
+		nlinha = strtok(NULL,"-");			
+	}
+
+	arquivoTXT.close();	
+	return true;			
+	
+
+
 }

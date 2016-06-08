@@ -431,7 +431,7 @@ bool TAB_Inserir(Tabela tabela, Chave chave, Valor valor)
             else {
                 std::size_t founded = tabela->valores[indice]->conteudo.find(valor->conteudo);                
                     if(founded == string::npos)
-                        tabela->valores[indice]->conteudo += " " + valor->conteudo;     //             
+                        tabela->valores[indice]->conteudo += "-" + valor->conteudo;     //             
                 }                                                               // AQUI                        
             if (tabela->qtdItens*2 >= tabela->tamanho)
                 Expandir(tabela);
