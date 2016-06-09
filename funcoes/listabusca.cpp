@@ -182,7 +182,7 @@ void LIS_ImprimirB(ListaB lista)
              std::cout << "Foram encontradas 0 linha(s) no arquivo \"" << i->nomeArquivo << "\"" << std::endl;
         }
 
-        if(i->numeroLinha != -1){
+        if(i->numeroLinha != -10){
             std::cout << "\t- linha " << i->numeroLinha << ": \"" << i->linha <<"\"\n";
         }
 
