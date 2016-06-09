@@ -207,8 +207,6 @@ bool listaLinhas(string arquivo, char * linhas,ListaB &listaBusca, char* chave, 
 		GoToLine(arquivoTXT, atoi(nlinha));
 		getline(arquivoTXT,linhaAux);
 
-		//falta colocar a hora
-
 		LIS_InserirFimB(listaBusca,arquivoAux,chave,dataHora,linhaAux,atoi(nlinha));
 
 		
