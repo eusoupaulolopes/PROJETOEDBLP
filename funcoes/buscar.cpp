@@ -1,6 +1,8 @@
 #include "buscar.h"
 #include "estruturas.h"
+#include "listar.h"
 #include "listabusca.h"
+
 #include <cstring>
 #include <iostream>
 #include <string>
@@ -9,6 +11,9 @@
 #include <limits>
 
 using namespace std;
+
+
+
 
 
 fstream& GoToLine(std::fstream& file, int num);
@@ -56,13 +61,17 @@ bool buscaPorArquivo(int argc, args argv){
 	std::string linha;
 	while(!file.eof()){
 		getline(file, linha);
-		std::string arquivo = "banco/";
+		string arquivo = "banco/";
+		cout << linha << endl;
+		
+		//cout << dataHora << endl;
 		if(linha != "\0"){
+			string dataHora = quebraLinha(linha, 2);
 			for (int j = 0; j < (int)linha.size(); j++){
 				if(linha[j] == ';'){ // o primeiro ; da linha		
 					arquivo = arquivo.erase(arquivo.length()-4,4) +".dat";
 					cout << ">>> Abrindo: " << arquivo << endl;
-					buscarNaTabela(argc, argv, arquivo, listaBusca[a]); //mandar lista por referência
+					buscarNaTabela(argc, argv, arquivo, listaBusca[a], dataHora); //mandar lista por referência
 					break;						
 				}
 				arquivo+=linha[j];
@@ -110,7 +119,7 @@ bool buscaBAND(ListaB* lista, int tamanho){
  @return true caso tenha aberto corretamento o arquivo e designado a busca, false caso o arquivo nao exista na base
  */
 
-bool buscarNaTabela(int argc, args argv, std::string arquivo, ListaB& listaBusca){
+bool buscarNaTabela(int argc, args argv, string arquivo, ListaB& listaBusca, string dataHora){
 	fstream file (arquivo);
 	file.seekg(0);
 	
@@ -121,13 +130,13 @@ bool buscarNaTabela(int argc, args argv, std::string arquivo, ListaB& listaBusca
 		return false;
 	}
 
-	std::string linha;
-	std::string nulo = "NULO";
+	string linha;
+	string nulo = "NULO";
 	getline(file, linha);
 	int tamanho = atoi(linha.c_str());
 
 	for (int i = 2; i < argc; i++){
-		cout << " > Procurando por: [" << argv[i] << "]" << endl;
+		//cout << " > Procurando por: [" << argv[i] << "]" << endl;
  		Chave chave = TAB_CriarChave(argv[i]);
 		int linhaIdeal = Hash(PreHash(chave), tamanho)+2;
 		
@@ -142,7 +151,7 @@ bool buscarNaTabela(int argc, args argv, std::string arquivo, ListaB& listaBusca
 			if(foundedNull!=string::npos){
 				cout << "\t - Não contem a palavra\n" << endl;
 				string linhaFail = "\t - Não contem a palavra\n";
-				LIS_InserirFimB(listaBusca,arquivo,argv[i],arquivo,linhaFail,-10);
+				LIS_InserirFimB(listaBusca,arquivo,argv[i],dataHora,linhaFail,-10);
 				break;
 			}
 			getline(file, linha);
@@ -156,7 +165,7 @@ bool buscarNaTabela(int argc, args argv, std::string arquivo, ListaB& listaBusca
 			strtok((char*)linha.c_str(),":");		
 			char* auxLinhas = strtok(NULL,":");
 			// Atribuo a linhas a uma string e envio a listagem				
-			listaLinhas(arquivo, auxLinhas,listaBusca,argv[i]);
+			listaLinhas(arquivo, auxLinhas,listaBusca,argv[i], dataHora);
 		}
 		file.seekg(0);
 	}
@@ -189,7 +198,7 @@ std::fstream& GoToLine(std::fstream& file, int num){
  @param linhas - todas as linhas a buscar no arquivo
  @return true se o arquivo foi aberto e as linhas tratadas; false caso o arquivo nao exista
  */
-bool listaLinhas(string arquivo, char * linhas,ListaB &listaBusca, char* chave){
+bool listaLinhas(string arquivo, char * linhas,ListaB &listaBusca, char* chave, string dataHora){
 	string arquivoAux = arquivo.erase(arquivo.length()-4,4) +".txt";
 	char* nlinha = std::strtok(linhas ,"-");
 	fstream arquivoTXT(arquivoAux);
@@ -203,13 +212,13 @@ bool listaLinhas(string arquivo, char * linhas,ListaB &listaBusca, char* chave){
 		string linhaAux;
 		GoToLine(arquivoTXT, atoi(nlinha));
 		getline(arquivoTXT,linhaAux);
-
+		cout << dataHora <<endl;	
 		//falta colocar a hora
-		LIS_InserirFimB(listaBusca,arquivoAux,chave,arquivoAux,linhaAux,atoi(nlinha));
+		LIS_InserirFimB(listaBusca,arquivoAux,chave,dataHora,linhaAux,atoi(nlinha));
 
 		
 
-		cout << "\t>>> Encontrado na linha " << nlinha << " -> " << linhaAux << endl;
+		//cout << "\t>>> Encontrado na linha " << nlinha << " -> " << linhaAux << endl;
 		nlinha = strtok(NULL,"-");			
 	}
 
