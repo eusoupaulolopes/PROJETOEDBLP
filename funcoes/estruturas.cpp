@@ -171,6 +171,9 @@ string LIS_Remover(Lista lista, int indice)
 
     no->anterior->proximo = no->proximo;
     no->proximo->anterior = no->anterior;
+
+    DestruirNo(no);
+    
     lista->tamanho--;
 
     return valorremovido;

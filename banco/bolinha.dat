@@ -1,13 +1,13 @@
 100
 0 NULO
-1 NULO
+1 de : 1-2-3-4
 2 NULO
 3 NULO
 4 NULO
 5 NULO
-6 NULO
+6 cheia : 3
 7 NULO
-8 NULO
+8 casa : 3
 9 NULO
 10 NULO
 11 NULO
@@ -20,9 +20,9 @@
 18 NULO
 19 NULO
 20 NULO
-21 NULO
+21 gude : 1
 22 NULO
-23 sao : 1
+23 NULO
 24 NULO
 25 NULO
 26 NULO
@@ -32,7 +32,7 @@
 30 NULO
 31 NULO
 32 NULO
-33 NULO
+33 bolinha : 1
 34 NULO
 35 NULO
 36 NULO
@@ -42,13 +42,13 @@
 40 NULO
 41 NULO
 42 NULO
-43 NULO
+43 piscina : 2
 44 NULO
 45 NULO
 46 NULO
 47 NULO
-48 bolinhas : 1
-49 redondas : 1
+48 bolinhas : 2-3-4-5
+49 redondas : 5
 50 NULO
 51 NULO
 52 NULO
@@ -65,7 +65,7 @@
 63 NULO
 64 NULO
 65 NULO
-66 NULO
+66 vestido : 4
 67 NULO
 68 NULO
 69 NULO
@@ -96,6 +96,6 @@
 94 NULO
 95 NULO
 96 NULO
-97 NULO
+97 a : 3
 98 NULO
 99 NULO

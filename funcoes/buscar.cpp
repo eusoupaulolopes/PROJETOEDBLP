@@ -24,52 +24,17 @@ int contadorLinhas(ifstream& file);
 bool Ler_Buscas(int argc, args argv){
 
 	if(!strcmp(argv[1], "-bAND")){
-		return buscaBAND(argc, argv);
+		return buscaPorArquivo(argc, argv);
 	}else if (!strcmp(argv[1], "-bOR")){
-		return buscaBOR(argc, argv);
+		return buscaPorArquivo(argc, argv);
 	}else{
 		return false;
 	}
 }
 
-int gerarTabela(std::string origem){
-	Tabela tabela = TAB_CriarTabela(100);
-	std::string palavra;
-	char * aux = new char[origem.length() +1];
-	std::strcpy(aux, origem.c_str());
-	ifstream arquivo (aux, fstream::binary);
-	
-	if (arquivo.is_open()){
-		
-		std::string linha;
-		int contadorLinha = 0;
-		int contadorPalavras = 0;
-			
-		while(!arquivo.eof()){
-			contadorLinha++;
-			getline(arquivo, linha);
-			char* termo = std::strtok((char *)linha.c_str() ," .,;!?()[]");
-			
-			while(termo != NULL){
-				contadorPalavras++;
-				Chave chave = TAB_CriarChave(termo);
-				Valor valor = TAB_CriarValor(std::to_string(contadorLinha).c_str());
-				TAB_Inserir(tabela, chave, valor);
-				termo = strtok(NULL," .,;!?()[]");	
-			}
-		}arquivo.close();
 
-		string arquivotabela = origem.erase(origem.length()-4,4) +".dat";
-		char * auxTabela = new char[arquivotabela.length() +1];
-		std::strcpy(auxTabela, arquivotabela.c_str());
-		
-		gerarArquivoTabela(auxTabela, tabela);		
-		return contadorPalavras;
-	} 	
-	return -1;
-}
 
-bool buscaBAND(int argc, args argv){
+bool buscaPorArquivo(int argc, args argv){
 	
 	setlocale(LC_ALL,"pt_BR"); 
 	char * banco = (char *) "bancodedados";
@@ -79,6 +44,7 @@ bool buscaBAND(int argc, args argv){
 		cout << "Não foi possivel abrir " << banco << endl;
 		return false;
 	}
+
    int numeroLinhas = contadorLinhas(file);
 	//Criação de um vetor de listas, em que cada lista corresponde a um arquivo da base de buscas
     ListaB listaBusca[numeroLinhas];
@@ -95,22 +61,45 @@ bool buscaBAND(int argc, args argv){
 			for (int j = 0; j < (int)linha.size(); j++){
 				if(linha[j] == ';'){ // o primeiro ; da linha		
 					arquivo = arquivo.erase(arquivo.length()-4,4) +".dat";
-				//	cout << ">>> Abrindo: " << arquivo << endl;
+					cout << ">>> Abrindo: " << arquivo << endl;
 					buscarNaTabela(argc, argv, arquivo, listaBusca[a]); //mandar lista por referência
 					break;						
 				}
 				arquivo+=linha[j];
 			}
 		}
-		LIS_ImprimirB(listaBusca[a]);
 		a++;
 	}	
 	file.close();
+
+
+	if(!strcmp(argv[1], "-bAND")){
+		cout << "Eu to na Band!" << endl;
+		buscaBAND(listaBusca,numeroLinhas);
+	}
+
+	if(!strcmp(argv[1], "-bOR")){
+		cout << "Eu to no BOR!" << endl;
+		buscaBOR(listaBusca,numeroLinhas);
+	}
+
 	return true;
 }
 
-bool buscaBOR(int argc, args argv){
-	//getline(file, linha);		
+bool buscaBOR(ListaB* lista, int tamanho){
+	//getline(file, linha);
+	for(int j=0; j < tamanho; j++){
+		LIS_ImprimirTeste(lista[j]);
+	}
+	
+	return true;
+}
+
+bool buscaBAND(ListaB* lista, int tamanho){
+	//getline(file, linha);
+	for(int j=0; j < tamanho; j++){
+		LIS_ImprimirTeste(lista[j]);
+	}
 	
 	return true;
 }
@@ -138,7 +127,7 @@ bool buscarNaTabela(int argc, args argv, std::string arquivo, ListaB& listaBusca
 	int tamanho = atoi(linha.c_str());
 
 	for (int i = 2; i < argc; i++){
-	//	cout << " > Procurando por: [" << argv[i] << "]" << endl;
+		cout << " > Procurando por: [" << argv[i] << "]" << endl;
  		Chave chave = TAB_CriarChave(argv[i]);
 		int linhaIdeal = Hash(PreHash(chave), tamanho)+2;
 		
@@ -153,7 +142,7 @@ bool buscarNaTabela(int argc, args argv, std::string arquivo, ListaB& listaBusca
 			if(foundedNull!=string::npos){
 				cout << "\t - Não contem a palavra\n" << endl;
 				string linhaFail = "\t - Não contem a palavra\n";
-				LIS_InserirFimB(listaBusca,arquivo,argv[i],arquivo,linhaFail,-1);
+				LIS_InserirFimB(listaBusca,arquivo,argv[i],arquivo,linhaFail,-10);
 				break;
 			}
 			getline(file, linha);
@@ -220,7 +209,7 @@ bool listaLinhas(string arquivo, char * linhas,ListaB &listaBusca, char* chave){
 
 		
 
-		//cout << "\t>>> Encontrado na linha " << nlinha << " -> " << linhaAux << endl;
+		cout << "\t>>> Encontrado na linha " << nlinha << " -> " << linhaAux << endl;
 		nlinha = strtok(NULL,"-");			
 	}
 
@@ -244,5 +233,43 @@ int contadorLinhas(ifstream& file){
 		cont++;
 	}
 	file.seekg(std::ios::beg);
-	return cont;
+	return cont-1;
+}
+
+
+int gerarTabela(std::string origem){
+	Tabela tabela = TAB_CriarTabela(100);
+	std::string palavra;
+	char * aux = new char[origem.length() +1];
+	std::strcpy(aux, origem.c_str());
+	ifstream arquivo (aux, fstream::binary);
+	
+	if (arquivo.is_open()){
+		
+		std::string linha;
+		int contadorLinha = 0;
+		int contadorPalavras = 0;
+			
+		while(!arquivo.eof()){
+			contadorLinha++;
+			getline(arquivo, linha);
+			char* termo = std::strtok((char *)linha.c_str() ," .,;!?()[]");
+			
+			while(termo != NULL){
+				contadorPalavras++;
+				Chave chave = TAB_CriarChave(termo);
+				Valor valor = TAB_CriarValor(std::to_string(contadorLinha).c_str());
+				TAB_Inserir(tabela, chave, valor);
+				termo = strtok(NULL," .,;!?()[]");	
+			}
+		}arquivo.close();
+
+		string arquivotabela = origem.erase(origem.length()-4,4) +".dat";
+		char * auxTabela = new char[arquivotabela.length() +1];
+		std::strcpy(auxTabela, arquivotabela.c_str());
+		
+		gerarArquivoTabela(auxTabela, tabela);		
+		return contadorPalavras;
+	} 	
+	return -1;
 }
