@@ -1,12 +1,12 @@
 
-##./buscaIMD
+###buscaIMD
 
-###Resumo
+####Resumo
 
 Os arquivos a seguir implementam o projeto de conclusão da disciplina de Estrutura de Dados e Linguagem de Programação 1 etc etc
 
 
-###Instalação
+####Instalação
 após baixar o repositório, no terminal (linux) rode:
 
 ```c++
@@ -20,10 +20,10 @@ g++ -w main.cpp funcoes/inserir.cpp suporte.cpp funcoes/estruturas.cpp funcoes/r
 ```
 
 
-### Tests
+#### Tests
 
 
-### Contributors
+#### Contributors
 
 
 ### License
