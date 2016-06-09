@@ -1,12 +1,37 @@
+
+#include "estruturas.h"
+#include "listar.h"
 #include <fstream>
 #include <cstring>
 #include <locale.h>
 #include <iostream>
-#include "estruturas.h"
-#include "listar.h"
+
 
 
 using namespace std;
+
+
+string quebraLinha(string linhaStr){
+
+	char* linha = new char[linhaStr.length()];
+
+	strcpy(linha,linhaStr.c_str());
+	
+	char* auxNome;
+	char* auxDataHora;
+	char* auxqtdePalavras;
+
+	auxNome = strtok(linha,";");
+	auxDataHora = strtok(NULL,";");
+	auxqtdePalavras = strtok(NULL," ;");
+
+	string nome(auxNome);
+	string dataHora(auxDataHora);
+	string qtdePalavras(auxqtdePalavras);
+	
+	return auxDataHora;
+}
+
 
 void quebraLinha(string linhaStr, Lista lista){
 

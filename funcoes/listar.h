@@ -1,3 +1,4 @@
+
 #ifndef _FUNCOES_LISTAR_
 #define _FUNCOES_LISTAR_
 
@@ -12,6 +13,8 @@ enum tipoListar {
 
 typedef char** args;
 
+
+std::string quebraLinha(string linhaStr);
 void quebraLinha(string linhaStr, Lista lista);
 bool listarInsercao(int argc, args argv);
 bool listarAlfabeticamente(int argc, args argv);
