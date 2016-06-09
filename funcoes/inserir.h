@@ -14,6 +14,6 @@ char* horaDataInsercao();
 bool copiarArquivoParaPasta(char* arquivo);
 bool fazAtualizacao(char * base, char * nomeArquivo);
 bool apenasInsere(char * base, char * nomeArquivo, int argc, int posicao);
-
+bool inserir(int argc, args argv);
 
 #endif

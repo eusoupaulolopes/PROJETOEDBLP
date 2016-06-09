@@ -1,4 +1,4 @@
-#include "buscar.h"
+#include "teste.h"
 #include "estruturas.h"
 #include "listabusca.h"
 #include <cstring>
@@ -12,7 +12,7 @@ using namespace std;
 
 
 fstream& GoToLine(std::fstream& file, int num);
-int contadorLinhas(ifstream& file);
+int contadorLinhas(fstream& file);
 
 /*
  Função que valida a entrada no terminal e escolhe a busca apropriada 
@@ -24,96 +24,76 @@ int contadorLinhas(ifstream& file);
 bool Ler_Buscas(int argc, args argv){
 
 	if(!strcmp(argv[1], "-bAND")){
-		return buscaBAND(argc, argv);
+		return busca(argc, argv);
 	}else if (!strcmp(argv[1], "-bOR")){
-		return buscaBOR(argc, argv);
+		return busca(argc, argv);
 	}else{
 		return false;
 	}
 }
 
-int gerarTabela(std::string origem){
-	Tabela tabela = TAB_CriarTabela(100);
-	std::string palavra;
-	char * aux = new char[origem.length() +1];
-	std::strcpy(aux, origem.c_str());
-	ifstream arquivo (aux, fstream::binary);
-	
-	if (arquivo.is_open()){
-		
-		std::string linha;
-		int contadorLinha = 0;
-		int contadorPalavras = 0;
-			
-		while(!arquivo.eof()){
-			contadorLinha++;
-			getline(arquivo, linha);
-			char* termo = std::strtok((char *)linha.c_str() ," .,;!?()[]");
-			
-			while(termo != NULL){
-				contadorPalavras++;
-				Chave chave = TAB_CriarChave(termo);
-				Valor valor = TAB_CriarValor(std::to_string(contadorLinha).c_str());
-				TAB_Inserir(tabela, chave, valor);
-				termo = strtok(NULL," .,;!?()[]");	
-			}
-		}arquivo.close();
+bool busca(int argc, args argv){
 
-		string arquivotabela = origem.erase(origem.length()-4,4) +".dat";
-		char * auxTabela = new char[arquivotabela.length() +1];
-		std::strcpy(auxTabela, arquivotabela.c_str());
-		
-		gerarArquivoTabela(auxTabela, tabela);		
-		return contadorPalavras;
-	} 	
-	return -1;
-}
-
-bool buscaBAND(int argc, args argv){
-	
 	setlocale(LC_ALL,"pt_BR"); 
 	char * banco = (char *) "bancodedados";
-	ifstream file;
+	fstream file;
 	file.open(banco);
 	if (!file.is_open()){
 		cout << "Não foi possivel abrir " << banco << endl;
 		return false;
 	}
-   int numeroLinhas = contadorLinhas(file);
+
+	int numeroLinhas = contadorLinhas(file);
 	//Criação de um vetor de listas, em que cada lista corresponde a um arquivo da base de buscas
     ListaB listaBusca[numeroLinhas];
-    for(int i=0; i<numeroLinhas;i++){
+    for(int i=0; i<2;i++){
      	listaBusca[i] = LIS_CriarB();
     }
     int a=0;
 
-	std::string linha;
+    std::string linha;
 	while(!file.eof()){
 		getline(file, linha);
-		std::string arquivo = "banco/";
 		if(linha != "\0"){
-			for (int j = 0; j < (int)linha.size(); j++){
-				if(linha[j] == ';'){ // o primeiro ; da linha		
-					arquivo = arquivo.erase(arquivo.length()-4,4) +".dat";
-				//	cout << ">>> Abrindo: " << arquivo << endl;
-					buscarNaTabela(argc, argv, arquivo, listaBusca[a]); //mandar lista por referência
-					break;						
-				}
-				arquivo+=linha[j];
-			}
+
+			std::string arquivoDat = "banco/";
+			std::string nome(strtok((char*)linha.c_str(),";"));
+			nome = nome.erase(nome.length()-4,4)+".dat";
+			arquivoDat+=nome;
+
+			buscarNaTabela(argc, argv, arquivoDat, listaBusca[a]);
+
 		}
+
 		LIS_ImprimirB(listaBusca[a]);
 		a++;
 	}	
+
 	file.close();
+
+	if(!strcmp(argv[1], "-bAND")){
+		cout << "Eu to na Band!" << endl;
+	}
+
+	if(!strcmp(argv[1], "-bOR")){
+		cout << "Eu to no BOR!" << endl;
+	}
+
+
 	return true;
+
 }
 
-bool buscaBOR(int argc, args argv){
-	//getline(file, linha);		
-	
-	return true;
+int contadorLinhas(fstream& file){
+	int cont = 0;
+	while(!file.eof()){
+		file.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+		cont++;
+	}
+	file.seekg(std::ios::beg);
+	return cont;
 }
+
 /*
  Função que não sei como se chama, quando descobrir coloco um nome melhor
  @param argc - tamanho do vetor de argumentos
@@ -138,7 +118,7 @@ bool buscarNaTabela(int argc, args argv, std::string arquivo, ListaB& listaBusca
 	int tamanho = atoi(linha.c_str());
 
 	for (int i = 2; i < argc; i++){
-	//	cout << " > Procurando por: [" << argv[i] << "]" << endl;
+		cout << " > Procurando por: [" << argv[i] << "]" << endl;
  		Chave chave = TAB_CriarChave(argv[i]);
 		int linhaIdeal = Hash(PreHash(chave), tamanho)+2;
 		
@@ -220,7 +200,7 @@ bool listaLinhas(string arquivo, char * linhas,ListaB &listaBusca, char* chave){
 
 		
 
-		//cout << "\t>>> Encontrado na linha " << nlinha << " -> " << linhaAux << endl;
+		cout << "\t>>> Encontrado na linha " << nlinha << " -> " << linhaAux << endl;
 		nlinha = strtok(NULL,"-");			
 	}
 
@@ -229,20 +209,4 @@ bool listaLinhas(string arquivo, char * linhas,ListaB &listaBusca, char* chave){
 	
 
 
-}
-
-/*
- Função que conta o numero de linhas de um arquivo
- @param file - arquivo a percorrer
- @return quantidade de linhas
- */
-
-int contadorLinhas(ifstream& file){
-	int cont = 0;
-	while(!file.eof()){
-		file.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-		cont++;
-	}
-	file.seekg(std::ios::beg);
-	return cont;
 }

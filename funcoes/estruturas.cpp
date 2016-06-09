@@ -367,7 +367,7 @@ bool DestruirNo(No no)
 }
 
 
-// Funções para TADS
+// Funções para Tabela de Dispersão
 
 Tabela TAB_CriarTabela(int tamanho){
     

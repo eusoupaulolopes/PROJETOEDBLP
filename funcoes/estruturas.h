@@ -13,7 +13,8 @@
 #include <fstream>
 
 using namespace std;
-// Esta é a estrutura para um nó de uma lista duplamente encadeada. Não a modifique!
+typedef char** args;
+
 struct tpNo
 {
     string conteudo;
@@ -26,8 +27,6 @@ struct tpNo
 
 typedef tpNo * No;
 
-
-// Esta é a estrutura para uma lista com sentinelas.
 struct tpLista
 {
     No cabeca;
@@ -55,8 +54,6 @@ void LIS_Ordenar(Lista lista, int tipoListar);
 // 	FIM: Lista
 
 // Estruturas TAD
-
-typedef char** args;
 
 typedef struct tpValor{
 	

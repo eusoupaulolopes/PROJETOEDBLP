@@ -103,10 +103,8 @@ bool fazAtualizacao(char * base, char * nomeArquivo){
 			char caminho[6+tamNome];
 			strcpy(caminho, "banco/");
 			strcat(caminho, nomeArquivo);
-			cout << "o caminho é "<< caminho << endl;
 			int palavras = gerarTabela(caminho); // Conta as palavras e gera tabela de dispersao
-			cout << "numro de palavras no arquivo: "<<palavras << endl;
-
+			
 			std::time_t horadeinsercao;
 			struct tm * timeinfo;
 			std::time(&horadeinsercao);
