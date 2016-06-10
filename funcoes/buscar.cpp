@@ -2,7 +2,7 @@
 #include "estruturas.h"
 #include "listar.h"
 #include "listabusca.h"
-
+#include "relogio.h"
 #include <cstring>
 #include <iostream>
 #include <string>
@@ -11,10 +11,14 @@
 #include <limits>
 
 using namespace std;
+long int tempoInicial = meuRelogio();
 
 typedef void (*PFuncao) (/* aquivai a lista pra ser imprimida  */ );
 
-void imprimepC(  ) { cout << "ImprimeC"<<endl; }
+void imprimepC(  ) { 
+	cout << "ImprimeC" << endl; 
+	fimRelogio(tempoInicial);
+}
 void imprimepI(  ) {  cout << "ImprimeI" << endl;}
 void imprimepA(  ) { cout << "imprimeA" <<endl;}
 
