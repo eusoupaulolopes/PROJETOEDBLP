@@ -12,6 +12,25 @@
 
 using namespace std;
 
+typedef void (*PFuncao) (/* aquivai a lista pra ser imprimida  */ );
+
+void imprimepC(  ) { cout << "ImprimeC"<<endl; }
+void imprimepI(  ) {  cout << "ImprimeI" << endl;}
+void imprimepA(  ) { cout << "imprimeA" <<endl;}
+
+
+PFuncao selecionaImprecao (int argc, args argv){
+
+	int limite = inicioPalavrasBusca(argc, argv);
+	if( limite > 2 ){
+		if(!strcmp(argv[2], "-pC")){
+			return imprimepC;
+		}else if(!strcmp(argv[2], "-pA")){
+			return imprimepA;
+		}
+	}
+	return imprimepI;
+}
 
 
 
@@ -94,7 +113,7 @@ bool buscaPorArquivo(int argc, args argv){
 
 	if(!strcmp(argv[1], "-bAND")){
 		
-		buscaBAND(listaBusca,numeroLinhas,qtdePalavrasBusca);
+		buscaBAND(listaBusca,numeroLinhas,qtdePalavrasBusca, argc, argv);
 	}
 
 	if(!strcmp(argv[1], "-bOR")){
@@ -118,7 +137,7 @@ bool buscaBOR(ListaB* lista, int tamanho){
 	return true;
 }
 
-bool buscaBAND(ListaB* lista, int tamanho,int numerodepalavras){
+bool buscaBAND(ListaB* lista, int tamanho,int numerodepalavras, int argc, args argv){
 	//getline(file, linha);
 	for(int j=0; j < tamanho; j++){
 
@@ -126,6 +145,10 @@ bool buscaBAND(ListaB* lista, int tamanho,int numerodepalavras){
 		ListaB aux = EliminaLinhasSemTodasPalavras(lista[j],numerodepalavras);
 		EliminaLinhasIguais(aux);
 		LIS_ImprimirB(aux);
+
+		void (*ponteiroFuncao) (  );
+		ponteiroFuncao = selecionaImprecao(argc, argv);
+		ponteiroFuncao();
 
 	}
 	
@@ -274,10 +297,9 @@ int inicioPalavrasBusca(int argc, args argv){
 		size_t tipoTempo2 = tempo.find(argv[2]);
 		if(tipoImpressao2!=string::npos) inicio++;
 		if(tipoTempo2!=string::npos) inicio++;
-
 	}
  	
-	if(argc > 3){
+	if(argc > 4){
 		size_t tipoImpressao3 = tipodeImpressao.find(argv[3]);
 		size_t tipoTempo3 = tempo.find(argv[3]);
 		if(tipoImpressao3!=string::npos) inicio++;
@@ -287,6 +309,10 @@ int inicioPalavrasBusca(int argc, args argv){
  	return inicio;
 
 }
+
+
+
+
 
 /*void opcaoImpressao(ListaB* lista,int iniciopalavras, int tamanho, args argv){
 
