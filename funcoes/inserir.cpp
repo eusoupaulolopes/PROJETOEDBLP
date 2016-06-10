@@ -130,7 +130,6 @@ bool fazAtualizacao(char * base, char * nomeArquivo){
 
     for(No i = lista->cabeca; i != lista->cauda; i = i->proximo){
         if(i != lista->cabeca){
-        	cout << i->conteudo << endl;
         	if(i->proximo == lista->cauda){
         		novobanco << i->conteudo;
         	}        		

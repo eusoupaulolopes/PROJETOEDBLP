@@ -7,6 +7,7 @@
 
 enum tipoListar {
 	alfabeticamente,
+	insercao,
 	quantidadePalavras,
 };
 

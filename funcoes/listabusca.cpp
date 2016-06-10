@@ -24,6 +24,7 @@ ListaB LIS_CriarB()
 
     
     lista->tamanho = 0;
+    lista->qtdeElementos = 0;
     
     lista->cauda = CriarNoB((string)VALOR_QUALQUER,(string)VALOR_QUALQUER,(string)VALOR_QUALQUER,(string)VALOR_QUALQUER,-10000);
     
@@ -70,6 +71,10 @@ bool LIS_InserirFimB(ListaB lista, string nomeArquivo, string palavra, string ho
     ultimo->proximo = no;
 
     lista->tamanho++;
+
+    if(numeroLinha != -10){
+        lista->qtdeElementos++;
+    }
     return true;
 }
 
@@ -80,11 +85,11 @@ bool LIS_InserirFimB(ListaB lista, string nomeArquivo, string palavra, string ho
  @return se encontrar a chave, devolve a posição em que ela se encontra na lisa, caso contrário retorna -1
  */
 
-int LIS_Buscar_NomeArquivo(ListaB lista, string nomeArquivo)
+int LIS_Buscar_NumeroLinha(ListaB lista, int numeroLinha)
 {
     NoB no = lista->cabeca->proximo;
     for (int i=0; i < lista->tamanho; i++){
-        if (no->nomeArquivo == nomeArquivo){
+        if (no->numeroLinha == numeroLinha){
             return i+1;
         }
         no = no->proximo;
@@ -124,9 +129,14 @@ string LIS_RemoverInicioB(ListaB lista)
         
         string valorremovido = primeiro->nomeArquivo;
 
-        DestruirNoB(primeiro);
+        
 
         lista->tamanho--;
+        if(primeiro->numeroLinha != -10){
+            lista->qtdeElementos--;
+        }
+
+        DestruirNoB(primeiro);
 
         return valorremovido;
     }
@@ -160,11 +170,120 @@ string LIS_RemoverB(ListaB lista, int indice)
     no->anterior->proximo = no->proximo;
     no->proximo->anterior = no->anterior;
 
-    DestruirNoB(no);
-
     lista->tamanho--;
 
+    if(no->numeroLinha != -10){
+        lista->qtdeElementos--;
+    }
+
+    DestruirNoB(no);
+
+
     return valorremovido;
+}
+
+void LIS_OrdenarB(ListaB lista, int tipoOrdenar)
+{
+    // Seleção
+    NoB menor, temp;
+    
+    for(NoB i = lista->cabeca->proximo; i != lista->cauda->anterior; i=i->proximo){
+        
+        menor = i;
+        for(NoB j = i->proximo; j != lista->cauda; j=j->proximo){
+            if(tipoOrdenar == nomeArquivo){
+                if(j->nomeArquivo < menor->nomeArquivo){
+                    
+                    menor = j;
+                }
+            }
+            if(tipoOrdenar == palavraChave){
+                if(j->palavraChave < menor->palavraChave){
+                    
+                    menor = j;
+                }
+            }
+            if(tipoOrdenar == linha){
+                if(j->linha < menor->linha){
+                    
+                    menor = j;
+                }
+            }
+            if(tipoOrdenar == numeroLinha){
+                if(j->numeroLinha < menor->numeroLinha){
+                    
+                    menor = j;
+                }
+            }
+            if(tipoOrdenar == hora){
+                if(j->hora < menor->hora){
+                    
+                    menor = j;
+                }
+            }
+        }
+        
+        if(menor != i){ // i não é o menor.
+            
+            if(i->proximo == menor){ // O menor é o elemento seguinte.
+                
+                i->anterior->proximo = menor;
+                menor->proximo->anterior = i;
+                i->proximo = menor->proximo;
+                menor->proximo = i;
+                menor->anterior = i->anterior;
+                i->anterior = menor;
+                i = menor;
+                
+            }else{  // Há outros elementos entre i e o menor.
+                
+                i->anterior->proximo = menor;
+                i->proximo->anterior = menor;
+                menor->anterior->proximo = i;
+                menor->proximo->anterior = i;
+                temp = i->proximo;
+                i->proximo = menor->proximo;
+                menor->proximo = temp;
+                temp = i->anterior;
+                i->anterior = menor->anterior;
+                menor->anterior = temp;
+                i = menor;
+            }           
+        }
+    }
+    
+}
+
+int LIS_BuscarRepeticaoLinha(ListaB lista, int numeroLinha)
+{
+    int cont = 0;
+    NoB no = lista->cabeca->proximo;
+    for (int i=0; i < lista->tamanho; i++){
+        if (no->numeroLinha == numeroLinha){
+            cont++;
+        }
+        no = no->proximo;
+    }
+
+    return cont;
+}
+
+void EliminaLinhasIguais(ListaB lista){
+
+    int repetidas;
+
+    for(NoB i = lista->cabeca->proximo; i != lista->cauda->anterior; i=i->proximo){
+        repetidas = LIS_BuscarRepeticaoLinha(lista,i->numeroLinha);
+
+        if ( repetidas > 1){
+            while(repetidas > 1){
+                LIS_RemoverB( lista, LIS_Buscar_NumeroLinha(lista,i->numeroLinha) );
+                repetidas --;
+            }
+
+        }
+
+    }
 }
 
 /*
@@ -172,17 +291,19 @@ string LIS_RemoverB(ListaB lista, int indice)
 */
 void LIS_ImprimirB(ListaB lista)
 {
-   
+
     for(NoB i = lista->cabeca->proximo; i != lista->cauda; i = i->proximo)
     {        
-        if(i == lista->cabeca->proximo && i->numeroLinha > 0){
-             std::cout << "Foram encontradas " << lista->tamanho << " linhas no arquivo \"" << i->nomeArquivo << "\"" << std::endl;
-        }
-        else if(i == lista->cabeca->proximo && i->numeroLinha <= 0){
-             std::cout << "Foram encontradas 0 linha(s) no arquivo \"" << i->nomeArquivo << "\"" << std::endl;
+
+        if(i == lista->cabeca->proximo){
+             std::cout << "Foram encontradas " << lista->qtdeElementos << " linhas no arquivo \"" << i->nomeArquivo << "\"" << std::endl;
         }
 
-        if(i->numeroLinha != -1){
+        /*else if(i == lista->cabeca->proximo && i->numeroLinha <= 0){
+             std::cout << "Foram encontradas 0 linha(s) no arquivo \"" << i->nomeArquivo << "\"" << std::endl;
+        }*/
+
+        if(i->numeroLinha != -10){
             std::cout << "\t- linha " << i->numeroLinha << ": \"" << i->linha <<"\"\n";
         }
 

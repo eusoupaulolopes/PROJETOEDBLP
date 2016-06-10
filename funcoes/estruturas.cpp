@@ -192,73 +192,64 @@ int LIS_Buscar(Lista lista, string chave)
     return -1;
 }
 
-//Selection Sort
-void LIS_Trocar(No menor, No fixo){
-    
-    No tmp1 = menor->proximo;
-    No tmp2 = fixo->anterior;
-    No tmp3 = fixo->proximo;
-    No tmp4 = menor->anterior;
-
-    if (fixo->proximo == menor) {//Nós vizinhos
-        fixo->anterior->proximo = menor;
-        menor->proximo->anterior = fixo;
-
-        fixo->proximo = menor->proximo;
-        menor->proximo = fixo;
-
-        menor->anterior = fixo->anterior;
-        fixo->anterior = menor;
-    }
-    else {//Nós com algum elemento entre eles
-        fixo->anterior->proximo = menor;
-        menor->proximo->anterior = fixo;
-
-        fixo->proximo = tmp1;
-        menor->proximo = tmp3;
-
-        menor->anterior = tmp2;
-        fixo->anterior = tmp4;
-    }
-
-}
-
 void LIS_Ordenar(Lista lista, int tipoListar)
 {
-    No menor;
-
-
-
-    //Seleção do menor
-    for(No fixo = lista->cabeca->proximo; fixo != lista->cauda->anterior; fixo=fixo->proximo){
-        menor = fixo;
-
-        //cout << "to por aqui!" << menor->nome << endl;
-
-
-        for(No iter=fixo->proximo; iter != lista->cauda; iter=iter->proximo){
-            
-           if(tipoListar == alfabeticamente){
-                if(iter->nome < menor->nome){
-                    menor = iter;
+    // Seleção
+    No menor, temp;
+    
+    for(No i = lista->cabeca->proximo; i != lista->cauda->anterior; i=i->proximo){
+        
+        menor = i;
+        for(No j = i->proximo; j != lista->cauda; j=j->proximo){
+            if(tipoListar == alfabeticamente){
+                if(j->nome < menor->nome){
+                    
+                    menor = j;
                 }
             }
-
+            if(tipoListar == insercao){
+                if(j->dataHora < menor->dataHora){
+                    
+                    menor = j;
+                }
+            }
             if(tipoListar == quantidadePalavras){
-                if(iter->qtdePalavras < menor->qtdePalavras){
-                    menor = iter;
+                if(j->qtdePalavras > menor->qtdePalavras){
+                    
+                    menor = j;
                 }
             }
-
-
         }
-
-        //Trocar se menor é diferente do no pré-fixado
-        if(menor!=fixo){
-            LIS_Trocar(menor,fixo);
-            fixo=menor;
+        
+        if(menor != i){ // i não é o menor.
+            
+            if(i->proximo == menor){ // O menor é o elemento seguinte.
+                
+                i->anterior->proximo = menor;
+                menor->proximo->anterior = i;
+                i->proximo = menor->proximo;
+                menor->proximo = i;
+                menor->anterior = i->anterior;
+                i->anterior = menor;
+                i = menor;
+                
+            }else{  // Há outros elementos entre i e o menor.
+                
+                i->anterior->proximo = menor;
+                i->proximo->anterior = menor;
+                menor->anterior->proximo = i;
+                menor->proximo->anterior = i;
+                temp = i->proximo;
+                i->proximo = menor->proximo;
+                menor->proximo = temp;
+                temp = i->anterior;
+                i->anterior = menor->anterior;
+                menor->anterior = temp;
+                i = menor;
+            }           
         }
     }
+    
 }
 
 /*

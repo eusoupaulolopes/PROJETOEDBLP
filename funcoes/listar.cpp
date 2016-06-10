@@ -83,8 +83,6 @@ bool listarInsercao(int argc, args argv){
 
 	Lista listaPorInsercao = LIS_Criar();
 	string linha;
-	//string horaInsercao;
-	//char* horaInsercao = new char[14];	//14 é o tamanho da string hora: AAAAMMDDHHMMSS
 	
 	fstream basedebuscas;
 	basedebuscas.open("bancodedados",ios::in);
@@ -95,13 +93,13 @@ bool listarInsercao(int argc, args argv){
 		while(!basedebuscas.eof()){
 			getline(basedebuscas,linha);
 			if(linha != "\0")
-				quebraLinha(linha,listaPorInsercao);
-
-			
+				quebraLinha(linha,listaPorInsercao);			
 		}
 	}else{
 		cout << "\tNão foi possivel encontrar a base de buscas, ou estava vazia!" << endl;
 	}
+
+	LIS_Ordenar(listaPorInsercao,insercao);
 
 	cout << "Arquivos contidos na base de buscas:" << endl;	
 	LIS_Imprimir(listaPorInsercao);
@@ -195,8 +193,6 @@ bool listarQtdePalavras(int argc, args argv){
 	}else{
 		cout << "\tNão foi possivel encontrar a base de buscas, ou estava vazia!" << endl;
 	}
-
-	LIS_Imprimir(listaQtdePalavras);
 
 
 	LIS_Ordenar(listaQtdePalavras,quantidadePalavras);

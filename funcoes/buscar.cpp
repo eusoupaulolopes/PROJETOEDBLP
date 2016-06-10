@@ -60,15 +60,13 @@ bool buscaPorArquivo(int argc, args argv){
 	while(!file.eof()){
 		getline(file, linha);
 		string arquivo = "banco/";
-		cout << linha << endl;
 		
-		//cout << dataHora << endl;
 		if(linha != "\0"){
 			string dataHora = quebraLinha(linha, 2);
 			for (int j = 0; j < (int)linha.size(); j++){
 				if(linha[j] == ';'){ // o primeiro ; da linha		
 					arquivo = arquivo.erase(arquivo.length()-4,4) +".dat";
-					cout << ">>> Abrindo: " << arquivo << endl;
+					//cout << ">>> Abrindo: " << arquivo << endl;
 					buscarNaTabela(argc, argv, arquivo, listaBusca[a], dataHora); //mandar lista por referência
 					break;						
 				}
@@ -94,9 +92,16 @@ bool buscaPorArquivo(int argc, args argv){
 }
 
 bool buscaBOR(ListaB* lista, int tamanho){
-	//getline(file, linha);
+	
 	for(int j=0; j < tamanho; j++){
-		LIS_ImprimirTeste(lista[j]);
+		//cout<< "Lista ANTES:" <<endl;
+	//	LIS_ImprimirB(lista[j]);
+		LIS_OrdenarB(lista[j],numeroLinha);
+	//	cout<< "Lista DEPOIS:" <<endl;
+//		LIS_ImprimirB(lista[j]);
+		EliminaLinhasIguais(lista[j]);
+	//	cout<< "Lista SEM REPETIÇÃO:" <<endl;
+		LIS_ImprimirB(lista[j]);
 	}
 	
 	return true;
@@ -148,7 +153,7 @@ bool buscarNaTabela(int argc, args argv, string arquivo, ListaB& listaBusca, str
 		//Se não achar a chave e != de nulo prossiga
 		while(foundedWord==string::npos && !file.eof()){
 			if(foundedNull!=string::npos){
-				cout << "\t - Não contem a palavra\n" << endl;
+			//	cout << "\t - Não contem a palavra\n" << endl;
 				string linhaFail = "\t - Não contem a palavra\n";
 				LIS_InserirFimB(listaBusca,Aux,argv[i],dataHora,linhaFail,-10);
 				break;
@@ -211,7 +216,7 @@ bool listaLinhas(string arquivo, char * linhas,ListaB &listaBusca, char* chave, 
 		string linhaAux;
 		GoToLine(arquivoTXT, atoi(nlinha));
 		getline(arquivoTXT,linhaAux);
-		cout << dataHora <<endl;	
+		//cout << dataHora <<endl;	
 		//falta colocar a hora
 		LIS_InserirFimB(listaBusca,arquivoAux,chave,dataHora,linhaAux,atoi(nlinha));
 
