@@ -131,13 +131,13 @@ bool buscaPorArquivo(int argc, args argv){
 
 	if(!strcmp(argv[1], "-bOR")){
 		
-		buscaBOR(listaBusca,numeroLinhas);
+		buscaBOR(listaBusca,numeroLinhas, argc, argv);
 	}
 
 	return true;
 }
 
-bool buscaBOR(ListaB* lista, int tamanho){
+bool buscaBOR(ListaB* lista, int tamanho, int argc, args argv){
 	
 	for(int j=0; j < tamanho; j++){
 	//cout<< "Lista ANTES:" <<endl;
@@ -145,6 +145,18 @@ bool buscaBOR(ListaB* lista, int tamanho){
 		EliminaLinhasIguais(lista[j]);
 		LIS_OrdenarB(lista[j],numeroLinha);
 		LIS_ImprimirB(lista[j]);
+
+		void (*ponteiroFuncao) (  );
+		ponteiroFuncao = selecionaImprecao(argc, argv);
+		ponteiroFuncao();
+		
+		// imprime o relogio
+		for (int i = 0; i < argc; i++){
+			if(!strcmp(argv[i], "-tT")){
+				fimRelogio(tempoInicial);
+				break;
+			}
+		}
 	}
 	
 	return true;
@@ -162,6 +174,7 @@ bool buscaBAND(ListaB* lista, int tamanho,int numerodepalavras, int argc, args a
 		void (*ponteiroFuncao) (  );
 		ponteiroFuncao = selecionaImprecao(argc, argv);
 		ponteiroFuncao();
+
 		// imprime o relogio
 		for (int i = 0; i < argc; i++){
 			if(!strcmp(argv[i], "-tT")){
