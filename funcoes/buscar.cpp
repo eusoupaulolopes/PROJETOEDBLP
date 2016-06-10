@@ -14,20 +14,36 @@ using namespace std;
 
 long int tempoInicial; // variavel global não precisa passar por parametro
 
-typedef void (*PFuncao) ( ListaB * lista);
+typedef void (*PFuncao) ( ListaB * lista, int tamanho );
 
 /* Exemplo das chamadas das funcoes genéricas elas não precisão estar nesse %%%%% arquivo %%%%%% */
 
-void imprimepC( ListaB * lista ) { 
-	cout << "ImprimeC" << endl; 
+void imprimepC( ListaB * lista, int tamanho ) { 
+	cout << "ImprimeC" << endl;
+	
+	LIS_OrdenarB(lista,tamanho,pC);
+
+	for(int j=0; j<tamanho; j++){
+		LIS_ImprimirB(lista[j]);
+	} 
 	
 }
-void imprimepI(  ListaB * lista ) {  
+void imprimepI(  ListaB * lista, int tamanho ) {  
 	cout << "ImprimeI" << endl;
+
+	LIS_OrdenarB(lista,tamanho,pI);
+	for(int j=0; j<tamanho; j++){
+		LIS_ImprimirB(lista[j]);
+	}
 	
 }
-void imprimepA( ListaB * lista ) { 
+void imprimepA( ListaB * lista, int tamanho ) { 
 	cout << "imprimeA" <<endl;
+
+	LIS_OrdenarB(lista,tamanho,pA);
+	for(int j=0; j<tamanho; j++){
+		LIS_ImprimirB(lista[j]);
+	}
 }
 
 
@@ -44,6 +60,17 @@ PFuncao selecionaImprecao (int argc, args argv){
 	return imprimepI;
 }
 
+/*Função identifica cada lista com nome e hora
+void identificarListas(ListaB* lista, int tamanho){
+	for(int i = 0; i < tamanho;i++){
+		lista[i]->nome = lista[i]->cabeca->proximo->nomeArquivo;
+		lista[i]->hora = lista[i]->cabeca->proximo->hora;
+
+		cout << "Nome da Lista " << i+1 << ": " << lista[i]->nome << endl;
+		cout << "Hora da Lista " << i+1 << ": " << lista[i]->hora << endl;
+	}
+
+}*/
 
 
 
@@ -121,6 +148,9 @@ bool buscaPorArquivo(int argc, args argv){
 
 	//ordenar o vetor de lista de acordo com a opção de impressão
 	//opcaoImpressao(listaBusca,inicioPalavrasBusca(argc,argv),numeroLinhas,argv);
+	//identificarListas(listaBusca,numeroLinhas);
+
+
 
 
 	if(!strcmp(argv[1], "-bAND")){
@@ -143,11 +173,11 @@ bool buscaBOR(ListaB* lista, int tamanho, int argc, args argv){
 	//	LIS_ImprimirB(lista[j]);
 		EliminaLinhasIguais(lista[j]);
 		LIS_OrdenarB(lista[j],numeroLinha);
-		LIS_ImprimirB(lista[j]);
+		
 	}
-	void (*ponteiroFuncao) ( ListaB * lista );
+	void (*ponteiroFuncao) ( ListaB * lista, int tamanho );
 	ponteiroFuncao = selecionaImprecao(argc, argv);
-	ponteiroFuncao(lista);
+	ponteiroFuncao(lista,tamanho);
 	
 	// imprime o relogio
 	for (int i = 0; i < argc; i++){
@@ -167,12 +197,12 @@ bool buscaBAND(ListaB* lista, int tamanho,int numerodepalavras, int argc, args a
 		LIS_OrdenarB(lista[j],numeroLinha);
 		ListaB aux = EliminaLinhasSemTodasPalavras(lista[j],numerodepalavras);
 		EliminaLinhasIguais(aux);
-		LIS_ImprimirB(aux);
+		lista[j]=aux;
 	}
 
-	void (*ponteiroFuncao) ( ListaB * lista );
+	void (*ponteiroFuncao) ( ListaB * lista, int tamanho );
 	ponteiroFuncao = selecionaImprecao(argc, argv);
-	ponteiroFuncao(lista);
+	ponteiroFuncao(lista,tamanho);
 	// imprime o relogio
 	for (int i = 0; i < argc; i++){
 		if(!strcmp(argv[i], "-tT")){
@@ -194,6 +224,7 @@ bool buscarNaTabela(int argc, args argv, string arquivo, ListaB& listaBusca, str
 	file.seekg(0);
 	string Aux = arquivo;
 	Aux = Aux.erase(Aux.length()-4,4) +".txt";
+
 
 
 	if (!file.is_open()){
@@ -254,7 +285,9 @@ bool buscarNaTabela(int argc, args argv, string arquivo, ListaB& listaBusca, str
  @return true se o arquivo foi aberto e as linhas tratadas; false caso o arquivo nao exista
  */
 bool listaLinhas(string arquivo, char * linhas,ListaB &listaBusca, char* chave, string dataHora){
+	
 	string arquivoAux = arquivo.erase(arquivo.length()-4,4) +".txt";
+
 	char* nlinha = std::strtok(linhas ,"-");
 	fstream arquivoTXT(arquivoAux);
 

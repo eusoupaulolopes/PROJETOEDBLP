@@ -261,14 +261,59 @@ void LIS_OrdenarB(ListaB lista, int tipoOrdenar)
 }
 
  /*
-Função que ordena o vetor de listas de acorco com o tipo de ordenação escolhido
+Função que ordena o vetor de listas de acordo com o tipo de ordenação escolhido
  @param lista - vetor de listas que vai ser ordenado
  @param tamanho - tamanho do vetor
  @param tipo - tipo de ordenação a executar por inserção, por ordem alfabetica ou por ocorrencias
  @return quantidade de vezes que o numero de linha buscado apareceu na lista
 */
 
-/*void LIS_OrdenarB(ListaB* lista, int tamanho, int tipo)
+ //Selection Sort
+
+int selecioneMenor(ListaB* lista, int i, int tamanho, int tipo){
+    int menor;
+
+    menor = i;
+    i++;
+
+    for( ; i<tamanho;i++){
+        if(tipo == pC){
+            if(lista[menor]->qtdeElementos < lista[i]->qtdeElementos){
+                 menor = i;                   
+            }
+        }
+        if(tipo == pA){
+            if(lista[menor]->cabeca->proximo->nomeArquivo > lista[i]->cabeca->proximo->nomeArquivo){
+                 menor = i;                   
+            }
+        }
+        if(tipo == pI){
+            if(lista[menor]->cabeca->proximo->hora > lista[i]->cabeca->proximo->hora){
+                 menor = i;                   
+            }
+        }
+    }
+
+    return menor;
+
+}
+
+
+void LIS_OrdenarB(ListaB* lista, int tamanho, int tipo){
+    ListaB aux;
+    int menor;
+
+    for(int i=0; i< tamanho; i++){
+        menor = selecioneMenor(lista,i,tamanho,tipo);
+        aux = lista[i];
+        lista[i] = lista[menor];
+        lista[menor] = aux;
+    }
+
+}
+
+/*
+void LIS_OrdenarB(ListaB* lista, int tamanho, int tipo)
 {
     // Seleção
     ListaB menor, temp;
@@ -304,8 +349,8 @@ Função que ordena o vetor de listas de acorco com o tipo de ordenação escolh
     }
     
 }
-*/
 
+*/
  /*
 Função que conta quantas vezes um numero de linha aparece na lista
  @param lista - lista em que será feita a busca
@@ -394,7 +439,9 @@ void LIS_ImprimirB(ListaB lista)
     {        
 
         if(i == lista->cabeca->proximo){
-             std::cout << "Foram encontradas " << lista->qtdeElementos << " linhas no arquivo \"" << i->nomeArquivo << "\"" << std::endl;
+            string nome = i->nomeArquivo;
+            nome = nome.erase(0,6);
+             std::cout << "Foram encontradas " << lista->qtdeElementos << " linhas no arquivo \"" << nome << "\"" << std::endl;
         }
 
         /*else if(i == lista->cabeca->proximo && i->numeroLinha <= 0){
