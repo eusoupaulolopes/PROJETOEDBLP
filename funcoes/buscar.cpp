@@ -106,7 +106,7 @@ bool buscaBOR(ListaB* lista, int tamanho){
 bool buscaBAND(ListaB* lista, int tamanho){
 	//getline(file, linha);
 	for(int j=0; j < tamanho; j++){
-		LIS_ImprimirB(lista[j]);
+		LIS_ImprimirTeste(lista[j]);
 	}
 	
 	return true;
@@ -144,7 +144,7 @@ bool buscarNaTabela(int argc, args argv, string arquivo, ListaB& listaBusca, str
 		std::size_t foundedNull = linha.find(nulo);                
 		
 		//Se não achar a chave e != de nulo prossiga
-		while(foundedWord==string::npos){
+		while(foundedWord==string::npos || !file.eof()){
 			if(foundedNull!=string::npos){
 				
 				string linhaFail = "\t - Não contem a palavra " ;				
@@ -288,14 +288,21 @@ int inicioPalavrinhas(int argc, args argv){
 	string tempo = "-tF -tT";
 	int inicio = 2;
 
-	size_t tipoImpressao2 = tipodeImpressao.find(argv[2]);
-	size_t tipoImpressao3 = tipodeImpressao.find(argv[3]);
-	size_t tipoTempo2 = tempo.find(argv[2]);
-	size_t tipoTempo3 = tempo.find(argv[3]);
+	if(argc >2){
+		size_t tipoImpressao2 = tipodeImpressao.find(argv[2]);
+		size_t tipoTempo2 = tempo.find(argv[2]);
+		if(tipoImpressao2!=string::npos) inicio++;
+		if(tipoTempo2!=string::npos) inicio++;
+
+	}
 	
-	if(tipoImpressao2!=string::npos || tipoImpressao3!=string::npos) inicio++;
-	if(tipoTempo2!=string::npos || tipoTempo3!=string::npos) inicio++;
-	
+	if(argc > 3){
+		size_t tipoImpressao3 = tipodeImpressao.find(argv[3]);
+		size_t tipoTempo3 = tempo.find(argv[3]);
+		if(tipoImpressao3!=string::npos) inicio++;
+		if(tipoTempo3!=string::npos) inicio++;
+	}
+		
 	return inicio;
 
 }
