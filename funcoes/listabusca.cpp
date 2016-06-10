@@ -24,7 +24,6 @@ ListaB LIS_CriarB()
 
     
     lista->tamanho = 0;
-    lista->qtdeElementos = 0;
     
     lista->cauda = CriarNoB((string)VALOR_QUALQUER,(string)VALOR_QUALQUER,(string)VALOR_QUALQUER,(string)VALOR_QUALQUER,-10000);
     
@@ -71,10 +70,6 @@ bool LIS_InserirFimB(ListaB lista, string nomeArquivo, string palavra, string ho
     ultimo->proximo = no;
 
     lista->tamanho++;
-
-    if(numeroLinha != -10){
-        lista->qtdeElementos++;
-    }
     return true;
 }
 
@@ -173,108 +168,21 @@ string LIS_RemoverB(ListaB lista, int indice)
 }
 
 /*
-Função Troca nós de lugar
-*/
-void LIS_TrocarB(NoB menor, NoB fixo){
-    
-    NoB tmp1 = menor->proximo;
-    NoB tmp2 = fixo->anterior;
-    NoB tmp3 = fixo->proximo;
-    NoB tmp4 = menor->anterior;
-
-    if (fixo->proximo == menor) {//Nós vizinhos
-        fixo->anterior->proximo = menor;
-        menor->proximo->anterior = fixo;
-
-        fixo->proximo = menor->proximo;
-        menor->proximo = fixo;
-
-        menor->anterior = fixo->anterior;
-        fixo->anterior = menor;
-    }
-    else {//Nós com algum elemento entre eles
-        fixo->anterior->proximo = menor;
-        menor->proximo->anterior = fixo;
-
-        fixo->proximo = tmp1;
-        menor->proximo = tmp3;
-
-        menor->anterior = tmp2;
-        fixo->anterior = tmp4;
-    }
-
-}
-/*
-Função Ordena os Nós por Selection Sort
-*/
-void LIS_OrdenarB(ListaB lista, int tipoOrdenar)
-{
-
-    NoB menor;
-
-    //Seleção do menor
-    for(NoB fixo = lista->cabeca->proximo; fixo != lista->cauda->anterior; fixo=fixo->proximo){
-        menor = fixo;
-
-        //cout << "to por aqui!" << menor->nome << endl;
-
-
-        for(NoB iter=fixo->proximo; iter != lista->cauda; iter=iter->proximo){
-            
-           if(tipoOrdenar == nomeArquivo){
-                if(iter->nomeArquivo < menor->nomeArquivo){
-                    menor = iter;
-                }
-            }
-            else if(tipoOrdenar == palavraChave){
-                if(iter->palavraChave < menor->palavraChave){
-                    menor = iter;
-                }
-            }
-            else if(tipoOrdenar == linha){
-                if(iter->linha < menor->linha){
-                    menor = iter;
-                }
-            }
-            else if(tipoOrdenar == numeroLinha){
-                if(iter->numeroLinha < menor->numeroLinha){
-                    menor = iter;
-                }
-            }
-            else{
-                if(iter->hora < menor->hora){
-                    menor = iter;
-                }
-            }
-        }
-
-        //Trocar se menor é diferente do no pré-fixado
-        if(menor!=fixo){
-            LIS_TrocarB(menor,fixo);
-            fixo=menor;
-        }
-    }
-}
-
-
-/*
     Função que imprime todos os elementos de uma lista.
 */
 void LIS_ImprimirB(ListaB lista)
 {
-
+   
     for(NoB i = lista->cabeca->proximo; i != lista->cauda; i = i->proximo)
     {        
-
-        if(i == lista->cabeca->proximo){
-             std::cout << "Foram encontradas " << lista->qtdeElementos << " linhas no arquivo \"" << i->nomeArquivo << "\"" << std::endl;
+        if(i == lista->cabeca->proximo && i->numeroLinha > 0){
+             std::cout << "Foram encontradas " << lista->tamanho << " linhas no arquivo \"" << i->nomeArquivo << "\"" << std::endl;
+        }
+        else if(i == lista->cabeca->proximo && i->numeroLinha <= 0){
+             std::cout << "Foram encontradas 0 linha(s) no arquivo \"" << i->nomeArquivo << "\"" << std::endl;
         }
 
-        /*else if(i == lista->cabeca->proximo && i->numeroLinha <= 0){
-             std::cout << "Foram encontradas 0 linha(s) no arquivo \"" << i->nomeArquivo << "\"" << std::endl;
-        }*/
-
-        if(i->numeroLinha != -10){
+        if(i->numeroLinha != -1){
             std::cout << "\t- linha " << i->numeroLinha << ": \"" << i->linha <<"\"\n";
         }
 

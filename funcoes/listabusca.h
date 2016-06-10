@@ -25,20 +25,10 @@ struct tpListaBusca
 {
     NoB cabeca;
     NoB cauda;
-    int qtdeElementos;
     int tamanho;
 };
 
 typedef tpListaBusca * ListaB;
-
-//Enum para Ordenação da ListaB
-enum tipoOrdenar {
-    nomeArquivo,
-    palavraChave,
-    linha,
-    numeroLinha,
-    hora,
-};
 
 ListaB LIS_CriarB();
 bool LIS_InserirFimB(ListaB lista, string nomeArquivo, string palavra, string hora, string linha, int numeroLinha);
@@ -48,7 +38,5 @@ string LIS_RemoverInicioB(ListaB lista);
 string LIS_RemoverB(ListaB lista, int indice);
 int LIS_Buscar_NomeArquivo(ListaB lista, string nomeArquivo);
 int LIS_Buscar_Chave(ListaB lista, string chave);
-void LIS_TrocarB(NoB menor, NoB fixo);
-void LIS_OrdenarB(ListaB lista, int tipoOrdenar);
 
 #endif

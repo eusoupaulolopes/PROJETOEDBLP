@@ -60,7 +60,7 @@ bool buscaPorArquivo(int argc, args argv){
 	while(!file.eof()){
 		getline(file, linha);
 		string arquivo = "banco/";
-		//cout << linha << endl;
+		cout << linha << endl;
 		
 		//cout << dataHora << endl;
 		if(linha != "\0"){
@@ -68,7 +68,7 @@ bool buscaPorArquivo(int argc, args argv){
 			for (int j = 0; j < (int)linha.size(); j++){
 				if(linha[j] == ';'){ // o primeiro ; da linha		
 					arquivo = arquivo.erase(arquivo.length()-4,4) +".dat";
-					//cout << ">>> Abrindo: " << arquivo << endl;
+					cout << ">>> Abrindo: " << arquivo << endl;
 					buscarNaTabela(argc, argv, arquivo, listaBusca[a], dataHora); //mandar lista por referência
 					break;						
 				}
@@ -81,12 +81,12 @@ bool buscaPorArquivo(int argc, args argv){
 
 
 	if(!strcmp(argv[1], "-bAND")){
-		//cout << "Eu to na Band!" << endl;
+		cout << "Eu to na Band!" << endl;
 		buscaBAND(listaBusca,numeroLinhas);
 	}
 
 	if(!strcmp(argv[1], "-bOR")){
-		//cout << "Eu to no BOR!" << endl;
+		cout << "Eu to no BOR!" << endl;
 		buscaBOR(listaBusca,numeroLinhas);
 	}
 
@@ -96,7 +96,6 @@ bool buscaPorArquivo(int argc, args argv){
 bool buscaBOR(ListaB* lista, int tamanho){
 	//getline(file, linha);
 	for(int j=0; j < tamanho; j++){
-		//LIS_buscarLista(lista[j])
 		LIS_ImprimirTeste(lista[j]);
 	}
 	
@@ -106,7 +105,7 @@ bool buscaBOR(ListaB* lista, int tamanho){
 bool buscaBAND(ListaB* lista, int tamanho){
 	//getline(file, linha);
 	for(int j=0; j < tamanho; j++){
-		LIS_ImprimirTeste(lista[j]);
+		LIS_ImprimirB(lista[j]);
 	}
 	
 	return true;
@@ -121,7 +120,8 @@ bool buscaBAND(ListaB* lista, int tamanho){
 bool buscarNaTabela(int argc, args argv, string arquivo, ListaB& listaBusca, string dataHora){
 	fstream file (arquivo);
 	file.seekg(0);
-	
+	string Aux = arquivo;
+	Aux = Aux.erase(Aux.length()-4,4) +".txt";
 
 
 	if (!file.is_open()){
@@ -133,10 +133,12 @@ bool buscarNaTabela(int argc, args argv, string arquivo, ListaB& listaBusca, str
 	string nulo = "NULO";
 	getline(file, linha);
 	int tamanho = atoi(linha.c_str());
-	
-	for (int i = inicioPalavrinhas(argc, argv); i < argc; i++){
+
+	for (int i = 2; i < argc; i++){
+		//cout << " > Procurando por: [" << argv[i] << "]" << endl;
  		Chave chave = TAB_CriarChave(argv[i]);
 		int linhaIdeal = Hash(PreHash(chave), tamanho)+2;
+		
 		GoToLine(file, linhaIdeal);	
 		getline(file,linha);
 		
@@ -144,12 +146,11 @@ bool buscarNaTabela(int argc, args argv, string arquivo, ListaB& listaBusca, str
 		std::size_t foundedNull = linha.find(nulo);                
 		
 		//Se não achar a chave e != de nulo prossiga
-		while(foundedWord==string::npos || !file.eof()){
+		while(foundedWord==string::npos && !file.eof()){
 			if(foundedNull!=string::npos){
-				
-				string linhaFail = "\t - Não contem a palavra " ;				
-				string arquivoAux = arquivo.erase(arquivo.length()-4,4) +".txt";
-				LIS_InserirFimB(listaBusca,arquivoAux,argv[i],dataHora,linhaFail,-10);
+				cout << "\t - Não contem a palavra\n" << endl;
+				string linhaFail = "\t - Não contem a palavra\n";
+				LIS_InserirFimB(listaBusca,Aux,argv[i],dataHora,linhaFail,-10);
 				break;
 			}
 			getline(file, linha);
@@ -210,7 +211,7 @@ bool listaLinhas(string arquivo, char * linhas,ListaB &listaBusca, char* chave, 
 		string linhaAux;
 		GoToLine(arquivoTXT, atoi(nlinha));
 		getline(arquivoTXT,linhaAux);
-		//cout << dataHora <<endl;	
+		cout << dataHora <<endl;	
 		//falta colocar a hora
 		LIS_InserirFimB(listaBusca,arquivoAux,chave,dataHora,linhaAux,atoi(nlinha));
 
@@ -279,30 +280,4 @@ int gerarTabela(std::string origem){
 		return contadorPalavras;
 	} 	
 	return -1;
-}
-
-
-
-int inicioPalavrinhas(int argc, args argv){
-	string tipodeImpressao = "-pC -pI -pA";
-	string tempo = "-tF -tT";
-	int inicio = 2;
-
-	if(argc >2){
-		size_t tipoImpressao2 = tipodeImpressao.find(argv[2]);
-		size_t tipoTempo2 = tempo.find(argv[2]);
-		if(tipoImpressao2!=string::npos) inicio++;
-		if(tipoTempo2!=string::npos) inicio++;
-
-	}
-	
-	if(argc > 3){
-		size_t tipoImpressao3 = tipodeImpressao.find(argv[3]);
-		size_t tipoTempo3 = tempo.find(argv[3]);
-		if(tipoImpressao3!=string::npos) inicio++;
-		if(tipoTempo3!=string::npos) inicio++;
-	}
-		
-	return inicio;
-
 }

@@ -2,7 +2,7 @@
 #include "listabusca.h"
 
 typedef char** args;
-int inicioPalavrinhas(int argc, args argv);
+
 int gerarTabela(std::string origem);
 bool Ler_Buscas(int argc, args argv);
 bool buscarNaTabela(int argc, args argv, std::string arquivo, ListaB& listaBusca, string dataHora);
