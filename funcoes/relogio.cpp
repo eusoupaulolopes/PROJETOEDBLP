@@ -20,4 +20,3 @@ void fimRelogio(long int tempoInicial){
 }
 
 
-//(std::clock() - hangar.avioes[temp].tEntrada) / (double)(CLOCKS_PER_SEC / 1000)

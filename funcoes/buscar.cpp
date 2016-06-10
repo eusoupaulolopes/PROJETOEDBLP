@@ -11,29 +11,28 @@
 #include <limits>
 
 using namespace std;
-long int tempoInicial = meuRelogio(); // variavel global não precisa passar por parametro
 
-typedef void (*PFuncao) (/* aquivai a lista pra ser imprimida  */ );
+long int tempoInicial; // variavel global não precisa passar por parametro
 
+typedef void (*PFuncao) ( ListaB * lista);
 
 /* Exemplo das chamadas das funcoes genéricas elas não precisão estar nesse %%%%% arquivo %%%%%% */
 
-void imprimepC( /* aqui recebemos a listinha a imprimir */ ) { 
+void imprimepC( ListaB * lista ) { 
 	cout << "ImprimeC" << endl; 
 	
 }
-void imprimepI(  /* aqui recebemos a listinha a imprimir */ ) {  
+void imprimepI(  ListaB * lista ) {  
 	cout << "ImprimeI" << endl;
 	
 }
-void imprimepA(  /* aqui recebemos a listinha a imprimir */ ) { 
+void imprimepA( ListaB * lista ) { 
 	cout << "imprimeA" <<endl;
 }
 
 
 // aqui tratarei as entradas do usuário 
 PFuncao selecionaImprecao (int argc, args argv){
-
 
 	for (int i = 2; i < argc; i++){
 		if(!strcmp(argv[i], "-pC")){
@@ -145,20 +144,19 @@ bool buscaBOR(ListaB* lista, int tamanho, int argc, args argv){
 		EliminaLinhasIguais(lista[j]);
 		LIS_OrdenarB(lista[j],numeroLinha);
 		LIS_ImprimirB(lista[j]);
-
-		void (*ponteiroFuncao) (  );
-		ponteiroFuncao = selecionaImprecao(argc, argv);
-		ponteiroFuncao();
-		
-		// imprime o relogio
-		for (int i = 0; i < argc; i++){
-			if(!strcmp(argv[i], "-tT")){
-				fimRelogio(tempoInicial);
-				break;
-			}
+	}
+	void (*ponteiroFuncao) ( ListaB * lista );
+	ponteiroFuncao = selecionaImprecao(argc, argv);
+	ponteiroFuncao(lista);
+	
+	// imprime o relogio
+	for (int i = 0; i < argc; i++){
+		if(!strcmp(argv[i], "-tT")){
+			fimRelogio(tempoInicial);
+			break;
 		}
 	}
-	
+
 	return true;
 }
 
@@ -170,21 +168,18 @@ bool buscaBAND(ListaB* lista, int tamanho,int numerodepalavras, int argc, args a
 		ListaB aux = EliminaLinhasSemTodasPalavras(lista[j],numerodepalavras);
 		EliminaLinhasIguais(aux);
 		LIS_ImprimirB(aux);
-
-		void (*ponteiroFuncao) (  );
-		ponteiroFuncao = selecionaImprecao(argc, argv);
-		ponteiroFuncao();
-
-		// imprime o relogio
-		for (int i = 0; i < argc; i++){
-			if(!strcmp(argv[i], "-tT")){
-				fimRelogio(tempoInicial);
-				break;
-			}
-		}
-
 	}
-	
+
+	void (*ponteiroFuncao) ( ListaB * lista );
+	ponteiroFuncao = selecionaImprecao(argc, argv);
+	ponteiroFuncao(lista);
+	// imprime o relogio
+	for (int i = 0; i < argc; i++){
+		if(!strcmp(argv[i], "-tT")){
+			fimRelogio(tempoInicial);
+			break;
+		}
+	}
 	return true;
 }
 /*
@@ -338,7 +333,13 @@ int inicioPalavrasBusca(int argc, args argv){
 		if(tipoImpressao3!=string::npos) inicio++;
 		if(tipoTempo3!=string::npos) inicio++;
 	}
-		
+	for (int i = 0; i < argc; i++){
+		if(!strcmp(argv[i], "-tT")){
+			tempoInicial = meuRelogio();
+			break;
+		}
+	}
+
  	return inicio;
 
 }
