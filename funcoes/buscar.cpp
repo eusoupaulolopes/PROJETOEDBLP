@@ -64,8 +64,15 @@ bool buscaPorArquivo(int argc, args argv){
 		if(linha != "\0"){
 			string dataHora = quebraLinha(linha, 2);
 			for (int j = 0; j < (int)linha.size(); j++){
-				if(linha[j] == ';'){ // o primeiro ; da linha		
+				if(linha[j] == ';'){ // o primeiro ; da linha
+					
+					//Para manipular o vetor de listas e ordenar para impressao
+					//listaBusca[a]->nome = arquivo;
+					//listaBusca[a]->hora = dataHora;
+
+
 					arquivo = arquivo.erase(arquivo.length()-4,4) +".dat";
+					
 					//cout << ">>> Abrindo: " << arquivo << endl;
 					buscarNaTabela(argc, argv, arquivo, listaBusca[a], dataHora); //mandar lista por referência
 					break;						
@@ -77,11 +84,16 @@ bool buscaPorArquivo(int argc, args argv){
 	}	
 	file.close();
 
+	//Calculo do numero de palavras digitadas para busca
 	int qtdePalavrasBusca = argc - inicioPalavrasBusca(argc,argv);
-	cout << qtdePalavrasBusca << endl;
+	//cout << qtdePalavrasBusca << endl;
+
+	//ordenar o vetor de lista de acordo com a opção de impressão
+	//opcaoImpressao(listaBusca,inicioPalavrasBusca(argc,argv),numeroLinhas,argv);
+
 
 	if(!strcmp(argv[1], "-bAND")){
-		cout << "Eu to na Band!" << endl;
+		
 		buscaBAND(listaBusca,numeroLinhas,qtdePalavrasBusca);
 	}
 
@@ -96,13 +108,10 @@ bool buscaPorArquivo(int argc, args argv){
 bool buscaBOR(ListaB* lista, int tamanho){
 	
 	for(int j=0; j < tamanho; j++){
-		//cout<< "Lista ANTES:" <<endl;
+	//cout<< "Lista ANTES:" <<endl;
 	//	LIS_ImprimirB(lista[j]);
-		LIS_OrdenarB(lista[j],numeroLinha);
-	//	cout<< "Lista DEPOIS:" <<endl;
-//		LIS_ImprimirB(lista[j]);
 		EliminaLinhasIguais(lista[j]);
-	//	cout<< "Lista SEM REPETIÇÃO:" <<endl;
+		LIS_OrdenarB(lista[j],numeroLinha);
 		LIS_ImprimirB(lista[j]);
 	}
 	
@@ -146,7 +155,8 @@ bool buscarNaTabela(int argc, args argv, string arquivo, ListaB& listaBusca, str
 	getline(file, linha);
 	int tamanho = atoi(linha.c_str());
 
-	for (int i = 2; i < argc; i++){
+
+	for (int i = inicioPalavrasBusca(argc,argv); i < argc; i++){
 		//cout << " > Procurando por: [" << argv[i] << "]" << endl;
  		Chave chave = TAB_CriarChave(argv[i]);
 		int linhaIdeal = Hash(PreHash(chave), tamanho)+2;
@@ -183,23 +193,6 @@ bool buscarNaTabela(int argc, args argv, string arquivo, ListaB& listaBusca, str
 	file.close();
 	
 	return true;
-}
-
-
-
-/*
- Função que recebe um arquivo contido na base de buscas, e a linha desejada nesse arquivo
- FONTE: //http://stackoverflow.com/questions/5207550/in-c-is-there-a-way-to-go-to-a-specific-line-in-a-text-file/5207600#5207600
- @param file - arquivo a percorrer
- @param num - linha desejada no arquivo
- @return file com o ponteiro armadao na linha desejada
- */
-std::fstream& GoToLine(std::fstream& file, int num){
-	file.seekg(std::ios::beg);
-    for(int i=0; i < num - 1; ++i){
-        file.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
-    }
-    return file;
 }
 
 
@@ -241,6 +234,21 @@ bool listaLinhas(string arquivo, char * linhas,ListaB &listaBusca, char* chave, 
 }
 
 /*
+ Função que recebe um arquivo contido na base de buscas, e a linha desejada nesse arquivo
+ FONTE: //http://stackoverflow.com/questions/5207550/in-c-is-there-a-way-to-go-to-a-specific-line-in-a-text-file/5207600#5207600
+ @param file - arquivo a percorrer
+ @param num - linha desejada no arquivo
+ @return file com o ponteiro armadao na linha desejada
+ */
+std::fstream& GoToLine(std::fstream& file, int num){
+	file.seekg(std::ios::beg);
+    for(int i=0; i < num - 1; ++i){
+        file.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+    }
+    return file;
+}
+
+/*
  Função que conta o numero de linhas de um arquivo
  @param file - arquivo a percorrer
  @return quantidade de linhas
@@ -254,44 +262,6 @@ int contadorLinhas(ifstream& file){
 	}
 	file.seekg(std::ios::beg);
 	return cont-1;
-}
-
-
-int gerarTabela(std::string origem){
-	Tabela tabela = TAB_CriarTabela(100);
-	std::string palavra;
-	char * aux = new char[origem.length() +1];
-	std::strcpy(aux, origem.c_str());
-	ifstream arquivo (aux, fstream::binary);
-	
-	if (arquivo.is_open()){
-		
-		std::string linha;
-		int contadorLinha = 0;
-		int contadorPalavras = 0;
-			
-		while(!arquivo.eof()){
-			contadorLinha++;
-			getline(arquivo, linha);
-			char* termo = std::strtok((char *)linha.c_str() ," .,;!?()[]");
-			
-			while(termo != NULL){
-				contadorPalavras++;
-				Chave chave = TAB_CriarChave(termo);
-				Valor valor = TAB_CriarValor(std::to_string(contadorLinha).c_str());
-				TAB_Inserir(tabela, chave, valor);
-				termo = strtok(NULL," .,;!?()[]");	
-			}
-		}arquivo.close();
-
-		string arquivotabela = origem.erase(origem.length()-4,4) +".dat";
-		char * auxTabela = new char[arquivotabela.length() +1];
-		std::strcpy(auxTabela, arquivotabela.c_str());
-		
-		gerarArquivoTabela(auxTabela, tabela);		
-		return contadorPalavras;
-	} 	
-	return -1;
 }
 
 int inicioPalavrasBusca(int argc, args argv){
@@ -317,3 +287,45 @@ int inicioPalavrasBusca(int argc, args argv){
  	return inicio;
 
 }
+
+/*void opcaoImpressao(ListaB* lista,int iniciopalavras, int tamanho, args argv){
+
+	if(iniciopalavras == 2){
+		LIS_OrdenarB(lista,tamanho,pI);
+	}
+	
+	if (iniciopalavras == 3 || iniciopalavras == 4){
+		
+		if(strcmp(argv[2],"-pC")==0){
+			LIS_OrdenarB(lista,tamanho,pC);
+		}
+
+		if(strcmp(argv[2],"-pI")==0){
+			LIS_OrdenarB(lista,tamanho,pI);
+		}
+
+		if(strcmp(argv[2],"-pA")==0){
+			LIS_OrdenarB(lista,tamanho,pA);
+		}
+	}
+
+	if (iniciopalavras == 4){
+		
+		if(strcmp(argv[3],"-pC")==0){
+			LIS_OrdenarB(lista,tamanho,pC);
+		}
+
+		if(strcmp(argv[3],"-pI")==0){
+			LIS_OrdenarB(lista,tamanho,pI);
+		}
+
+		if(strcmp(argv[3],"-pA")==0){
+			LIS_OrdenarB(lista,tamanho,pA);
+		}
+	}
+
+
+
+}
+
+*/

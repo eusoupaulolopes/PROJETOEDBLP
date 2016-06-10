@@ -251,3 +251,41 @@ bool copiarArquivoParaPasta(char* arquivo){
 	}
 	return false;
 }
+
+
+int gerarTabela(std::string origem){
+	Tabela tabela = TAB_CriarTabela(100);
+	std::string palavra;
+	char * aux = new char[origem.length() +1];
+	std::strcpy(aux, origem.c_str());
+	ifstream arquivo (aux, fstream::binary);
+	
+	if (arquivo.is_open()){
+		
+		std::string linha;
+		int contadorLinha = 0;
+		int contadorPalavras = 0;
+			
+		while(!arquivo.eof()){
+			contadorLinha++;
+			getline(arquivo, linha);
+			char* termo = std::strtok((char *)linha.c_str() ," .,;!?()[]");
+			
+			while(termo != NULL){
+				contadorPalavras++;
+				Chave chave = TAB_CriarChave(termo);
+				Valor valor = TAB_CriarValor(std::to_string(contadorLinha).c_str());
+				TAB_Inserir(tabela, chave, valor);
+				termo = strtok(NULL," .,;!?()[]");	
+			}
+		}arquivo.close();
+
+		string arquivotabela = origem.erase(origem.length()-4,4) +".dat";
+		char * auxTabela = new char[arquivotabela.length() +1];
+		std::strcpy(auxTabela, arquivotabela.c_str());
+		
+		gerarArquivoTabela(auxTabela, tabela);		
+		return contadorPalavras;
+	} 	
+	return -1;
+}

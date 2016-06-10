@@ -1,3 +1,6 @@
+#ifndef _LISTA_PARA_BUSCAS_
+#define _LISTA_PARA_BUSCAS_
+
 #include <string>
 #include "listabusca.h"
 
@@ -11,3 +14,5 @@ bool buscaBOR(ListaB* lista, int tamanho);
 bool buscaBAND(ListaB* lista, int tamanho, int numerodepalavras);
 bool listaLinhas(string arquivo, char * linhas,ListaB &listaBusca, char* chave, string dataHora);
 int inicioPalavrasBusca(int argc, args argv);
+//void opcaoImpressao(ListaB* lista,int iniciopalavras, int tamanho, args argv);
+#endif

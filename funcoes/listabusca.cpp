@@ -9,8 +9,10 @@
 NoB CriarNoB(string,string,string,string,int);
 bool DestruirNoB(NoB);
 
-/**
-    Função que aloca memória para uma instância da estrutura Lista e inicializa os seus campos.
+/*
+Função que aloca memória para uma instância da estrutura ListaB e inicializa os seus campos.
+
+ @return a lista inicializada, ou NULL caso haja algum problema na inicialização;
  */
 ListaB LIS_CriarB()
 {
@@ -25,7 +27,7 @@ ListaB LIS_CriarB()
     
     lista->tamanho = 0;
     lista->qtdeElementos = 0;
-    
+
     lista->cauda = CriarNoB((string)VALOR_QUALQUER,(string)VALOR_QUALQUER,(string)VALOR_QUALQUER,(string)VALOR_QUALQUER,-10000);
     
 
@@ -79,12 +81,11 @@ bool LIS_InserirFimB(ListaB lista, string nomeArquivo, string palavra, string ho
 }
 
 /*
- Função que insere um valor no fim da lista. Após a execução desta função, o elemento inserido será o último elemento da lista.
+ Função que busca um determinado numero de linha na lista
  @param lista - lista em que será feita a busca
- @param chave - valor a ser buscado na lista
- @return se encontrar a chave, devolve a posição em que ela se encontra na lisa, caso contrário retorna -1
+ @param numeroLinha - numero a ser buscado na lista
+ @return se encontrar o numero da linha, devolve a posição em que ela se encontra na lista, caso contrário retorna -1
  */
-
 int LIS_Buscar_NumeroLinha(ListaB lista, int numeroLinha)
 {
     NoB no = lista->cabeca->proximo;
@@ -98,6 +99,12 @@ int LIS_Buscar_NumeroLinha(ListaB lista, int numeroLinha)
     return -1;
 }
 
+/*
+ Função que busca um determinado uma palavra chave na lista
+ @param lista - lista em que será feita a busca
+ @param chave - palavra a ser buscada na lista
+ @return se encontrar a palavra, devolve a posição em que ela se encontra na lista, caso contrário retorna -1
+*/
 int LIS_Buscar_Chave(ListaB lista, string chave)
 {
     NoB no = lista->cabeca->proximo;
@@ -110,11 +117,11 @@ int LIS_Buscar_Chave(ListaB lista, string chave)
 
     return -1;
 }
-
 /*
- Função que remove um valor no início da lista.
- */
-
+  Função que remove um valor no início da lista.
+ @param lista - lista em que será feita a remoção
+ @return se remover corretamente retorna o nomedoArquivo do no removido, caso contrário retorna a string "menosum"
+*/
 string LIS_RemoverInicioB(ListaB lista)
 {
     string menosum = "menosum";
@@ -142,9 +149,13 @@ string LIS_RemoverInicioB(ListaB lista)
     }
 }
 
-/*
- Função que remove um valor numa determinada posição da lista.
- */
+
+ /*
+Função que remove um valor numa determinada posição da lista.
+ @param lista - lista em que será feita a remoção
+ @param indice - posicao do nó que deve ser removido
+ @return se remover corretamente retorna o nomedoArquivo do no removido, caso contrário retorna a string "menosum"
+*/
 string LIS_RemoverB(ListaB lista, int indice)
 {    
     string menosum = "menosum";
@@ -182,6 +193,12 @@ string LIS_RemoverB(ListaB lista, int indice)
     return valorremovido;
 }
 
+ /*
+Função que ordena um tipo ListaB de acordo com o tipo de ordenação escolhido
+ @param lista - lista que será ordenada
+ @param tipoOrdenar - tipo de ordenação que pode ser por palavraChave, ordem alfabética de linha ou 
+                      ordem crescente por número da linha
+*/
 void LIS_OrdenarB(ListaB lista, int tipoOrdenar)
 {
     // Seleção
@@ -191,12 +208,6 @@ void LIS_OrdenarB(ListaB lista, int tipoOrdenar)
         
         menor = i;
         for(NoB j = i->proximo; j != lista->cauda; j=j->proximo){
-            if(tipoOrdenar == nomeArquivo){
-                if(j->nomeArquivo < menor->nomeArquivo){
-                    
-                    menor = j;
-                }
-            }
             if(tipoOrdenar == palavraChave){
                 if(j->palavraChave < menor->palavraChave){
                     
@@ -215,12 +226,7 @@ void LIS_OrdenarB(ListaB lista, int tipoOrdenar)
                     menor = j;
                 }
             }
-            if(tipoOrdenar == hora){
-                if(j->hora < menor->hora){
-                    
-                    menor = j;
-                }
-            }
+            
         }
         
         if(menor != i){ // i não é o menor.
@@ -254,6 +260,58 @@ void LIS_OrdenarB(ListaB lista, int tipoOrdenar)
     
 }
 
+ /*
+Função que ordena o vetor de listas de acorco com o tipo de ordenação escolhido
+ @param lista - vetor de listas que vai ser ordenado
+ @param tamanho - tamanho do vetor
+ @param tipo - tipo de ordenação a executar por inserção, por ordem alfabetica ou por ocorrencias
+ @return quantidade de vezes que o numero de linha buscado apareceu na lista
+*/
+
+/*void LIS_OrdenarB(ListaB* lista, int tamanho, int tipo)
+{
+    // Seleção
+    ListaB menor, temp;
+
+    for(int i =0; i < tamanho-1; i++){
+        menor = lista[i];
+
+        for(int j = i+1; j < tamanho;j++){
+            if(tipo == pA){
+                if(lista[j]->nome < menor->nome){
+                    menor = lista[j];
+                }
+            }
+            if(tipo == pI){
+                if(lista[j]->hora < menor->hora){
+                    menor = lista[j];
+                }
+            }
+            if(tipo == pC){
+                if(lista[j]->qtdeElementos > menor->qtdeElementos){
+                    
+                    menor = lista[j];
+                }
+            }
+        }
+
+        if(menor != lista[i]){
+            temp = menor;
+            menor = lista[i];
+            lista[i] = temp;
+        }
+
+    }
+    
+}
+*/
+
+ /*
+Função que conta quantas vezes um numero de linha aparece na lista
+ @param lista - lista em que será feita a busca
+ @param numeroLinha - numero de linha a ser buscado na lista
+ @return quantidade de vezes que o numero de linha buscado apareceu na lista
+*/
 int LIS_BuscarRepeticaoLinha(ListaB lista, int numeroLinha)
 {
     int cont = 0;
@@ -268,6 +326,10 @@ int LIS_BuscarRepeticaoLinha(ListaB lista, int numeroLinha)
     return cont;
 }
 
+ /*
+Função que elimina os nós da lista que possuem o mesmo número de linha
+ @param lista - lista em que será feita a remoção
+*/
 void EliminaLinhasIguais(ListaB lista){
 
     int repetidas;
@@ -275,17 +337,22 @@ void EliminaLinhasIguais(ListaB lista){
     for(NoB i = lista->cabeca->proximo; i != lista->cauda->anterior; i=i->proximo){
         repetidas = LIS_BuscarRepeticaoLinha(lista,i->numeroLinha);
 
-        if ( repetidas > 1){
+        if ( repetidas > 1){ //Se houver repetição, elimina até só apareça uma vez na lista
             while(repetidas > 1){
                 LIS_RemoverB( lista, LIS_Buscar_NumeroLinha(lista,i->numeroLinha) );
                 repetidas --;
             }
-
         }
-
     }
 }
 
+/*
+Função que elimina as linhas que não aparecem todas as palavras buscadas na mesma linha
+ @param lista - lista em que será feita a busca de linhas com todas as palavras buscadas
+ @param numerodepalavras -  corresponde ao numero de palavras digitadas pelo usuário na busca
+ @return lista com linhas que contem todas as palavras buscadas na msm linha ou caso nao haja linhas
+         na lista que tenha todas as palavras, retorna uma linha Fail.
+*/
 ListaB EliminaLinhasSemTodasPalavras(ListaB lista, int numerodepalavras){
     
     ListaB linhasComTodasPalavras = LIS_CriarB();
@@ -304,23 +371,9 @@ ListaB EliminaLinhasSemTodasPalavras(ListaB lista, int numerodepalavras){
             LIS_InserirFimB(linhasComTodasPalavras,i->nomeArquivo,i->palavraChave,i->hora,i->linha,i->numeroLinha);
             nenhumaInsercao = false;
         }
-/*
-
-        if ( repetidas < numerodepalavras){
-            while(repetidas > 0){
-                //aantes de eliminar o ultimo nó
-                if(repetidas == 1 && lista->tamanho == 1){
-                    string linhaFail = "\t - Não contem a palavra\n";
-                    LIS_InserirFimB(lista,i->nomeArquivo,i->palavraChave,i->hora,linhaFail,-10);
-                }
-                LIS_RemoverB( lista, LIS_Buscar_NumeroLinha(lista,i->numeroLinha) );
-                repetidas--;
-
-            }
-
-        }*/
 
     }
+
 
     if(nenhumaInsercao){
         string linhaFail = "\t - Não contem a palavra\n";
@@ -330,8 +383,9 @@ ListaB EliminaLinhasSemTodasPalavras(ListaB lista, int numerodepalavras){
     return linhasComTodasPalavras;
 }
 
+
 /*
-    Função que imprime todos os elementos de uma lista.
+    Função que imprime todos os elementos da lista bAND e bOR.
 */
 void LIS_ImprimirB(ListaB lista)
 {
@@ -355,6 +409,9 @@ void LIS_ImprimirB(ListaB lista)
     std::cout << std::endl;
 }
 
+/*
+    Função que imprime todos os elementos da lista em formato de Teste
+*/
 void LIS_ImprimirTeste(ListaB lista)
 {
    
@@ -371,6 +428,14 @@ void LIS_ImprimirTeste(ListaB lista)
     std::cout << std::endl;
 }
 
+
+
+
+/*
+Função que aloca memória para uma instância da estrutura NoB e preenche os seus campos.
+
+ @return o no com os campos preenchidos, ou NULL caso haja algum problema na alocação de memória];
+ */
 NoB CriarNoB(string nomeArquivo, string palavra, string hora, string linha, int numeroLinha){
     
     NoB no = new tpNoBusca;

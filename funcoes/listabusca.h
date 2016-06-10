@@ -25,20 +25,29 @@ struct tpListaBusca
 {
     NoB cabeca;
     NoB cauda;
+//    string nome;
+//    string hora;
     int qtdeElementos;
     int tamanho;
+
 };
 
 typedef tpListaBusca * ListaB;
 
 //Enum para Ordenação da ListaB
 enum tipoOrdenar {
-    nomeArquivo,
     palavraChave,
     linha,
     numeroLinha,
-    hora,
 };
+
+/*Enum para Ordenação do vetor de ListaB (opção de impressão)
+enum tipo {
+    pA,
+    pC,
+    pI,
+};*/
+
 
 ListaB LIS_CriarB();
 bool LIS_InserirFimB(ListaB lista, string nomeArquivo, string palavra, string hora, string linha, int numeroLinha);
@@ -55,6 +64,7 @@ int LIS_Buscar_Chave(ListaB lista, string chave);
 void LIS_TrocarB(NoB menor, NoB fixo);
 void LIS_OrdenarB(ListaB lista);
 void LIS_OrdenarB(ListaB lista, int tipoOrdenar);
+//void LIS_OrdenarB(ListaB* lista, int tamanho, int tipo);
 
 void EliminaLinhasIguais(ListaB lista);
 ListaB EliminaLinhasSemTodasPalavras(ListaB lista, int numerodepalavras);
