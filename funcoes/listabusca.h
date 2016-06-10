@@ -57,4 +57,5 @@ void LIS_OrdenarB(ListaB lista);
 void LIS_OrdenarB(ListaB lista, int tipoOrdenar);
 
 void EliminaLinhasIguais(ListaB lista);
+ListaB EliminaLinhasSemTodasPalavras(ListaB lista, int numerodepalavras);
 #endif

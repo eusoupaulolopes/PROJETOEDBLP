@@ -286,6 +286,50 @@ void EliminaLinhasIguais(ListaB lista){
     }
 }
 
+ListaB EliminaLinhasSemTodasPalavras(ListaB lista, int numerodepalavras){
+    
+    ListaB linhasComTodasPalavras = LIS_CriarB();
+
+    int repetidas;
+
+    bool nenhumaInsercao = true;
+
+    NoB aux = lista->cabeca->proximo;
+    string nomeArq = aux->nomeArquivo;
+ 
+    for(NoB i = lista->cabeca->proximo; i != lista->cauda; i=i->proximo){
+        repetidas = LIS_BuscarRepeticaoLinha(lista,i->numeroLinha);
+
+        if(repetidas == numerodepalavras){
+            LIS_InserirFimB(linhasComTodasPalavras,i->nomeArquivo,i->palavraChave,i->hora,i->linha,i->numeroLinha);
+            nenhumaInsercao = false;
+        }
+/*
+
+        if ( repetidas < numerodepalavras){
+            while(repetidas > 0){
+                //aantes de eliminar o ultimo nó
+                if(repetidas == 1 && lista->tamanho == 1){
+                    string linhaFail = "\t - Não contem a palavra\n";
+                    LIS_InserirFimB(lista,i->nomeArquivo,i->palavraChave,i->hora,linhaFail,-10);
+                }
+                LIS_RemoverB( lista, LIS_Buscar_NumeroLinha(lista,i->numeroLinha) );
+                repetidas--;
+
+            }
+
+        }*/
+
+    }
+
+    if(nenhumaInsercao){
+        string linhaFail = "\t - Não contem a palavra\n";
+        LIS_InserirFimB(linhasComTodasPalavras,nomeArq,linhaFail,linhaFail,linhaFail,-10);
+    }
+
+    return linhasComTodasPalavras;
+}
+
 /*
     Função que imprime todos os elementos de uma lista.
 */

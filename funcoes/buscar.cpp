@@ -77,14 +77,16 @@ bool buscaPorArquivo(int argc, args argv){
 	}	
 	file.close();
 
+	int qtdePalavrasBusca = argc - inicioPalavrasBusca(argc,argv);
+	cout << qtdePalavrasBusca << endl;
 
 	if(!strcmp(argv[1], "-bAND")){
 		cout << "Eu to na Band!" << endl;
-		buscaBAND(listaBusca,numeroLinhas);
+		buscaBAND(listaBusca,numeroLinhas,qtdePalavrasBusca);
 	}
 
 	if(!strcmp(argv[1], "-bOR")){
-		cout << "Eu to no BOR!" << endl;
+		
 		buscaBOR(listaBusca,numeroLinhas);
 	}
 
@@ -107,10 +109,15 @@ bool buscaBOR(ListaB* lista, int tamanho){
 	return true;
 }
 
-bool buscaBAND(ListaB* lista, int tamanho){
+bool buscaBAND(ListaB* lista, int tamanho,int numerodepalavras){
 	//getline(file, linha);
 	for(int j=0; j < tamanho; j++){
-		LIS_ImprimirB(lista[j]);
+
+		LIS_OrdenarB(lista[j],numeroLinha);
+		ListaB aux = EliminaLinhasSemTodasPalavras(lista[j],numerodepalavras);
+		EliminaLinhasIguais(aux);
+		LIS_ImprimirB(aux);
+
 	}
 	
 	return true;
@@ -285,4 +292,28 @@ int gerarTabela(std::string origem){
 		return contadorPalavras;
 	} 	
 	return -1;
+}
+
+int inicioPalavrasBusca(int argc, args argv){
+ 	string tipodeImpressao = "-pC -pI -pA";
+ 	string tempo = "-tF -tT";
+ 	int inicio = 2;
+ 
+	if(argc >2){
+		size_t tipoImpressao2 = tipodeImpressao.find(argv[2]);
+		size_t tipoTempo2 = tempo.find(argv[2]);
+		if(tipoImpressao2!=string::npos) inicio++;
+		if(tipoTempo2!=string::npos) inicio++;
+
+	}
+ 	
+	if(argc > 3){
+		size_t tipoImpressao3 = tipodeImpressao.find(argv[3]);
+		size_t tipoTempo3 = tempo.find(argv[3]);
+		if(tipoImpressao3!=string::npos) inicio++;
+		if(tipoTempo3!=string::npos) inicio++;
+	}
+		
+ 	return inicio;
+
 }
