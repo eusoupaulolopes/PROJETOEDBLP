@@ -79,7 +79,7 @@ Describe and show how to run the tests with code examples.
 
 ## License
 
-A short snippet describing the license (MIT, Apache, etc.)
+GNU LGPLv3 
 
 
 [buscaIMD]: <https:///github.com/lopespaulo/PROJETOEDBLP/archive/master.zip>
