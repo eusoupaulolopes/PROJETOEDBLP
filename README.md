@@ -19,9 +19,9 @@ No mais, é disponibilizado opcionalmente, o tempo total das buscas em milisegun
 
 ## Instalação
 baixe uma copia do projeto em [buscaIMD].
-- desconpacte os arquivos
-- No terminal, acesse a pasta criada
-- execute:
+1) desconpacte os arquivos,
+2) No terminal, acesse a pasta criada,
+3) execute:
 ```sh
  $ make
 ```       
@@ -33,17 +33,36 @@ $    g++ -w main.cpp funcoes/inserir.cpp suporte.cpp funcoes/estruturas.cpp func
    
 
 ## Uso
-Para gerenciar a base de busca:
+**Gerenciamento da base de busca:**
+
 ```sh
 > ./buscaIMD <opção> <nome_arquivo> 
 ```
-onde <opção> recebe qualquer um dos seguintes paramentos:
-* -i insere <nome_arquivo> na base de busca (atualiza o mesmo caso já exista)
-* -r remove <nome_arquivo> na base de busca
+ onde < opção > deve recebe qualquer um dos seguintes paramentos:
+* -i insere < nome_arquivo > na base de busca (atualiza o mesmo caso já exista)
+* -r remove < nome_arquivo > na base de busca
 * -li lista arquivos na base de busca por ordem de inserção
 * -la lista arquivos na base de busca por ordem alfabetica
 * -lt lista arquivos na base de busca por por quantidade de palavras
  
+**Modos de busca:**
+```sh
+> /buscaIMD <opção_busca> <opção_impressão> <tempo> <palavras_chave>
+```
+ onde < opção_busca > deve receber um dos seguintes parametros, indicando de que forma a busca deve ser realizada:
+- -bAND: A busca é feita por linhas nos arquivos texto da base de busca que contém todos os termos < palavras_chave >, passadas como argumento.
+- -bOR: A busca é feita por linhas nos arquivos texto da base de busca que contém ao menos um dos termos < palavras_chave > passsados como argumento de entraga.
+
+Alem disso < opção_impressão > indica como o resultado da busca deve ser exibida ao usuário, é possivel:
+- -pA: A impressão é feita exibindo os resultados em ordem alfabética do nome do arquivo-texto.
+- -pC: A impressão é feita exibindo os resultados em ordem decrescente do número de vezes que os termos < palavras_chave> ocorreram em cada arquivo-texto.
+- -pI: A impressão é feita exibindo os resultados na ordem em que cada arquivo foi inserido na base de busca.
+
+Caso seja necessário, o tempo total de realização das buscas é exibido através do parametro < tempo > que deve receber:
+- tT: O programa registra e exibe o tempo total de execução da busca.
+- tF: O programa não registra nem exibe o tempo total de execução da busca. 
+
+
 
 ## Tests
 
