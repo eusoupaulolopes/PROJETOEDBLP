@@ -1,351 +1,85 @@
-100
-0 NULO
-1 NULO
-2 NULO
-3 NULO
-4 NULO
-5 NULO
-6 NULO
-7 NULO
-8 |________| : 6
-9 NULO
-10 NULO
-11 NULO
-12 NULO
-13 NULO
-14 NULO
-15 NULO
-16 NULO
-17 NULO
-18 NULO
-19 NULO
-20 NULO
-21 NULO
-22 NULO
-23 NULO
-24 | : 4-5
-25 NULO
-26 os : 1
-27 tem : 1
-28 NULO
-29 devem : 2
-30 ser : 2
-31 lados : 1
-32 NULO
-33 NULO
-34 NULO
-35 NULO
-36 NULO
-37 NULO
-38 NULO
-39 NULO
-40 NULO
-41 NULO
-42 NULO
-43 NULO
-44 NULO
-45 NULO
-46 NULO
-47 NULO
-48 NULO
-49 NULO
-50 NULO
-51 NULO
-52 4 : 1
-53 NULO
-54 NULO
-55 _________ : 3
-56 NULO
-57 NULO
-58 NULO
-59 NULO
-60 NULO
-61 NULO
-62 NULO
-63 NULO
-64 quadrados : 1
-65 NULO
-66 NULO
-67 NULO
-68 NULO
-69 E : 2
-70 NULO
-71 NULO
-72 NULO
-73 NULO
-74 NULO
-75 NULO
-76 NULO
-77 NULO
-78 NULO
-79 NULO
-80 NULO
-81 NULO
-82 NULO
-83 NULO
-84 NULO
-85 NULO
-86 NULO
-87 NULO
-88 NULO
-89 NULO
-90 NULO
-91 NULO
-92 NULO
-93 NULO
-94 NULO
-95 NULO
-96 NULO
-97 NULO
-98 NULO
-99 assim: : 2
-100
-0 NULO
-1 NULO
-2 NULO
-3 NULO
-4 NULO
-5 NULO
-6 NULO
-7 NULO
-8 |________| : 6
-9 NULO
-10 NULO
-11 NULO
-12 NULO
-13 NULO
-14 NULO
-15 NULO
-16 NULO
-17 NULO
-18 NULO
-19 NULO
-20 NULO
-21 NULO
-22 NULO
-23 NULO
-24 | : 4-5
-25 NULO
-26 os : 1
-27 tem : 1
-28 NULO
-29 devem : 2
-30 ser : 2
-31 lados : 1
-32 NULO
-33 NULO
-34 NULO
-35 NULO
-36 NULO
-37 NULO
-38 NULO
-39 NULO
-40 NULO
-41 NULO
-42 NULO
-43 NULO
-44 NULO
-45 NULO
-46 NULO
-47 NULO
-48 NULO
-49 NULO
-50 NULO
-51 NULO
-52 4 : 1
-53 NULO
-54 NULO
-55 _________ : 3
-56 NULO
-57 NULO
-58 NULO
-59 NULO
-60 NULO
-61 NULO
-62 NULO
-63 NULO
-64 quadrados : 1
-65 NULO
-66 NULO
-67 NULO
-68 NULO
-69 E : 2
-70 NULO
-71 NULO
-72 NULO
-73 NULO
-74 NULO
-75 NULO
-76 NULO
-77 NULO
-78 NULO
-79 NULO
-80 NULO
-81 NULO
-82 NULO
-83 NULO
-84 NULO
-85 NULO
-86 NULO
-87 NULO
-88 NULO
-89 NULO
-90 NULO
-91 NULO
-92 NULO
-93 NULO
-94 NULO
-95 NULO
-96 NULO
-97 NULO
-98 NULO
-99 assim: : 2
-100
-0 NULO
-1 NULO
-2 NULO
-3 NULO
-4 NULO
-5 NULO
-6 NULO
-7 NULO
-8 |________| : 6
-9 NULO
-10 NULO
-11 NULO
-12 NULO
-13 NULO
-14 NULO
-15 NULO
-16 NULO
-17 NULO
-18 NULO
-19 NULO
-20 NULO
-21 NULO
-22 NULO
-23 NULO
-24 | : 4-5
-25 NULO
-26 os : 1
-27 tem : 1
-28 NULO
-29 devem : 2
-30 ser : 2
-31 lados : 1
-32 NULO
-33 NULO
-34 NULO
-35 NULO
-36 NULO
-37 NULO
-38 NULO
-39 NULO
-40 NULO
-41 NULO
-42 NULO
-43 NULO
-44 NULO
-45 NULO
-46 NULO
-47 NULO
-48 NULO
-49 NULO
-50 NULO
-51 NULO
-52 4 : 1
-53 NULO
-54 NULO
-55 _________ : 3
-56 NULO
-57 NULO
-58 NULO
-59 NULO
-60 NULO
-61 NULO
-62 NULO
-63 NULO
-64 quadrados : 1
-65 NULO
-66 NULO
-67 NULO
-68 NULO
-69 E : 2
-70 NULO
-71 NULO
-72 NULO
-73 NULO
-74 NULO
-75 NULO
-76 NULO
-77 NULO
-78 NULO
-79 NULO
-80 NULO
-81 NULO
-82 NULO
-83 NULO
-84 NULO
-85 NULO
-86 NULO
-87 NULO
-88 NULO
-89 NULO
-90 NULO
-91 NULO
-92 NULO
-93 NULO
-94 NULO
-95 NULO
-96 NULO
-97 NULO
-98 NULO
-99 assim: : 2
-100
+807
+influência : 42
+à : 36
 NULO
 NULO
 NULO
+administrativas : 26
 NULO
 NULO
 NULO
 NULO
+é : 4-9-24-44-52
 NULO
-|________| : 6
 NULO
 NULO
 NULO
 NULO
 NULO
+Pensando : 35
 NULO
+Gostaria : 7-49
+desenvolvimento : 13-39
+comprometimento : 29
+facilita : 21-55
 NULO
 NULO
 NULO
 NULO
 NULO
+acarreta : 10-58
 NULO
+ambiente : 7-55
 NULO
 NULO
 NULO
-| : 4-5
+Internet : 12
+Não : 12-58
+analisar : 23
 NULO
-os : 1
-tem : 1
 NULO
-devem : 2
-ser : 2
-lados : 1
+mercados : 2-58
+adotados : 15-59
+exigidas : 26
+melhoria : 13-27-53
+capitais : 27
+esperado : 14
 NULO
 NULO
+abertura : 13-53
 NULO
+levantam : 31
+programa : 17-56
+mundiais : 2-58
+auxiliam : 28
 NULO
+esquecer : 25
+indireto : 38
 NULO
+obstante : 12-58
+diversas : 27
+maximiza : 45
+atitudes : 23
+estimula : 2-49
+setorial : 29
+ação : 44
 NULO
+A : 14-18-27
+consulta : 25
+não : 19-25
+consenso : 38
+respeito : 39-56
 NULO
+processo : 10-24-34-59
+diversos : 25
 NULO
 NULO
 NULO
+costumes : 18
 NULO
 NULO
+O : 20-23-34-44-48-52
+recursos : 5
 NULO
 NULO
 NULO
@@ -354,29 +88,36 @@ NULO
 NULO
 NULO
 NULO
-4 : 1
 NULO
+posturas : 30
 NULO
-_________ : 3
 NULO
 NULO
 NULO
 NULO
 NULO
+a : 1-2-3-4-7-8-12-13-14-17-18-19-21-25-27-28-29-35-36-38-39-40-42-43-44-48-49-53-55-56-57-58
 NULO
 NULO
 NULO
-quadrados : 1
+e : 3-9-10-18-26-29-56-59
 NULO
+convincentemente : 19
 NULO
 NULO
 NULO
-E : 2
 NULO
+já : 29-55
+agilidade : 12
 NULO
+o : 1-9-12-13-18-20-23-24-29-31-38-39-43-47-51-52-55-57
 NULO
 NULO
 NULO
+adoção : 19-49
+importância : 1-18
+às : 30-37-40
+tecnológico : 20-48
 NULO
 NULO
 NULO
@@ -390,18 +131,1489 @@ NULO
 NULO
 NULO
 NULO
+atividade : 14-23
+cotidiana : 14
+hegemonia : 7-55
 NULO
 NULO
 NULO
 NULO
+imparcial : 1-52
 NULO
 NULO
 NULO
 NULO
+essencial : 32-51
 NULO
 NULO
 NULO
-assim: : 2
+NULO
+crescente : 42
+NULO
+órgãos : 30
+NULO
+efetuados : 28
+dissociar : 26
+NULO
+apresenta : 8
+enfatizar : 7-49
+inovadora : 9-58
+problemas : 9
+enfrentar : 47
+NULO
+NULO
+verticais : 35-52
+NULO
+NULO
+NULO
+NULO
+incentivo : 20-48
+constante : 35
+ressaltar : 4-40-57
+NULO
+distintas : 13
+NULO
+correntes : 27
+objetivos : 36
+NULO
+NULO
+NULO
+Do : 3-50
+As : 43
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+ortodoxas : 40
+No : 25-27
+independentemente : 23
+progresso : 43
+NULO
+NULO
+NULO
+NULO
+propostas : 21
+da : 1-4-8-9-12-23-42-58
+NULO
+NULO
+estrutura : 4
+de : 4-5-7-8-10-12-13-14-17-19-20-21-23-24-27-28-34-36-37-38-39-40-43-44-47-48-49-51-55-56-57-59
+capacidade : 12
+NULO
+NULO
+NULO
+NULO
+na : 12-20-32-34-38-44-51
+ao : 20-42-48
+NULO
+em : 23-25-34-44-52
+do : 2-7-10-12-13-17-21-24-28-31-32-37-42-50-55-56
+as : 29-35-45-52
+NULO
+NULO
+NULO
+se : 26-31
+preferências : 47-51
+NULO
+NULO
+NULO
+no : 8-15-42-50
+reestruturação : 17
+criação : 21-55
+Percebemos : 36
+experiências : 43
+os : 5-31
+um : 10-24-31-34-43-51-58
+mobilidade : 27
+reciclagem : 25
+relação : 30
+NULO
+NULO
+NULO
+atuação : 13
+desafiador : 43
+NULO
+estratégicos : 2-49
+NULO
+NULO
+NULO
+NULO
+paradigmas : 18
+NULO
+NULO
+NULO
+NULO
+NULO
+comerciais : 3
+acumuladas : 43
+ponderadas : 31
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+diferentes : 31
+considerar : 17
+NULO
+NULO
+NULO
+dirigentes : 30
+funcionais : 3-5-50
+participar : 20
+NULO
+mídia : 42
+NULO
+NULO
+NULO
+julgamento : 1-52
+NULO
+NULO
+representa : 13-53
+militantes : 25
+pensamento : 27
+envolvidas : 32
+demonstram : 43
+NULO
+NULO
+NULO
+processual : 8-48
+NULO
+importante : 38-44
+normativas : 18-57
+diretrizes : 39
+resultados : 20
+vislumbrar : 29-55
+utilizados : 20
+envolvidos : 5
+NULO
+questionar : 38
+nível : 18
+surgimento : 24
+visão : 5
+subjetivos : 45
+demonstrou : 19
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+Por : 12-17-57
+NULO
+NULO
+estrutural : 10-57
+descentralizadoras : 19-50
+NULO
+NULO
+das : 1-4-17-21-24-26-27-30-32-34-35-38-39-42-44-45-47-51-52-53-57
+produtivos : 31
+NULO
+estruturas : 34
+NULO
+NULO
+NULO
+com : 28-30
+vai : 19
+faz : 34
+nas : 3
+uma : 5-9-13-24-37-53
+aos : 25
+prepara-nos : 47
+dos : 1-2-3-7-15-17-18-20-27-28-30-34-36-47-49-50-51-56-58-59
+NULO
+NULO
+alavancagem : 28
+NULO
+que : 4-7-8-9-14-19-25-28-36-37-43-44-49-52
+ter : 44-52
+NULO
+NULO
+NULO
+nos : 17-28-35
+necessidade : 8-38-48
+por : 23-45
+consequências : 24
+formação : 23-37
+vez : 9-36
+operação : 48
+NULO
+NULO
+execução : 17-56
+significado : 9
+identificar : 34
+financeiras : 26
+NULO
+direções : 42
+devidamente : 30
+NULO
+globalizado : 43
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+fundamental : 4
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+apropriadas : 45-53
+NULO
+NULO
+NULO
+NULO
+NULO
+posições : 14-50
+NULO
+preconizado : 10-57
+hierarquias : 35-52
+decorrentes : 47
+obstaculiza : 1
+pretendidos : 8
+possibilita : 4
+conseguinte : 13
+normalmente : 15-59
+avanço : 20-48
+corresponde : 37
+soluções : 40
+início : 23
+NULO
+NULO
+NULO
+NULO
+NULO
+gestão : 9-34-58
+cada : 36
+NULO
+NULO
+NULO
+NULO
+NULO
+importantes : 14-50
+NULO
+NULO
+NULO
+NULO
+NULO
+níveis : 36
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+lado : 17-57
+NULO
+NULO
+NULO
+para : 2-13-27-37-39-47-49-53
+deve : 23
+NULO
+NULO
+pode : 17-25
+NULO
+mais : 25-35-36
+NULO
+NULO
+avaliação : 20
+definição : 4-56
+modo : 3-29-51-55
+aqui : 10-57
+como : 20-24-39-48-56
+pelo : 29-55
+qual : 9-29-55-58
+NULO
+NULO
+todo : 24
+peso : 9
+NULO
+NULO
+dificuldades : 39
+NULO
+tudo : 4
+suas : 30
+percepção : 39
+NULO
+NULO
+NULO
+novo : 10-57
+NULO
+necessidades : 37
+NULO
+NULO
+condições : 26-45-53
+complexidade : 28
+relatividade : 40-58
+renovação : 8-48
+NULO
+NULO
+NULO
+NULO
+motivação : 36
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+Acima : 4
+revolução : 18
+Ainda : 39-56
+técnica : 25
+NULO
+mudança : 20
+metodologias : 28
+diálogo : 31
+entendimento : 21
+análise : 36
+cenário : 43
+índices : 7
+prática : 14
+levantamento : 32
+oportunidade : 37
+alternativas : 40
+situações : 47
+NULO
+NULO
+interessante : 37
+NULO
+NULO
+Desta : 24
+NULO
+NULO
+NULO
+Nunca : 9
+NULO
+NULO
+Caros : 1
+dúvidas : 31-39-56
+NULO
+Todas : 30
+NULO
+ainda : 19
+investimento : 25
+Assim : 42
+Neste : 47
+afeta : 7
+métodos : 20
+clara : 36
+corporativos : 19
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+geral : 21-23-56
+lidar : 28
+causa : 38
+NULO
+NULO
+NULO
+claro : 8
+exige : 3-56
+papel : 31-51
+apreciação : 1
+venha : 40-57
+conta : 45
+atual : 4-27
+NULO
+mente : 44-52
+levar : 17
+metas : 21
+parte : 9-34-58
+assim : 20-39-48-56
+entre : 29-31-35-52
+longo : 14-35
+estas : 30
+mesmo : 3-42-51
+sobre : 31-38
+mundo : 27
+nossa : 14
+valor : 42
+Evidentemente : 19
+novas : 4
+prova : 14
+todos : 5
+preparação : 29
+divulgação : 35
+prazo : 14-35
+grupo : 43
+fluxo : 10
+temos : 44-52
+modos : 48
+NULO
+NULO
+NULO
+NULO
+formulação : 32-51
+NULO
+manutenção : 8
+NULO
+outro : 17-57
+composição : 30
+departamental : 36
+preferenciais : 42
+inegavelmente : 45-53
+NULO
+remanejamento : 3-50
+NULO
+NULO
+NULO
+transações : 3
+NULO
+NULO
+NULO
+NULO
+conhecimentos : 1-49
+convencionais : 48
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+procedimentos : 15-59
+atípicas : 47
+NULO
+comércio : 24
+NULO
+NULO
+precisão : 3-56
+NULO
+NULO
+NULO
+fenômeno : 12
+NULO
+positivamente : 7
+NULO
+NULO
+expansão : 2-14-58
+NULO
+NULO
+críticos : 34
+contínua : 14
+agrega : 42
+político : 7-55
+NULO
+NULO
+NULO
+previsão : 7
+NULO
+NULO
+global : 5
+NULO
+demais : 9
+obriga : 36
+NULO
+contínuo : 13
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+amigos : 1
+modelo : 10-57
+questões : 30
+aponta : 27
+regras : 17-57
+reavaliação : 38
+NULO
+melhor : 5
+destes : 9
+formas : 13-44
+passar : 23
+verificação : 37
+cumpre : 31-51
+sempre : 44-52
+assume : 14-50
+comunicação : 24
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+talvez : 40-57
+NULO
+quanto : 38
+NULO
+organização : 4
+equalização : 12
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+pontos : 17-34-56
+acompanhamento : 47-51
+futuro : 39
+informações : 10-35
+eventualidades : 1-52
+valorização : 44
+possibilidades : 45
+organizacional : 18
+atribuições : 30
+NULO
+NULO
+NULO
+NULO
+internacionais : 27
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+decisória : 12
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+proposições : 4
+alcance : 18
+Todavia : 2
+NULO
+NULO
+NULO
+NULO
+desafia : 12
+variáveis : 32
+políticas : 19-50
+orçamento : 29
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+Podemos : 29-55
+NULO
+cuidado : 34
+oferece : 37
+NULO
+NULO
+maneira : 24
+NULO
+NULO
+NULO
+NULO
+garante : 43
+NULO
+NULO
+lembrar : 9
+NULO
+NULO
+estende : 18
+certificação : 28
+NULO
+NULO
+empenho : 23
+impacto : 12-38
+atingir : 2-49
+conduta : 17-57
+correta : 7
+auxilia : 29
+qualificação : 38
+NULO
+fatores : 44
+fazemos : 9-58
+sentido : 8-42-47
+sistema : 21-37-55
+modificações : 23
+entanto : 25
+podemos : 25
+aprovar : 8
+participação : 21-55
+equipes : 29
+aumento : 31
+quadros : 3-37-50
+consolidação : 34
+determinação : 36-44
+existem : 39-56
+NULO
+consumo : 47-51
+setores : 31
+NULO
+padronização : 2-49
+modernização : 10-59
+retorno : 13
+virtual : 24
+estudos : 28
+reformulação : 10-59
+estabelecimento : 15-42-50
+promove : 28
+contribuição : 43
+NULO
+É : 8-38
+NULO
+NULO
+competitividade : 3
+NULO
+NULO
+NULO
+NULO
+excelência : 2-49
+NULO
+NULO
+NULO
+relacionamentos : 35-51
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+tendências : 8
+807
+influência : 42
+à : 36
+NULO
+NULO
+NULO
+administrativas : 26
+NULO
+NULO
+NULO
+NULO
+é : 4-9-24-44-52
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+Pensando : 35
+NULO
+Gostaria : 7-49
+desenvolvimento : 13-39
+comprometimento : 29
+facilita : 21-55
+NULO
+NULO
+NULO
+NULO
+NULO
+acarreta : 10-58
+NULO
+ambiente : 7-55
+NULO
+NULO
+NULO
+Internet : 12
+Não : 12-58
+analisar : 23
+NULO
+NULO
+mercados : 2-58
+adotados : 15-59
+exigidas : 26
+melhoria : 13-27-53
+capitais : 27
+esperado : 14
+NULO
+NULO
+abertura : 13-53
+NULO
+levantam : 31
+programa : 17-56
+mundiais : 2-58
+auxiliam : 28
+NULO
+esquecer : 25
+indireto : 38
+NULO
+obstante : 12-58
+diversas : 27
+maximiza : 45
+atitudes : 23
+estimula : 2-49
+setorial : 29
+ação : 44
+NULO
+A : 14-18-27
+consulta : 25
+não : 19-25
+consenso : 38
+respeito : 39-56
+NULO
+processo : 10-24-34-59
+diversos : 25
+NULO
+NULO
+NULO
+costumes : 18
+NULO
+NULO
+O : 20-23-34-44-48-52
+recursos : 5
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+posturas : 30
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+a : 1-2-3-4-7-8-12-13-14-17-18-19-21-25-27-28-29-35-36-38-39-40-42-43-44-48-49-53-55-56-57-58
+NULO
+NULO
+NULO
+e : 3-9-10-18-26-29-56-59
+NULO
+convincentemente : 19
+NULO
+NULO
+NULO
+NULO
+já : 29-55
+agilidade : 12
+NULO
+o : 1-9-12-13-18-20-23-24-29-31-38-39-43-47-51-52-55-57
+NULO
+NULO
+NULO
+adoção : 19-49
+importância : 1-18
+às : 30-37-40
+tecnológico : 20-48
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+atividade : 14-23
+cotidiana : 14
+hegemonia : 7-55
+NULO
+NULO
+NULO
+NULO
+imparcial : 1-52
+NULO
+NULO
+NULO
+NULO
+essencial : 32-51
+NULO
+NULO
+NULO
+NULO
+crescente : 42
+NULO
+órgãos : 30
+NULO
+efetuados : 28
+dissociar : 26
+NULO
+apresenta : 8
+enfatizar : 7-49
+inovadora : 9-58
+problemas : 9
+enfrentar : 47
+NULO
+NULO
+verticais : 35-52
+NULO
+NULO
+NULO
+NULO
+incentivo : 20-48
+constante : 35
+ressaltar : 4-40-57
+NULO
+distintas : 13
+NULO
+correntes : 27
+objetivos : 36
+NULO
+NULO
+NULO
+Do : 3-50
+As : 43
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+ortodoxas : 40
+No : 25-27
+independentemente : 23
+progresso : 43
+NULO
+NULO
+NULO
+NULO
+propostas : 21
+da : 1-4-8-9-12-23-42-58
+NULO
+NULO
+estrutura : 4
+de : 4-5-7-8-10-12-13-14-17-19-20-21-23-24-27-28-34-36-37-38-39-40-43-44-47-48-49-51-55-56-57-59
+capacidade : 12
+NULO
+NULO
+NULO
+NULO
+na : 12-20-32-34-38-44-51
+ao : 20-42-48
+NULO
+em : 23-25-34-44-52
+do : 2-7-10-12-13-17-21-24-28-31-32-37-42-50-55-56
+as : 29-35-45-52
+NULO
+NULO
+NULO
+se : 26-31
+preferências : 47-51
+NULO
+NULO
+NULO
+no : 8-15-42-50
+reestruturação : 17
+criação : 21-55
+Percebemos : 36
+experiências : 43
+os : 5-31
+um : 10-24-31-34-43-51-58
+mobilidade : 27
+reciclagem : 25
+relação : 30
+NULO
+NULO
+NULO
+atuação : 13
+desafiador : 43
+NULO
+estratégicos : 2-49
+NULO
+NULO
+NULO
+NULO
+paradigmas : 18
+NULO
+NULO
+NULO
+NULO
+NULO
+comerciais : 3
+acumuladas : 43
+ponderadas : 31
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+diferentes : 31
+considerar : 17
+NULO
+NULO
+NULO
+dirigentes : 30
+funcionais : 3-5-50
+participar : 20
+NULO
+mídia : 42
+NULO
+NULO
+NULO
+julgamento : 1-52
+NULO
+NULO
+representa : 13-53
+militantes : 25
+pensamento : 27
+envolvidas : 32
+demonstram : 43
+NULO
+NULO
+NULO
+processual : 8-48
+NULO
+importante : 38-44
+normativas : 18-57
+diretrizes : 39
+resultados : 20
+vislumbrar : 29-55
+utilizados : 20
+envolvidos : 5
+NULO
+questionar : 38
+nível : 18
+surgimento : 24
+visão : 5
+subjetivos : 45
+demonstrou : 19
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+Por : 12-17-57
+NULO
+NULO
+estrutural : 10-57
+descentralizadoras : 19-50
+NULO
+NULO
+das : 1-4-17-21-24-26-27-30-32-34-35-38-39-42-44-45-47-51-52-53-57
+produtivos : 31
+NULO
+estruturas : 34
+NULO
+NULO
+NULO
+com : 28-30
+vai : 19
+faz : 34
+nas : 3
+uma : 5-9-13-24-37-53
+aos : 25
+prepara-nos : 47
+dos : 1-2-3-7-15-17-18-20-27-28-30-34-36-47-49-50-51-56-58-59
+NULO
+NULO
+alavancagem : 28
+NULO
+que : 4-7-8-9-14-19-25-28-36-37-43-44-49-52
+ter : 44-52
+NULO
+NULO
+NULO
+nos : 17-28-35
+necessidade : 8-38-48
+por : 23-45
+consequências : 24
+formação : 23-37
+vez : 9-36
+operação : 48
+NULO
+NULO
+execução : 17-56
+significado : 9
+identificar : 34
+financeiras : 26
+NULO
+direções : 42
+devidamente : 30
+NULO
+globalizado : 43
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+fundamental : 4
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+apropriadas : 45-53
+NULO
+NULO
+NULO
+NULO
+NULO
+posições : 14-50
+NULO
+preconizado : 10-57
+hierarquias : 35-52
+decorrentes : 47
+obstaculiza : 1
+pretendidos : 8
+possibilita : 4
+conseguinte : 13
+normalmente : 15-59
+avanço : 20-48
+corresponde : 37
+soluções : 40
+início : 23
+NULO
+NULO
+NULO
+NULO
+NULO
+gestão : 9-34-58
+cada : 36
+NULO
+NULO
+NULO
+NULO
+NULO
+importantes : 14-50
+NULO
+NULO
+NULO
+NULO
+NULO
+níveis : 36
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+lado : 17-57
+NULO
+NULO
+NULO
+para : 2-13-27-37-39-47-49-53
+deve : 23
+NULO
+NULO
+pode : 17-25
+NULO
+mais : 25-35-36
+NULO
+NULO
+avaliação : 20
+definição : 4-56
+modo : 3-29-51-55
+aqui : 10-57
+como : 20-24-39-48-56
+pelo : 29-55
+qual : 9-29-55-58
+NULO
+NULO
+todo : 24
+peso : 9
+NULO
+NULO
+dificuldades : 39
+NULO
+tudo : 4
+suas : 30
+percepção : 39
+NULO
+NULO
+NULO
+novo : 10-57
+NULO
+necessidades : 37
+NULO
+NULO
+condições : 26-45-53
+complexidade : 28
+relatividade : 40-58
+renovação : 8-48
+NULO
+NULO
+NULO
+NULO
+motivação : 36
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+Acima : 4
+revolução : 18
+Ainda : 39-56
+técnica : 25
+NULO
+mudança : 20
+metodologias : 28
+diálogo : 31
+entendimento : 21
+análise : 36
+cenário : 43
+índices : 7
+prática : 14
+levantamento : 32
+oportunidade : 37
+alternativas : 40
+situações : 47
+NULO
+NULO
+interessante : 37
+NULO
+NULO
+Desta : 24
+NULO
+NULO
+NULO
+Nunca : 9
+NULO
+NULO
+Caros : 1
+dúvidas : 31-39-56
+NULO
+Todas : 30
+NULO
+ainda : 19
+investimento : 25
+Assim : 42
+Neste : 47
+afeta : 7
+métodos : 20
+clara : 36
+corporativos : 19
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+geral : 21-23-56
+lidar : 28
+causa : 38
+NULO
+NULO
+NULO
+claro : 8
+exige : 3-56
+papel : 31-51
+apreciação : 1
+venha : 40-57
+conta : 45
+atual : 4-27
+NULO
+mente : 44-52
+levar : 17
+metas : 21
+parte : 9-34-58
+assim : 20-39-48-56
+entre : 29-31-35-52
+longo : 14-35
+estas : 30
+mesmo : 3-42-51
+sobre : 31-38
+mundo : 27
+nossa : 14
+valor : 42
+Evidentemente : 19
+novas : 4
+prova : 14
+todos : 5
+preparação : 29
+divulgação : 35
+prazo : 14-35
+grupo : 43
+fluxo : 10
+temos : 44-52
+modos : 48
+NULO
+NULO
+NULO
+NULO
+formulação : 32-51
+NULO
+manutenção : 8
+NULO
+outro : 17-57
+composição : 30
+departamental : 36
+preferenciais : 42
+inegavelmente : 45-53
+NULO
+remanejamento : 3-50
+NULO
+NULO
+NULO
+transações : 3
+NULO
+NULO
+NULO
+NULO
+conhecimentos : 1-49
+convencionais : 48
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+procedimentos : 15-59
+atípicas : 47
+NULO
+comércio : 24
+NULO
+NULO
+precisão : 3-56
+NULO
+NULO
+NULO
+fenômeno : 12
+NULO
+positivamente : 7
+NULO
+NULO
+expansão : 2-14-58
+NULO
+NULO
+críticos : 34
+contínua : 14
+agrega : 42
+político : 7-55
+NULO
+NULO
+NULO
+previsão : 7
+NULO
+NULO
+global : 5
+NULO
+demais : 9
+obriga : 36
+NULO
+contínuo : 13
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+amigos : 1
+modelo : 10-57
+questões : 30
+aponta : 27
+regras : 17-57
+reavaliação : 38
+NULO
+melhor : 5
+destes : 9
+formas : 13-44
+passar : 23
+verificação : 37
+cumpre : 31-51
+sempre : 44-52
+assume : 14-50
+comunicação : 24
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+talvez : 40-57
+NULO
+quanto : 38
+NULO
+organização : 4
+equalização : 12
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+pontos : 17-34-56
+acompanhamento : 47-51
+futuro : 39
+informações : 10-35
+eventualidades : 1-52
+valorização : 44
+possibilidades : 45
+organizacional : 18
+atribuições : 30
+NULO
+NULO
+NULO
+NULO
+internacionais : 27
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+decisória : 12
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+proposições : 4
+alcance : 18
+Todavia : 2
+NULO
+NULO
+NULO
+NULO
+desafia : 12
+variáveis : 32
+políticas : 19-50
+orçamento : 29
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+Podemos : 29-55
+NULO
+cuidado : 34
+oferece : 37
+NULO
+NULO
+maneira : 24
+NULO
+NULO
+NULO
+NULO
+garante : 43
+NULO
+NULO
+lembrar : 9
+NULO
+NULO
+estende : 18
+certificação : 28
+NULO
+NULO
+empenho : 23
+impacto : 12-38
+atingir : 2-49
+conduta : 17-57
+correta : 7
+auxilia : 29
+qualificação : 38
+NULO
+fatores : 44
+fazemos : 9-58
+sentido : 8-42-47
+sistema : 21-37-55
+modificações : 23
+entanto : 25
+podemos : 25
+aprovar : 8
+participação : 21-55
+equipes : 29
+aumento : 31
+quadros : 3-37-50
+consolidação : 34
+determinação : 36-44
+existem : 39-56
+NULO
+consumo : 47-51
+setores : 31
+NULO
+padronização : 2-49
+modernização : 10-59
+retorno : 13
+virtual : 24
+estudos : 28
+reformulação : 10-59
+estabelecimento : 15-42-50
+promove : 28
+contribuição : 43
+NULO
+É : 8-38
+NULO
+NULO
+competitividade : 3
+NULO
+NULO
+NULO
+NULO
+excelência : 2-49
+NULO
+NULO
+NULO
+relacionamentos : 35-51
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+NULO
+tendências : 8
 807
 influência : 42
 à : 36
