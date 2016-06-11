@@ -75,7 +75,7 @@ bool listarInsercao(int argc, args argv){
 
 
 	// verifica se a função chamada é listar
-	if(strcmp(argv[1], "-li")){
+	if(strcmp(argv[1], "-li")  || (argc != 2)){
 		return false;	
 	} 
 
@@ -123,7 +123,7 @@ bool listarAlfabeticamente(int argc, args argv){
 
 
 	// verifica se a função chamada é listar
-	if(strcmp(argv[1], "-la")){
+	if(strcmp(argv[1], "-la") || (argc != 2)){
 		return false;	
 	} 
 
@@ -173,7 +173,7 @@ bool listarQtdePalavras(int argc, args argv){
 
 
 	// verifica se a função chamada é listar
-	if(strcmp(argv[1], "-lt")){
+	if(strcmp(argv[1], "-lt")  || (argc != 2)){
 		return false;	
 	} 
 

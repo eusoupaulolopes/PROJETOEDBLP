@@ -17,7 +17,7 @@ bool remover(int argc, args argv){
 	
 
 	// verifica se a função chamada é remover
-	if(strcmp(argv[1], "-r")){
+	if(strcmp(argv[1], "-r")  || (argc < 3)){
 
 		return false;	
 	} 

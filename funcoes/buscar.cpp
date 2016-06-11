@@ -83,7 +83,7 @@ int contadorLinhas(ifstream& file);
 
 bool Ler_Buscas(int argc, args argv){
 
-	if(!strcmp(argv[1], "-bAND") || !strcmp(argv[1],"-bOR")){
+	if((!strcmp(argv[1], "-bAND") || !strcmp(argv[1],"-bOR")) && (argc > 2)){
 		return buscaPorArquivo(argc, argv);
 	}else{
 		return false;
@@ -120,11 +120,6 @@ bool buscaPorArquivo(int argc, args argv){
 			string dataHora = quebraLinha(linha, 2);
 			for (int j = 0; j < (int)linha.size(); j++){
 				if(linha[j] == ';'){ // o primeiro ; da linha
-					
-					//Para manipular o vetor de listas e ordenar para impressao
-					//listaBusca[a]->nome = arquivo;
-					//listaBusca[a]->hora = dataHora;
-
 
 					arquivo = arquivo.erase(arquivo.length()-4,4) +".dat";
 					
@@ -141,14 +136,6 @@ bool buscaPorArquivo(int argc, args argv){
 
 	//Calculo do numero de palavras digitadas para busca
 	int qtdePalavrasBusca = argc - inicioPalavrasBusca(argc,argv);
-	//cout << qtdePalavrasBusca << endl;
-
-	//ordenar o vetor de lista de acordo com a opção de impressão
-	//opcaoImpressao(listaBusca,inicioPalavrasBusca(argc,argv),numeroLinhas,argv);
-	//identificarListas(listaBusca,numeroLinhas);
-
-
-
 
 	if(!strcmp(argv[1], "-bAND")){
 		
@@ -166,8 +153,7 @@ bool buscaPorArquivo(int argc, args argv){
 bool buscaBOR(ListaB* lista, int tamanho, int argc, args argv){
 	
 	for(int j=0; j < tamanho; j++){
-	//cout<< "Lista ANTES:" <<endl;
-	//	LIS_ImprimirB(lista[j]);
+
 		EliminaLinhasIguais(lista[j]);
 		LIS_OrdenarB(lista[j],numeroLinha);
 		

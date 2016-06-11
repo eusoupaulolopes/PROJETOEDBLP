@@ -15,7 +15,7 @@ bool inserir(int argc, args argv){
 	
 	
 	// verifica se a função chamada é inserir
-	if(strcmp(argv[1], "-i")){
+	if(strcmp(argv[1], "-i")  || (argc < 3)){
 		
 		return false;	
 	}
@@ -31,10 +31,9 @@ bool inserir(int argc, args argv){
 	file.close();
 
 	for (int i = 2; i < argc; i++){
-
-		if(atualiza(banco,argv[i])){
-
-			if(fazAtualizacao(banco,argv[i])){
+		bool validou = copiarArquivoParaPasta(argv[i]);
+		if(atualiza(banco,argv[i])){			
+			if(fazAtualizacao(banco,argv[i]) && validou){
 				cout << "Arquivo " << argv[i] << " já estava na base de buscas.\n\tSeu registro foi atualizado." <<endl;
 				
 			}
@@ -44,7 +43,7 @@ bool inserir(int argc, args argv){
 			}
 		}
 		else{
-			if(apenasInsere(banco,argv[i],argc,i)){
+			if(apenasInsere(banco,argv[i],argc,i) && validou){
 				cout << "Arquivo: " << argv[i] << " inserido na base de buscas." <<endl;
 				
 			}
@@ -97,29 +96,32 @@ bool fazAtualizacao(char * base, char * nomeArquivo){
 
 		}
 		else{
-			copiarArquivoParaPasta(nomeArquivo);
+			if(copiarArquivoParaPasta(nomeArquivo)){
 
-			int tamNome = strlen(nomeArquivo);
-			char caminho[6+tamNome];
-			strcpy(caminho, "banco/");
-			strcat(caminho, nomeArquivo);
-			int palavras = gerarTabela(caminho); // Conta as palavras e gera tabela de dispersao
-			
-			std::time_t horadeinsercao;
-			struct tm * timeinfo;
-			std::time(&horadeinsercao);
-			char horaData[80];
-			// humanizando o tempo
-			timeinfo = localtime(&horadeinsercao);
-			strftime(horaData,80,"%Y%m%d%H%M%S", timeinfo);
+				int tamNome = strlen(nomeArquivo);
+				char caminho[6+tamNome];
+				strcpy(caminho, "banco/");
+				strcat(caminho, nomeArquivo);
+				int palavras = gerarTabela(caminho); // Conta as palavras e gera tabela de dispersao
+				
+				std::time_t horadeinsercao;
+				struct tm * timeinfo;
+				std::time(&horadeinsercao);
+				char horaData[80];
+				// humanizando o tempo
+				timeinfo = localtime(&horadeinsercao);
+				strftime(horaData,80,"%Y%m%d%H%M%S", timeinfo);
 
-			string pontoevirgula = ";";
+				string pontoevirgula = ";";
 
-			string linhaatualizada = nomeArquivo+pontoevirgula + horaData + pontoevirgula + std::to_string(palavras).c_str();
-			
-			//o que tem da posiçao 0 até tamanho da linha, é substituido pelo conteudo de linhaatualizada
-			//linha.replace(0,linha.size(),linhaatualizada); 
-			LIS_InserirFim(lista,linhaatualizada);
+				string linhaatualizada = nomeArquivo+pontoevirgula + horaData + pontoevirgula + std::to_string(palavras).c_str();
+				
+				//o que tem da posiçao 0 até tamanho da linha, é substituido pelo conteudo de linhaatualizada
+				//linha.replace(0,linha.size(),linhaatualizada); 
+				LIS_InserirFim(lista,linhaatualizada);
+			}else{
+				return false;
+			}
 		}
 	}
 
@@ -162,7 +164,7 @@ bool apenasInsere(char * base, char * nomeArquivo, int argc, int posicao){
 		return false;
 	}
 
-	copiarArquivoParaPasta(nomeArquivo);
+	if(!copiarArquivoParaPasta(nomeArquivo)) return false;
 
 	int tamNome = strlen(nomeArquivo);
 	char caminho[6+tamNome];
@@ -180,18 +182,6 @@ bool apenasInsere(char * base, char * nomeArquivo, int argc, int posicao){
 	strftime(horaData,80,"%Y%m%d%H%M%S", timeinfo);
 
 	file << nomeArquivo << ";" << horaData << ";" << palavras << "\n";
-
-	/*if (posicao < argc-1){
-		file << nomeArquivo << ";" << horaData << ";" << palavras << "\n";
-
-	}else{
-
-		file << nomeArquivo << ";" << horaData << ";" << palavras;
-
-		if(argc == 3){
-		file << "\n";
-		}						
-	}*/
 
 	file.close();
 	return true;

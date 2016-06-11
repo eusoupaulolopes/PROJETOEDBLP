@@ -14,11 +14,12 @@ using namespace std;
 
 //Ponteio dessa função está na frente do vetor para que verifique se o numero de argumentos é valido
 bool validarArgumentos(int argc, args argv){
-	
-	bool aux = !(argc==3 || argc == 5);
-	if(aux){
-		cout << "Número de argumentos inválido!" << endl;
-	}
+	bool aux = true;
+	if (argc == 2){
+		if (strcmp(argv[1], "-li") || strcmp(argv[1], "-ta") || strcmp(argv[1], "-la")){
+			aux = false;
+		}
+	}	
 	return aux;
 
 }
@@ -27,7 +28,7 @@ bool validarArgumentos(int argc, args argv){
 int main(int argc, char** argv){
 
 
-	opcao opcoes[6]; 
+	opcao opcoes[7]; 
 
 	//opcoes[0] = validarArgumentos;
 	opcoes[0] = inserir;
@@ -36,14 +37,6 @@ int main(int argc, char** argv){
 	opcoes[3] = listarAlfabeticamente;
 	opcoes[4] = listarQtdePalavras;
 	opcoes[5] = Ler_Buscas;
-
-
-	/*opcao opcoesBusca[1];
-	opcoesBusca[0] = inserir;
-
-	opcao opcoesGerenciamento[1];
-	opcoesGerenciamento[0] = inserir;*/
-
 
 	if(!rodarOpcoes(opcoes,6,argc,argv)){
 		cout << "Opção nao reconhecida!" << endl;
