@@ -242,8 +242,12 @@ bool buscarNaTabela(int argc, args argv, string arquivo, ListaB& listaBusca, str
 		
 		GoToLine(file, linhaIdeal);	
 		getline(file,linha);
+
 		
-		std::size_t foundedWord = linha.find(argv[i]);                
+		char* auxi = strtok((char*)linha.c_str()," :");
+		string coisinhas(auxi);
+
+		std::size_t foundedWord = coisinhas.find(argv[i]);                
 		std::size_t foundedNull = linha.find(nulo);                
 		
 		//Se não achar a chave e != de nulo prossiga
@@ -255,14 +259,18 @@ bool buscarNaTabela(int argc, args argv, string arquivo, ListaB& listaBusca, str
 				break;
 			}
 			getline(file, linha);
-			foundedWord = linha.find(argv[i]);                
+			
+			char* auxi2 = strtok((char*)linha.c_str()," :");
+			string coisinhas2(auxi2);
+	
+			foundedWord = coisinhas2.find(argv[i]);                
 			foundedNull = linha.find(nulo);
 			
 		}
 		// Se achou a palavra
 		if(foundedWord!=string::npos){
 			// Descarto tudo antes do ':' 
-			strtok((char*)linha.c_str(),":");		
+			//strtok((char*)linha.c_str(),":");		
 			char* auxLinhas = strtok(NULL,":");
 			// Atribuo a linhas a uma string e envio a listagem				
 			listaLinhas(arquivo, auxLinhas,listaBusca,argv[i], dataHora);

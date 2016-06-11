@@ -459,7 +459,7 @@ void gerarArquivoTabela(char* auxTabela, Tabela tabela)
     if(file.is_open()){
         file << tabela->tamanho <<"\n";
         for (int i = 0; i < tabela->tamanho; i++){
-            file << std::to_string(i).c_str() << " ";
+            //file << std::to_string(i).c_str() << " ";
             Valor valor = tabela->valores[i];
             Chave chave = tabela->chaves[i];
             if ( valor == NULL){

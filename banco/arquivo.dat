@@ -25,7 +25,7 @@ NULO
 NULO
 NULO
 NULO
-arquivo3 : 1
+NULO
 NULO
 NULO
 NULO
@@ -49,6 +49,8 @@ NULO
 NULO
 NULO
 teste : 1
+1 : 1
+3 : 1
 NULO
 NULO
 NULO
@@ -72,9 +74,7 @@ NULO
 NULO
 NULO
 NULO
-NULO
-NULO
-NULO
+arquivo : 1
 NULO
 NULO
 NULO
