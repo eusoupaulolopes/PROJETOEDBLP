@@ -74,6 +74,7 @@ Describe and show how to run the tests with code examples.
 ## Desenvolvedores
 
 [Clarissa Soares]
+
 [Paulo Lopes]
 
 ## License
@@ -83,6 +84,6 @@ A short snippet describing the license (MIT, Apache, etc.)
 
 [buscaIMD]: <https:///github.com/lopespaulo/PROJETOEDBLP/archive/master.zip>
 [Clarissa Soares]: <https://github.com/clahzita>
-[Paulo Lopes] : <https://github.com/lopespaulo>
+[Paulo Lopes]: <https://github.com/lopespaulo>
 
 
