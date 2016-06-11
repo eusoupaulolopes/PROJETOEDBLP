@@ -18,10 +18,13 @@ No mais, é disponibilizado opcionalmente, o tempo total das buscas em milisegun
 
 
 ## Instalação
+
 baixe uma copia do projeto em [buscaIMD].
-1) desconpacte os arquivos,
-2) No terminal, acesse a pasta criada,
-3) execute:
+
+>1. desconpacte os arquivos,
+>2. No terminal, acesse a pasta criada,
+>3. execute:
+
 ```sh
  $ make
 ```       
@@ -68,9 +71,10 @@ Caso seja necessário, o tempo total de realização das buscas é exibido atrav
 
 Describe and show how to run the tests with code examples.
 
-## Contributors
+## Desenvolvedores
 
-Let people know how they can dive into the project, include important links to things like issue trackers, irc, twitter accounts if applicable.
+[Clarissa Soares]
+[Paulo Lopes]
 
 ## License
 
@@ -78,5 +82,7 @@ A short snippet describing the license (MIT, Apache, etc.)
 
 
 [buscaIMD]: <https:///github.com/lopespaulo/PROJETOEDBLP/archive/master.zip>
+[Clarissa Soares]: <https://github.com/clahzita>
+[Paulo Lopes] : <https://github.com/lopespaulo>
 
 
