@@ -312,45 +312,7 @@ void LIS_OrdenarB(ListaB* lista, int tamanho, int tipo){
 
 }
 
-/*
-void LIS_OrdenarB(ListaB* lista, int tamanho, int tipo)
-{
-    // Seleção
-    ListaB menor, temp;
 
-    for(int i =0; i < tamanho-1; i++){
-        menor = lista[i];
-
-        for(int j = i+1; j < tamanho;j++){
-            if(tipo == pA){
-                if(lista[j]->nome < menor->nome){
-                    menor = lista[j];
-                }
-            }
-            if(tipo == pI){
-                if(lista[j]->hora < menor->hora){
-                    menor = lista[j];
-                }
-            }
-            if(tipo == pC){
-                if(lista[j]->qtdeElementos > menor->qtdeElementos){
-                    
-                    menor = lista[j];
-                }
-            }
-        }
-
-        if(menor != lista[i]){
-            temp = menor;
-            menor = lista[i];
-            lista[i] = temp;
-        }
-
-    }
-    
-}
-
-*/
  /*
 Função que conta quantas vezes um numero de linha aparece na lista
  @param lista - lista em que será feita a busca

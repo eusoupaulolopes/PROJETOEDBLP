@@ -5,6 +5,7 @@
 #include "listabusca.h"
 
 typedef char** args;
+typedef void (*PFuncao) ( ListaB * lista, int tamanho );
 
 int gerarTabela(std::string origem);
 bool Ler_Buscas(int argc, args argv);

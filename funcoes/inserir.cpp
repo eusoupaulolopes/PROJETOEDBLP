@@ -240,7 +240,7 @@ bool copiarArquivoParaPasta(char* arquivo){
 	strcpy(caminho, "banco/");
 	strcat(caminho, arquivo);
 
-//	gerarTabela(caminho);
+	gerarTabela(caminho);
 	
 	ifstream origem (arquivo, fstream::binary);
 

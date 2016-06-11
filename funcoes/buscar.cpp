@@ -14,12 +14,11 @@ using namespace std;
 
 long int tempoInicial; // variavel global não precisa passar por parametro
 
-typedef void (*PFuncao) ( ListaB * lista, int tamanho );
+//typedef void (*PFuncao) ( ListaB * lista, int tamanho );
 
 /* Exemplo das chamadas das funcoes genéricas elas não precisão estar nesse %%%%% arquivo %%%%%% */
 
 void imprimepC( ListaB * lista, int tamanho ) { 
-	cout << "ImprimeC" << endl;
 	
 	LIS_OrdenarB(lista,tamanho,pC);
 
@@ -29,8 +28,7 @@ void imprimepC( ListaB * lista, int tamanho ) {
 	
 }
 void imprimepI(  ListaB * lista, int tamanho ) {  
-	cout << "ImprimeI" << endl;
-
+	
 	LIS_OrdenarB(lista,tamanho,pI);
 	for(int j=0; j<tamanho; j++){
 		LIS_ImprimirB(lista[j]);
@@ -38,7 +36,6 @@ void imprimepI(  ListaB * lista, int tamanho ) {
 	
 }
 void imprimepA( ListaB * lista, int tamanho ) { 
-	cout << "imprimeA" <<endl;
 
 	LIS_OrdenarB(lista,tamanho,pA);
 	for(int j=0; j<tamanho; j++){
