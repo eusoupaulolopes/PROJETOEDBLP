@@ -79,7 +79,7 @@ Describe and show how to run the tests with code examples.
 
 ## License
 
-GNU LGPLv3 
+[![License (LGPL version 3.0)](https://img.shields.io/badge/license-GNU%20LGPL%20version%203.0-blue.svg?style=flat-square)](http://opensource.org/licenses/LGPL-3.0)
 
 
 [buscaIMD]: <https:///github.com/lopespaulo/PROJETOEDBLP/archive/master.zip>
