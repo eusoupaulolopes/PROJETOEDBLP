@@ -1,10 +1,9 @@
-## Resumo
 
-**buscaIMD** é um programa para uso no terminal linux, basicamente, seu objetivo é receber, via linha de comando, palavras-chave para entregar quais linhas dos arquivos em uma determinada base de buscas contem os termos buscados, segundo critério préviamente estipulado.
+**buscaIMD** é um programa para uso no terminal linux. Basicamente, seu objetivo é receber, via linha de comando, palavras-chaves para entregar quais linhas dos arquivos em uma determinada base de buscas contem os termos buscados, segundo critério préviamente estipulado, utilizando estruturas e algoritmos apresentados na disciplina de Estrutura Básica de Dados I, e praticamos em Linguagem de Programação I do curso Bacharelado em Tecnologia da Informação da Universidade Federal do Rio Grande do Norte.
 
 ## Funcionamento
 
-O programa funciona através do gerenciamento de arquivos-texto cadastrados em uma base de busca, é possivel inserir, atualizar, remover e listar arquivos dessa base.
+O programa foi desenvolvido para gerenciamento de arquivos-texto cadastrados em uma base de busca, é possivel inserir, atualizar, remover e listar arquivos dessa base.
 Com os arquivos pre-processados nessa base é possivel buscar por ocorrencia de termos nos arquivos-texto inseridos na base. Dois modos distintos são válidos: 
 * -bAND retorna a conjunção dos termos nas linhas dos arquivos. 
 * -bOR entrega a disjunção dos termos. 
@@ -67,17 +66,65 @@ Caso seja necessário, o tempo total de realização das buscas é exibido atrav
 
 
 
-## Tests
+## Exemplos
+__Inserir arquivos na base de buscas__
+Exemplo 1: Inserindo só um arquivo por vez 
+```sh
+> ./buscaIMD ­i libertadores.txt 
+>> Arquivo "libertadores.txt" inserido na base de buscas.
+```
+Exemplo 2: Inserindo mais de um arquivo por vez 
+```sh
+> ./buscaIMD ­i libertadores.txt granja.txt 
+>> Arquivo "libertadores.txt" inserido na base de buscas. 
+>> Arquivo "granja.txt" inserido na base de buscas. 
+```
 
-Describe and show how to run the tests with code examples.
+__Remover arquivos da base de buscas __
 
+Exemplo 1: Removendo só um arquivo por vez 
+```sh
+> ./buscaIMD ­r libertadores.txt 
+>> Arquivo "libertadores.txt" removido da base de buscas. 
+```
+Exemplo 2: Removendo dois arquivos por vez 
+```sh
+> ./buscaIMD ­r libertadores.txt granja.txt 
+>> Arquivo "libertadores.txt" removido da base de buscas. 
+>> Arquivo "granja.txt" removido da base de buscas.
+```
+Obs.: Podemos remover todos os arquivos na base de busca com a entrada *.txt
+
+
+__Realizar buscas por palavras­chaves__
+
+Exemplo 1: Buscando só uma palavra­chave  
+```sh
+> ./buscaIMD ­bAND galo 
+   >> Foram encontradas 2 linhas no arquivo "libertadores.txt": 
+­ linha 23: "o galo mais uma vez se salvou na libertadores" 
+­ linha 50: "na próxima fase, o galo joga em casa contra o" 
+  >> Foram encontradas 3 linhas no arquivo "granja.txt": 
+­ linha 1: "o galo é o macho da galinha, comumente tratado" 
+­ linha 4: "Algumas especies de galo são criadas como aves" 
+­ linha 8: " O galo é extremamente territorialista, sempre"
+```
+
+Exemplo 2: Buscando mais de uma palavra­chave com opção AND 
+```sh
+  ./buscaIMD ­bAND galo macho 
+   >> Foram encontradas 0 linhas no arquivo "libertadores.txt": 
+   >> Foram encontradas 1 linhas no arquivo "granja.txt": 
+  linha 1: "o galo é o macho da galinha, comumente tratado" 
+   >> Foram encontradas 0 linhas no arquivo "clima.txt": 
+```
 ## Desenvolvedores
 
 [Clarissa Soares]
 
 [Paulo Lopes]
 
-## License
+## Licensa
 
 [![License (LGPL version 3.0)](https://img.shields.io/badge/license-GNU%20LGPL%20version%203.0-blue.svg?style=flat-square)](http://opensource.org/licenses/LGPL-3.0)
 
