@@ -192,13 +192,14 @@ por padrão caso o parametro -tT não seja informado, o sistema não medira o te
 ## Desenvolvedores
 
 [Clarissa Soares]
+
 [Paulo Lopes]
 
 Mencionamos também os orientadores:
+
 Prof. Dr. Eiji Adachi Medeiros Barbosa
+
 Prof. Dr. Silvio Consta Sampaio
-
-
 
 ## Licensa de Uso
 
