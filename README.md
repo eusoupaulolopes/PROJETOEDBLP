@@ -113,7 +113,6 @@ Exemplo 1: Listando arquivos da base de buscas em *ordem de inserção*
 ­ "libertadores.txt" 
 ­ "granja.txt" 
 ```
-
 Obs.: *também é possivel listar os arquivos por ordem alfabética [-la] ou por ordem de quantidade de palavras [-lt]*
 
 
@@ -172,7 +171,8 @@ Exemplo 1: Exibindo resultados em ordem alfabética dos nomes dos arquivos
 Obs: *Outras opções de configuração são: [-pC] para exibir por ordem de ocorrencia dos termos e [-pI] para ordem de inserção dos arquivos na base de busca*
 
 
-__Registrar tempo de execução das buscas__ 
+__Registrar tempo de execução das buscas__
+
 Exemplo 1: Exibindo tempo de execução das buscas 
 ```sh
 > ./buscaIMD ­bAND ­pA ­tT galo 
@@ -188,11 +188,17 @@ Exemplo 1: Exibindo tempo de execução das buscas
 ```
 por padrão caso o parametro -tT não seja informado, o sistema não medira o tempo de execução das buscas
 
+
 ## Desenvolvedores
 
 [Clarissa Soares]
-
 [Paulo Lopes]
+
+Mencionamos também os orientadores:
+Prof. Dr. Eiji Adachi Medeiros Barbosa
+Prof. Dr. Silvio Consta Sampaio
+
+
 
 ## Licensa de Uso
 
