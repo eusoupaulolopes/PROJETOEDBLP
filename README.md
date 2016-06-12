@@ -1,6 +1,8 @@
 
 **buscaIMD** é um programa para uso no terminal linux. Basicamente, seu objetivo é receber, via linha de comando, palavras-chaves para entregar quais linhas dos arquivos em uma determinada base de buscas contem os termos buscados, segundo critério préviamente estipulado. Para isso, utiliza estruturas e algoritmos apresentados nas disciplinas de Estrutura Básica de Dados I, as mesmas devidamente praticadas em Linguagem de Programação I do curso Bacharelado em Tecnologia da Informação da Universidade Federal do Rio Grande do Norte.
 
+
+
 ## Funcionamento
 
 O programa foi desenvolvido para gerenciamento de arquivos-texto cadastrados em uma base de busca, é possivel inserir, atualizar, remover e listar arquivos dessa base.
@@ -14,6 +16,7 @@ Com os arquivos pre-processados nessa base é possivel buscar por ocorrencia de 
 * -pI : por ordem de inserção dos arquivos-text na base.
 
 No mais, é disponibilizado opcionalmente, o tempo total das buscas em milisegundos.
+
 
 
 ## Instalação
@@ -32,7 +35,8 @@ caso preferir compilar manualmente:
 ```sh
 $    g++ -w main.cpp funcoes/inserir.cpp suporte.cpp funcoes/estruturas.cpp funcoes/remover.cpp funcoes/listar.cpp funcoes/buscar.cpp funcoes/listabusca.cpp funcoes/relogio.cpp -o buscaIMD -std=c++11
 ```    
-   
+ 
+
 
 ## Uso
 **Gerenciamento da base de busca:**
@@ -81,9 +85,10 @@ Exemplo 2: Inserindo mais de um arquivo por vez
 >> Arquivo "libertadores.txt" inserido na base de buscas. 
 >> Arquivo "granja.txt" inserido na base de buscas. 
 ```
-Obs.: *Caso desejar atualizar um arquivo na base de busca, basta inseri-lo novamente o sistema verificará que o arquivo já existe e fará os ajustes necessários.*
+Obs.: *Caso precise atualizar um arquivo na base de busca, basta inseri-lo novamente o sistema verificará que o arquivo já existe e fará os ajustes necessários.*
 
-__Remover arquivos da base de buscas __
+
+__Remover arquivos da base de buscas__
 
 Exemplo 1: Removendo só um arquivo por vez 
 ```sh
@@ -97,6 +102,20 @@ Exemplo 2: Removendo dois arquivos por vez
 >> Arquivo "granja.txt" removido da base de buscas.
 ```
 Obs.: *Podemos remover todos os arquivos na base de busca com a entrada *.txt*
+
+
+__Listar arquivos da base de buscas__
+
+Exemplo 1: Listando arquivos da base de buscas em *ordem de inserção*
+```sh
+> ./buscaIMD ­li  
+>> Arquivos contidos na base de buscas:  
+­ "libertadores.txt" 
+­ "granja.txt" 
+```
+
+Obs.: *também é possivel listar os arquivos por ordem alfabética [-la] ou por ordem de quantidade de palavras [-lt]*
+
 
 __Realizar buscas por palavras­chaves__
 
@@ -120,6 +139,55 @@ Exemplo 2: Buscando mais de uma palavra­chave com opção AND
   linha 1: "o galo é o macho da galinha, comumente tratado" 
    >> Foram encontradas 0 linhas no arquivo "clima.txt": 
 ```
+
+Exemplo 3: Buscando mais de uma palavra­chave com opção OR 
+```sh
+> ./buscaIMD ­bOR galo macho 
+   >> Foram encontradas 2 linhas no arquivo "libertadores.txt": 
+­ linha 23: "o galo mais uma vez se salvou na libertadores" 
+­ linha 50: "na próxima fase, o galo joga em casa contra o" 
+   >> Foram encontradas 5 linhas no arquivo "granja.txt": 
+­ linha 1: "o galo é o macho da galinha, comumente tratado" 
+­ linha 4: "Algumas especies de galo são criadas como aves " 
+­ linha 8: "O galo é extremamente territorialista, sempre" 
+­ linha 15: "a relação é restrita com relação a outro macho" 
+­ linha 45: "o macho é ligeiramente maior que a fêmea" 
+   >> Foram encontradas 0 linhas no arquivo "clima.txt": 
+```
+
+
+__Configurar impressão das buscas__ 
+
+Exemplo 1: Exibindo resultados em ordem alfabética dos nomes dos arquivos 
+```sh
+> ./buscaIMD ­bAND ­pA galo 
+   >> Foram encontradas 0 linhas no arquivo "clima.txt": 
+   >> Foram encontradas 3 linhas no arquivo "granja.txt": 
+­ linha 1: "o galo é o macho da galinha, comumente tratado" 
+­ linha 4: "Algumas especies de galo são criadas como aves" 
+­ linha 8: " O galo é extremamente territorialista, sempre" 
+   >> Foram encontradas 2 linhas no arquivo "libertadores.txt": 
+­ linha 23: "o galo mais uma vez se salvou na libertadores" 
+```
+Obs: *Outras opções de configuração são: [-pC] para exibir por ordem de ocorrencia dos termos e [-pI] para ordem de inserção dos arquivos na base de busca*
+
+
+__Registrar tempo de execução das buscas__ 
+Exemplo 1: Exibindo tempo de execução das buscas 
+```sh
+> ./buscaIMD ­bAND ­pA ­tT galo 
+   >> Foram encontradas 0 linhas no arquivo "clima.txt": 
+   >> Foram encontradas 3 linhas no arquivo "granja.txt": 
+­ linha 1: "o galo é o macho da galinha, comumente tratado" 
+­ linha 4: " Algumas especies de galo são criadas como aves" 
+­ linha 8: "O galo é extremamente territorialista, sempre" 
+   >> Foram encontradas 2 linhas no arquivo "libertadores.txt": 
+­ linha 23: "o galo mais uma vez se salvou na libertadores" 
+­ linha 50: "na próxima fase, o galo joga em casa contra o" 
+   >> Tempo total de execução: 3021 ms 
+```
+por padrão caso o parametro -tT não seja informado, o sistema não medira o tempo de execução das buscas
+
 ## Desenvolvedores
 
 [Clarissa Soares]
