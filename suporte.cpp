@@ -21,22 +21,3 @@ bool rodarOpcoes(opcao *ops, int tamanhoOps,int argc, args argv){
 	return false; //não executou
 
 }
-/*
-//opcoesGerenciamento é um vetor de ponteiros de função do Gerenciamento de Busca
-bool opcaoGerenciamento(opcao *opcoesGerenciamento, int tamanhoOpGerenciamento,int argc, args argv ){
-
-	if(rodarOpcoes(opcoesGerenciamento,tamanhoOpGerenciamento,argc,argv)){
-		return true;
-	}
-	return false;
-}
-
-//opcoesBusca é um vetor de ponteiros de funço do Modo Busca
-bool opcaoModoBusca(opcao *opcoesBusca, int tamanhoOpBusca,int argc, args argv){
-	
-	if(rodarOpcoes(opcoesBusca,tamanhoOpBusca,argc,argv)){
-		return true;
-	}
-	return false;
-}
-*/

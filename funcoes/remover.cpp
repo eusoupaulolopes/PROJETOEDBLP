@@ -85,10 +85,6 @@ bool remocao(char* nomedoarquivo){
 
 	arquivoLog.close();
 
-
-	/*cout << "Lista com todos elementos" << endl;
-	LIS_Imprimir(listaLog);*/
-
 	int indice = LIS_Buscar(listaLog,nomedoarquivo);
 
 	if(indice > 0){
@@ -122,24 +118,4 @@ bool remocao(char* nomedoarquivo){
 	}
 
 }
-
-
-/*//Construir a lista com cada nó sendo uma string do indice do arquivo referenciado
-		while(!arquivoLog.eof()){
-			getline(arquivoLog,linhaLog);
-			//O que não for igual ao arquivo que se deseja remover
-			//copia os indices de arquivos do arquivo de Log para a listaLog
-			if(linhaLog.substr(0,prefixo.size()) != nomedoarquivo){
-				
-				LIS_InserirFim(listaLog,linhaLog);
-			}
-			else{ //Senao, nao adciona na lista e remove
-				//bool removeu = removeArquivo(nomedoarquivo);
-				//cout << "valor de removeu: " << removeu << endl;
-				if(removeArquivo(nomedoarquivo)){
-					verificaExistenciaArquivo = true;
-				}
-			}
-		}
-*/
 

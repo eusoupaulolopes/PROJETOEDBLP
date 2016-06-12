@@ -1,12 +1,6 @@
-//
-//  estruturas.h
-//  Estruturas de Dados
+#ifndef _ESTRUTURAS_
+#define _ESTRUTURAS_
 
-// 	INICIO: Lista
-
-//  Created by Eiji Adachi Medeiros Barbosa on 31/03/16.
-//  Copyright (c) 2016 Eiji Adachi Medeiros Barbosa. All rights reserved.
-//
 
 #include <string>
 #include <cstring>
@@ -85,4 +79,4 @@ const Valor ITEM_REMOVIDO = ((Valor)(-11));
 const Chave CHAVE_REMOVIDA = ((Chave)(-17));
 
 
-
+#endif

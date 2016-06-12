@@ -264,16 +264,6 @@ void LIS_Imprimir(Lista lista)
     }
     std::cout << std::endl;
 }
-/* PARA TESTAR inserir.cpp e remover.cpp
-void LIS_Imprimir(Lista lista)
-{
-    //std::cout << "Tamanho " << lista->tamanho << std::endl;
-    for(No i = lista->cabeca->proximo; i != lista->cauda; i = i->proximo)
-    {
-        std::cout << "\t-  \""<< i->conteudo <<"\"\n";
-    }
-    std::cout << std::endl;
-}*/
 
 /**
  Função que libera a memória de uma instância da estrutura Lista, liberando a memória de todos os nós encadeados na lista, incluindo os nós cabeça e cauda.
@@ -394,6 +384,7 @@ void Expandir(Tabela tabela){
     
 }
 
+//Não usado a função Reduzir
 void Reduzir(Tabela tabela){
     
     Tabela novaTabela = TAB_CriarTabela(1+(tabela->tamanho/2));

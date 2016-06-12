@@ -14,10 +14,6 @@ using namespace std;
 
 long int tempoInicial; // variavel global não precisa passar por parametro
 
-//typedef void (*PFuncao) ( ListaB * lista, int tamanho );
-
-/* Exemplo das chamadas das funcoes genéricas elas não precisão estar nesse %%%%% arquivo %%%%%% */
-
 void imprimepC( ListaB * lista, int tamanho ) { 
 	
 	LIS_OrdenarB(lista,tamanho,pC);
@@ -56,20 +52,6 @@ PFuncao selecionaImprecao (int argc, args argv){
 	}
 	return imprimepI;
 }
-
-/*Função identifica cada lista com nome e hora
-void identificarListas(ListaB* lista, int tamanho){
-	for(int i = 0; i < tamanho;i++){
-		lista[i]->nome = lista[i]->cabeca->proximo->nomeArquivo;
-		lista[i]->hora = lista[i]->cabeca->proximo->hora;
-
-		cout << "Nome da Lista " << i+1 << ": " << lista[i]->nome << endl;
-		cout << "Hora da Lista " << i+1 << ": " << lista[i]->hora << endl;
-	}
-
-}*/
-
-
 
 fstream& GoToLine(std::fstream& file, int num);
 int contadorLinhas(ifstream& file);
@@ -120,10 +102,7 @@ bool buscaPorArquivo(int argc, args argv){
 			string dataHora = quebraLinha(linha, 2);
 			for (int j = 0; j < (int)linha.size(); j++){
 				if(linha[j] == ';'){ // o primeiro ; da linha
-
 					arquivo = arquivo.erase(arquivo.length()-4,4) +".dat";
-					
-					//cout << ">>> Abrindo: " << arquivo << endl;
 					buscarNaTabela(argc, argv, arquivo, listaBusca[a], dataHora); //mandar lista por referência
 					break;						
 				}
@@ -174,7 +153,6 @@ bool buscaBOR(ListaB* lista, int tamanho, int argc, args argv){
 }
 
 bool buscaBAND(ListaB* lista, int tamanho,int numerodepalavras, int argc, args argv){
-	//getline(file, linha);
 	for(int j=0; j < tamanho; j++){
 
 		LIS_OrdenarB(lista[j],numeroLinha);
@@ -239,7 +217,6 @@ bool buscarNaTabela(int argc, args argv, string arquivo, ListaB& listaBusca, str
 		//Se não achar a chave e != de nulo prossiga
 		while(foundedWord==string::npos && !file.eof()){
 			if(foundedNull!=string::npos){
-			//	cout << "\t - Não contem a palavra\n" << endl;
 				string linhaFail = "\t - Não contem a palavra\n";
 				LIS_InserirFimB(listaBusca,Aux,argv[i],dataHora,linhaFail,-10);
 				break;
@@ -291,13 +268,7 @@ bool listaLinhas(string arquivo, char * linhas,ListaB &listaBusca, char* chave, 
 		string linhaAux;
 		GoToLine(arquivoTXT, atoi(nlinha));
 		getline(arquivoTXT,linhaAux);
-		//cout << dataHora <<endl;	
-		//falta colocar a hora
 		LIS_InserirFimB(listaBusca,arquivoAux,chave,dataHora,linhaAux,atoi(nlinha));
-
-		
-
-		//cout << "\t>>> Encontrado na linha " << nlinha << " -> " << linhaAux << endl;
 		nlinha = strtok(NULL,"-");			
 	}
 
@@ -370,46 +341,3 @@ int inicioPalavrasBusca(int argc, args argv){
 
 
 
-
-
-/*void opcaoImpressao(ListaB* lista,int iniciopalavras, int tamanho, args argv){
-
-	if(iniciopalavras == 2){
-		LIS_OrdenarB(lista,tamanho,pI);
-	}
-	
-	if (iniciopalavras == 3 || iniciopalavras == 4){
-		
-		if(strcmp(argv[2],"-pC")==0){
-			LIS_OrdenarB(lista,tamanho,pC);
-		}
-
-		if(strcmp(argv[2],"-pI")==0){
-			LIS_OrdenarB(lista,tamanho,pI);
-		}
-
-		if(strcmp(argv[2],"-pA")==0){
-			LIS_OrdenarB(lista,tamanho,pA);
-		}
-	}
-
-	if (iniciopalavras == 4){
-		
-		if(strcmp(argv[3],"-pC")==0){
-			LIS_OrdenarB(lista,tamanho,pC);
-		}
-
-		if(strcmp(argv[3],"-pI")==0){
-			LIS_OrdenarB(lista,tamanho,pI);
-		}
-
-		if(strcmp(argv[3],"-pA")==0){
-			LIS_OrdenarB(lista,tamanho,pA);
-		}
-	}
-
-
-
-}
-
-*/

@@ -134,9 +134,7 @@ string LIS_RemoverInicioB(ListaB lista)
         lista->cabeca->proximo = primeiro->proximo;
         primeiro->proximo->anterior = lista->cabeca;
         
-        string valorremovido = primeiro->nomeArquivo;
-
-        
+        string valorremovido = primeiro->nomeArquivo;        
 
         lista->tamanho--;
         if(primeiro->numeroLinha != -10){
@@ -189,7 +187,6 @@ string LIS_RemoverB(ListaB lista, int indice)
 
     DestruirNoB(no);
 
-
     return valorremovido;
 }
 
@@ -201,7 +198,7 @@ Função que ordena um tipo ListaB de acordo com o tipo de ordenação escolhido
 */
 void LIS_OrdenarB(ListaB lista, int tipoOrdenar)
 {
-    // Seleção
+    
     NoB menor, temp;
     
     for(NoB i = lista->cabeca->proximo; i != lista->cauda->anterior; i=i->proximo){
@@ -406,10 +403,6 @@ void LIS_ImprimirB(ListaB lista)
              std::cout << "Foram encontradas " << lista->qtdeElementos << " linhas no arquivo \"" << nome << "\"" << std::endl;
         }
 
-        /*else if(i == lista->cabeca->proximo && i->numeroLinha <= 0){
-             std::cout << "Foram encontradas 0 linha(s) no arquivo \"" << i->nomeArquivo << "\"" << std::endl;
-        }*/
-
         if(i->numeroLinha != -10){
             std::cout << "\t- linha " << i->numeroLinha << ": \"" << i->linha <<"\"\n";
         }
@@ -443,7 +436,7 @@ void LIS_ImprimirTeste(ListaB lista)
 /*
 Função que aloca memória para uma instância da estrutura NoB e preenche os seus campos.
 
- @return o no com os campos preenchidos, ou NULL caso haja algum problema na alocação de memória];
+ @return no com os campos preenchidos, ou NULL caso haja algum problema na alocação de memória];
  */
 NoB CriarNoB(string nomeArquivo, string palavra, string hora, string linha, int numeroLinha){
     
