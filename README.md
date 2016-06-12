@@ -1,5 +1,5 @@
 
-**buscaIMD** é um programa para uso no terminal linux. Basicamente, seu objetivo é receber, via linha de comando, palavras-chaves para entregar quais linhas dos arquivos em uma determinada base de buscas contem os termos buscados, segundo critério préviamente estipulado, utilizando estruturas e algoritmos apresentados na disciplina de Estrutura Básica de Dados I, e praticamos em Linguagem de Programação I do curso Bacharelado em Tecnologia da Informação da Universidade Federal do Rio Grande do Norte.
+**buscaIMD** é um programa para uso no terminal linux. Basicamente, seu objetivo é receber, via linha de comando, palavras-chaves para entregar quais linhas dos arquivos em uma determinada base de buscas contem os termos buscados, segundo critério préviamente estipulado. Para isso, utiliza estruturas e algoritmos apresentados nas disciplinas de Estrutura Básica de Dados I, as mesmas devidamente praticadas em Linguagem de Programação I do curso Bacharelado em Tecnologia da Informação da Universidade Federal do Rio Grande do Norte.
 
 ## Funcionamento
 
@@ -67,7 +67,9 @@ Caso seja necessário, o tempo total de realização das buscas é exibido atrav
 
 
 ## Exemplos
+
 __Inserir arquivos na base de buscas__
+
 Exemplo 1: Inserindo só um arquivo por vez 
 ```sh
 > ./buscaIMD ­i libertadores.txt 
@@ -79,6 +81,7 @@ Exemplo 2: Inserindo mais de um arquivo por vez
 >> Arquivo "libertadores.txt" inserido na base de buscas. 
 >> Arquivo "granja.txt" inserido na base de buscas. 
 ```
+Obs.: *Caso desejar atualizar um arquivo na base de busca, basta inseri-lo novamente o sistema verificará que o arquivo já existe e fará os ajustes necessários.*
 
 __Remover arquivos da base de buscas __
 
@@ -93,8 +96,7 @@ Exemplo 2: Removendo dois arquivos por vez
 >> Arquivo "libertadores.txt" removido da base de buscas. 
 >> Arquivo "granja.txt" removido da base de buscas.
 ```
-Obs.: Podemos remover todos os arquivos na base de busca com a entrada *.txt
-
+Obs.: *Podemos remover todos os arquivos na base de busca com a entrada *.txt*
 
 __Realizar buscas por palavras­chaves__
 
@@ -124,7 +126,7 @@ Exemplo 2: Buscando mais de uma palavra­chave com opção AND
 
 [Paulo Lopes]
 
-## Licensa
+## Licensa de Uso
 
 [![License (LGPL version 3.0)](https://img.shields.io/badge/license-GNU%20LGPL%20version%203.0-blue.svg?style=flat-square)](http://opensource.org/licenses/LGPL-3.0)
 
