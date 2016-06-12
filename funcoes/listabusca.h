@@ -1,5 +1,5 @@
-#ifndef _LISTA_BUSCA_
-#define _LISTA_BUSCA_
+#ifndef _LISTA_ENCADEADA_BUSCA_
+#define _LISTA_ENCADEADA_BUSCA_
 
 #include <string>
 #include <cstring>

@@ -11,7 +11,13 @@
 using namespace std;
 
 
-
+/*
+ Função que quebra a string que tem a linha do arquivo log, separando o nome do arquivo, hora e data
+ de inserção e quantidade de palavras.
+ @param linhaStr - string que contem a linha do log
+ @param opção - inteiro que define qual string será retornada, seja o nome, horadata ou qtde de palavras
+ @return string especificada pela opção escolhida no parametro opção.
+*/
 string quebraLinha(string linhaStr, int opcao){
 
 	char* linha = new char[linhaStr.length()];
@@ -34,11 +40,11 @@ string quebraLinha(string linhaStr, int opcao){
 		case 1:
 			return nome;
 			break;
-		case 3:
-			return qtdePalavras;
-			break;
 		case 2:
 			return dataHora;
+			break;
+		case 3:
+			return qtdePalavras;
 			break;
 		default:
 			break;
@@ -46,7 +52,12 @@ string quebraLinha(string linhaStr, int opcao){
 	return dataHora;
 }
 
-
+/*
+ Função que quebra a string que tem a linha do arquivo log, separando o nome do arquivo, hora e data
+ de inserção e quantidade de palavras. Inserindo esses dados em uma lista.
+ @param linhaStr - string que contem a linha do log
+ @param lista - lista que vai receber na estrutura do nó, os elementos identificadores dos arquivos de modo separado
+*/
 void quebraLinha(string linhaStr, Lista lista){
 
 	char* linha = new char[linhaStr.length()];
@@ -69,6 +80,12 @@ void quebraLinha(string linhaStr, Lista lista){
 	
 }
 
+/*
+ Função que lista os arquivos da base de busca em ordem de inserção dos arquvios na base de buscas
+ @param argc - tamanho do vetor de argumentos
+ @param argv - vetor de argumentos do terminal
+ @return true se listou com sucesso, false caso a opção escolhida não seja -la
+*/
 bool listarInsercao(int argc, args argv){
 
 	setlocale(LC_ALL,"pt_BR"); 

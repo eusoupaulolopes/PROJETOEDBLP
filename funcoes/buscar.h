@@ -1,5 +1,5 @@
-#ifndef _LISTA_PARA_BUSCAS_
-#define _LISTA_PARA_BUSCAS_
+#ifndef _FUNCOES_BUSCA_
+#define _FUNCOES_BUSCA_
 
 #include <string>
 #include "listabusca.h"

@@ -9,6 +9,12 @@
 
 using namespace std;
 
+/*
+ Função que insere um arquivo da base de buscas um arquivo
+ @param argc - tamanho do vetor de argumentos
+ @param argv - vetor de argumentos do terminal
+ @return true se inseriu com sucesso, false caso a opção escolhida não seja -i
+ */
 bool inserir(int argc, args argv){
 	
 	setlocale(LC_ALL,"pt_BR"); 
@@ -242,6 +248,12 @@ bool copiarArquivoParaPasta(char* arquivo){
 	return false;
 }
 
+/*
+  Função que gera a Tabela de Dispersão e gera um arquivo .dat com o conteúdo da tabela.
+  Além de retorna a quantidade de palavras do texto.
+ @param origem - string com o endereço do arquivo de texto
+ @return quantidade de palavras do texto
+ */
 
 int gerarTabela(std::string origem){
 	Tabela tabela = TAB_CriarTabela(100);

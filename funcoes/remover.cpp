@@ -8,7 +8,7 @@
 using namespace std;
 
 /*
- Função que insere um remove da base de buscas um arquivo
+ Função que remove um arquivo da base de buscas um arquivo
  @param argc - tamanho do vetor de argumentos
  @param argv - vetor de argumentos do terminal
  @return true se removeu com sucesso, false caso a opção escolhida não seja -r

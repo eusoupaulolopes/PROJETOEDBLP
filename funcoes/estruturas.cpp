@@ -179,6 +179,9 @@ string LIS_Remover(Lista lista, int indice)
     return valorremovido;
 }
 
+/*
+ Função que busca uma chave na lista.
+ */
 int LIS_Buscar(Lista lista, string chave)
 {
     No no = lista->cabeca->proximo;
@@ -192,6 +195,12 @@ int LIS_Buscar(Lista lista, string chave)
     return -1;
 }
 
+ /*
+Função que ordena a lista de acordo com o tipo de ordenação escolhido
+ @param lista - lista que será ordenada
+ @param tipoOrdenar - tipo de ordenação que pode ser alfabeticamente, por ordem de inserção pu 
+ por quantidade de palavras
+*/
 void LIS_Ordenar(Lista lista, int tipoListar)
 {
     // Seleção
@@ -398,6 +407,10 @@ void Reduzir(Tabela tabela){
     tabela->chaves = novaTabela->chaves;    
     
 }
+
+/*
+    Função que insere um par (chave, item) na tabela.
+*/
 bool TAB_Inserir(Tabela tabela, Chave chave, Valor valor)
 {
     
@@ -427,6 +440,9 @@ bool TAB_Inserir(Tabela tabela, Chave chave, Valor valor)
     return false;
 }
 
+/*
+ Função que imprime a tabela de dispersão
+*/
 void TAB_imprimir(Tabela tabela)
 {
     for (int i = 0; i < tabela->tamanho; i++){
@@ -442,7 +458,8 @@ void TAB_imprimir(Tabela tabela)
         }
     }
 }
-
+/* Função que gera o arquivo .dat que contém a tabela de dispersão
+*/
 void gerarArquivoTabela(char* auxTabela, Tabela tabela)
 {
     std::string texto;
@@ -467,13 +484,14 @@ void gerarArquivoTabela(char* auxTabela, Tabela tabela)
     file.close();
 
 }
-
+//Função que um inteiro long em um indice da tabela
 short Hash(long valor, int n)
 {
     int indice = (valor & 0x7FFFFFFF) % n;
     return indice;
 }
 
+//Função que tranforma um tipo chave em um inteiro long
 long PreHash(Chave chave)
 {
     char * str = chave->chave;

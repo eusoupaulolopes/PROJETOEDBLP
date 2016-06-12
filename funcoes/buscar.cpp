@@ -14,6 +14,7 @@ using namespace std;
 
 long int tempoInicial; // variavel global não precisa passar por parametro
 
+//Função que imprime o resultado por ordem de ocorrência
 void imprimepC( ListaB * lista, int tamanho ) { 
 	
 	LIS_OrdenarB(lista,tamanho,pC);
@@ -23,6 +24,7 @@ void imprimepC( ListaB * lista, int tamanho ) {
 	} 
 	
 }
+//Função que imprime o resultado por ordem de inserção
 void imprimepI(  ListaB * lista, int tamanho ) {  
 	
 	LIS_OrdenarB(lista,tamanho,pI);
@@ -31,6 +33,7 @@ void imprimepI(  ListaB * lista, int tamanho ) {
 	}
 	
 }
+//Função que imprime o resultado por ordem alfabética
 void imprimepA( ListaB * lista, int tamanho ) { 
 
 	LIS_OrdenarB(lista,tamanho,pA);
@@ -40,8 +43,8 @@ void imprimepA( ListaB * lista, int tamanho ) {
 }
 
 
-// aqui tratarei as entradas do usuário 
-PFuncao selecionaImprecao (int argc, args argv){
+//Funçãp  que trata a opção de impressão escolhida pelo usuário 
+PFuncao selecionaImpressao (int argc, args argv){
 
 	for (int i = 2; i < argc; i++){
 		if(!strcmp(argv[i], "-pC")){
@@ -60,9 +63,9 @@ int contadorLinhas(ifstream& file);
  Função que valida a entrada no terminal e escolhe a busca apropriada 
  @param argc - tamanho do vetor de argumentos
  @param argv - vetor de argumentos do terminal
- @return busca apropriada, false caso a opção escolhida não seja -bAND ou -bOR
+ @return true se a busca for feita com sucesso, false caso a opção escolhida não seja -bAND ou -bOR, ou haja
+ problemas na busca.
  */
-
 bool Ler_Buscas(int argc, args argv){
 
 	if((!strcmp(argv[1], "-bAND") || !strcmp(argv[1],"-bOR")) && (argc > 2)){
@@ -72,8 +75,12 @@ bool Ler_Buscas(int argc, args argv){
 	}
 }
 
-
-
+/*
+ Função que inicia a busca em cada arquivo da base de buscas
+ @param argc - tamanho do vetor de argumentos
+ @param argv - vetor de argumentos do terminal
+ @return true se a busca em todos os arquivos correr bem, false caso apresente algum problema
+ */
 bool buscaPorArquivo(int argc, args argv){
 	
 	setlocale(LC_ALL,"pt_BR"); 
@@ -129,6 +136,14 @@ bool buscaPorArquivo(int argc, args argv){
 	return true;
 }
 
+/*
+ Função que organiza o vetor de listas com as linhas que contém palavras-chave de acordo com a estartégia OR
+ @param lista - vetor de listas que contém o resultado da busca de cada palavra
+ @param tamanho - tamanho do vetor de listas
+ @param argc - tamanho do vetor de argumentos
+ @param argv - vetor de argumentos
+ @return true quando todos os tratamentos a lista são executados.
+ */
 bool buscaBOR(ListaB* lista, int tamanho, int argc, args argv){
 	
 	for(int j=0; j < tamanho; j++){
@@ -138,7 +153,7 @@ bool buscaBOR(ListaB* lista, int tamanho, int argc, args argv){
 		
 	}
 	void (*ponteiroFuncao) ( ListaB * lista, int tamanho );
-	ponteiroFuncao = selecionaImprecao(argc, argv);
+	ponteiroFuncao = selecionaImpressao(argc, argv);
 	ponteiroFuncao(lista,tamanho);
 	
 	// imprime o relogio
@@ -152,6 +167,15 @@ bool buscaBOR(ListaB* lista, int tamanho, int argc, args argv){
 	return true;
 }
 
+/*
+ Função que organiza o vetor de listas com as linhas que contém palavras-chave de acordo com a estartégia AND
+ @param lista - vetor de listas que contém o resultado da busca de cada palavra
+ @param tamanho - tamanho do vetor de listas
+ @param numerodepalavras - quantidade de palavras-chave
+ @param argc - tamanho do vetor de argumentos
+ @param argv - vetor de argumentos
+ @return true quando todos so tratamentos a lista são executados.
+ */
 bool buscaBAND(ListaB* lista, int tamanho,int numerodepalavras, int argc, args argv){
 	for(int j=0; j < tamanho; j++){
 
@@ -162,7 +186,7 @@ bool buscaBAND(ListaB* lista, int tamanho,int numerodepalavras, int argc, args a
 	}
 
 	void (*ponteiroFuncao) ( ListaB * lista, int tamanho );
-	ponteiroFuncao = selecionaImprecao(argc, argv);
+	ponteiroFuncao = selecionaImpressao(argc, argv);
 	ponteiroFuncao(lista,tamanho);
 	// imprime o relogio
 	for (int i = 0; i < argc; i++){
@@ -309,7 +333,12 @@ int contadorLinhas(ifstream& file){
 	file.seekg(std::ios::beg);
 	return cont-1;
 }
-
+/*
+ Função que identifica se o usuário digitou opção de impressão e/ou opção de exibir tempo de busca
+ @param argc - tamanho do vetor de argumentos
+ @param argv - vetor de argumentos
+ @return o indice em que inicia as palavras-chave no vetor de argumentos
+ */
 int inicioPalavrasBusca(int argc, args argv){
  	string tipodeImpressao = "-pC -pI -pA";
  	string tempo = "-tF -tT";

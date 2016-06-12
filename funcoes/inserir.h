@@ -1,5 +1,5 @@
-#ifndef _FUNCAO_INSERIR_
-#define _FUNCAO_INSERIR_
+#ifndef _FUNCOES_INSERIR_
+#define _FUNCOES_INSERIR_
 
 #include <fstream>
 #include <iostream>

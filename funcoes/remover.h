@@ -1,5 +1,5 @@
-#ifndef _FUNCAO_REMOVER_
-#define _FUNCAO_REMOVER_
+#ifndef _FUNCOES_REMOVER_
+#define _FUNCOES_REMOVER_
 
 typedef char** args;
 

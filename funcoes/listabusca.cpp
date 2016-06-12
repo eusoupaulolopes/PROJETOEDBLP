@@ -258,14 +258,13 @@ void LIS_OrdenarB(ListaB lista, int tipoOrdenar)
 }
 
  /*
-Função que ordena o vetor de listas de acordo com o tipo de ordenação escolhido
+Função que verifica o menor de acordo com o tipo selecionado
  @param lista - vetor de listas que vai ser ordenado
+ @param i - inicio da comparação
  @param tamanho - tamanho do vetor
- @param tipo - tipo de ordenação a executar por inserção, por ordem alfabetica ou por ocorrencias
- @return quantidade de vezes que o numero de linha buscado apareceu na lista
+ @param tipo - tipo de comparação a ser feita: por inserção, por ordem alfabetica ou por ocorrencias
+ @return o indice do menor
 */
-
- //Selection Sort
 
 int selecioneMenor(ListaB* lista, int i, int tamanho, int tipo){
     int menor;
@@ -295,7 +294,12 @@ int selecioneMenor(ListaB* lista, int i, int tamanho, int tipo){
 
 }
 
-
+ /*
+Função que ordena por Selection Sort o vetor de listas de acordo com o tipo de ordenação escolhido
+ @param lista - vetor de listas que vai ser ordenado
+ @param tamanho - tamanho do vetor
+ @param tipo - tipo de ordenação a executar por inserção, por ordem alfabetica ou por ocorrencias
+*/
 void LIS_OrdenarB(ListaB* lista, int tamanho, int tipo){
     ListaB aux;
     int menor;

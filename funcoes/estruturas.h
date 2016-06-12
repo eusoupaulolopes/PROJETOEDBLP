@@ -1,5 +1,5 @@
-#ifndef _ESTRUTURAS_
-#define _ESTRUTURAS_
+#ifndef _ESTRUTURAS_DE_DADOS_
+#define _ESTRUTURAS_DE_DADOS_
 
 
 #include <string>
@@ -66,6 +66,10 @@ typedef struct tpTabela {
 	int qtdItens;
 } *Tabela;
 
+const Valor ITEM_REMOVIDO = ((Valor)(-11));
+const Chave CHAVE_REMOVIDA = ((Chave)(-17));
+
+// INICIO: Tabela de Dispersão
 void TAB_imprimir(Tabela tabela);
 void gerarArquivoTabela(char* auxTabela, Tabela tabela);
 Tabela TAB_CriarTabela(int);
@@ -74,9 +78,8 @@ Valor TAB_CriarValor(const char* c);
 bool TAB_Inserir(Tabela tabela, Chave chave, Valor valor);
 short Hash(long valor, int n);
 long PreHash(Chave chave);
+// FIM: Tabela de Dispersão
 
-const Valor ITEM_REMOVIDO = ((Valor)(-11));
-const Chave CHAVE_REMOVIDA = ((Chave)(-17));
 
 
 #endif
